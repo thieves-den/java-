@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 30/06/2020 10:18:55
+ Date: 30/06/2020 23:00:15
 */
 
 SET NAMES utf8mb4;
@@ -112,7 +112,8 @@ CREATE TABLE `coustomer_service`  (
   `state` int(0) NULL DEFAULT NULL COMMENT '状态',
   `head_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `nice_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
+  `nick_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
+  `real_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '真实姓名\r\n',
   `customer_service_id` int(0) NOT NULL COMMENT '客户工号',
   `customer_service_phone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客服手机号',
   `total_online_time` datetime(0) NULL DEFAULT NULL COMMENT '在线时常',
@@ -129,6 +130,7 @@ CREATE TABLE `coustomer_service`  (
 -- ----------------------------
 -- Records of coustomer_service
 -- ----------------------------
+INSERT INTO `coustomer_service` VALUES ('15891866472', '12', 12, '12', '123@qq.com', 'abc', 'string', 12, '12', '2020-06-30 18:30:49', '2020-06-30 18:30:52', '2020-06-25 18:30:55', 12, 12, 12, '12', 12);
 
 -- ----------------------------
 -- Table structure for customer_service_group
@@ -138,12 +140,14 @@ CREATE TABLE `customer_service_group`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客服组名称',
   `number` int(0) NULL DEFAULT NULL COMMENT '数量',
   `customer_service_group_id` int(0) NOT NULL COMMENT '客服组id',
+  `create_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`customer_service_group_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customer_service_group
 -- ----------------------------
+INSERT INTO `customer_service_group` VALUES ('客服组2,测试', 2, 5, '2020-04-04 16:00:00');
 
 -- ----------------------------
 -- Table structure for customer_service_id
