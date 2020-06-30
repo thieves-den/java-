@@ -9,6 +9,9 @@ server:
   port: 8080
   servlet:
     context-path: "/ccs"
-
-
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.project.ccs.entity;
+  configuration:
+    map-underscore-to-camel-case: true
 

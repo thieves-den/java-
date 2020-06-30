@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ccs.biz.ICustomerServiceInfoBiz">
+
+    <insert id="save" parameterType="CustomerInfo">
+        insert into coustomer_info(email,nick_name,real_name,customer_id,phone) values(#{email},#{nickName},#{realName},#{customerId},#{phone})
+    </insert>
+
+</mapper>
