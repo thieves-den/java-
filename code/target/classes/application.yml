@@ -1,17 +1,28 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/ync?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT
+    url: jdbc:mysql://localhost:3306/ycs?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 201311tz
+  jackson:
+    date-format: "yyyy-MM-dd"
+    time-zone: "GMT+8"
 
 server:
   port: 8080
   servlet:
     context-path: "/ccs"
+
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.project.ccs.entity;
+  type-aliases-package: com.igeekhome.ccsv2.entity
   configuration:
     map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      igeekhome:
+        ccsv2:
+          mapper: debug
 

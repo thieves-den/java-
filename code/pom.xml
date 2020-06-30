@@ -8,11 +8,11 @@
         <version>2.3.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.project</groupId>
-    <artifactId>ccs</artifactId>
+    <groupId>com.igeekhome</groupId>
+    <artifactId>ccs-v2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ccs</name>
-    <description>Demo project for Spring Boot</description>
+    <name>ccs-v2</name>
+    <description>极客营云客服</description>
 
     <properties>
         <java.version>1.8</java.version>
