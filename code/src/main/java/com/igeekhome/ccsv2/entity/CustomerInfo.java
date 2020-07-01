@@ -16,4 +16,8 @@ public class CustomerInfo {
     private String remark;
     private String tags;
     private Timestamp lastedLoginTime;
+
+    public void setcustomerId(int v) {
+        this.customerId = v;
+    }
 }

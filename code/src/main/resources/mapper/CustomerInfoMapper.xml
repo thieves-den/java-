@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.igeekhome.ccsv2.mapper.CustomerInfoMapper">
+    <insert id="create" parameterType="CustomerInfo">
+        insert into coustomer_info(nick_name,real_name,phone,email,company,address,level,channel,tags,remark,customer_id,customer_service_id)
+        values (#{nickName},#{realName},#{phone},#{email},#{company},#{address},#{level},#{channel},#{tags},#{remark},#{customerId},#{customerServiceId})
+    </insert>
+    <select id="createId" resultType="java.util.HashMap">
+        SELECT MAX(customer_id) FROM coustomer_info
+    </select>
+</mapper>
