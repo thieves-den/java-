@@ -9,5 +9,16 @@
             phone=#{phone}
             where customer_service_id = #{customerServiceId}
     </update>
+    <update id="updatePwd" parameterType="CustomerService">
+        update coustomer_service set password = #{password} where customer_service_id = #{customerServiceId}
+    </update>
+    <select id="findPwd" parameterType="CustomerService" resultType="hashmap">
+        SELECT
+	        coustomer_service.`password`
+        FROM
+	        coustomer_service
+        WHERE
+	        coustomer_service.customer_service_id = #{customerServiceId}
 
+    </select>
 </mapper>
