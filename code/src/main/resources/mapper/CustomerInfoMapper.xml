@@ -5,6 +5,9 @@
         insert into coustomer_info(nick_name,real_name,phone,email,company,address,level,channel,tags,remark,customer_id,customer_service_id)
         values (#{nickName},#{realName},#{phone},#{email},#{company},#{address},#{level},#{channel},#{tags},#{remark},#{customerId},#{customerServiceId})
     </insert>
+    <delete id="delete" parameterType="CustomerInfo">
+        DELETE FROM coustomer_info WHERE coustomer_info.customer_id = #{customerId}
+    </delete>
     <select id="createId" resultType="java.util.HashMap">
         SELECT MAX(customer_id) FROM coustomer_info
     </select>

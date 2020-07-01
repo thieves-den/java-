@@ -10,4 +10,6 @@ public interface CustomerInfoMapper {
     int create(CustomerInfo customerInfo);
 
     HashMap<String, Integer> createId();
+
+    int delete(CustomerInfo customerInfo);
 }

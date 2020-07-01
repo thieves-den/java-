@@ -24,4 +24,9 @@ public class CustomerInfoBizImpl implements ICustomerInfoBiz {
     public HashMap<String, Integer> createId() {
         return customerInfoMapper.createId();
     }
+
+    @Override
+    public int delete(CustomerInfo customerInfo) {
+        return customerInfoMapper.delete(customerInfo);
+    }
 }
