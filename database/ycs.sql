@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 30/06/2020 23:00:15
+ Date: 02/07/2020 19:53:27
 */
 
 SET NAMES utf8mb4;
@@ -29,10 +29,6 @@ CREATE TABLE `auto_reply`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of auto_reply
--- ----------------------------
-
--- ----------------------------
 -- Table structure for blacklist
 -- ----------------------------
 DROP TABLE IF EXISTS `blacklist`;
@@ -41,11 +37,7 @@ CREATE TABLE `blacklist`  (
   `customer_id` int(0) NOT NULL COMMENT '客户id',
   `reason` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '原因',
   PRIMARY KEY (`customer_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of blacklist
--- ----------------------------
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '黑名单\r\n' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for common_words
@@ -60,10 +52,6 @@ CREATE TABLE `common_words`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of common_words
--- ----------------------------
-
--- ----------------------------
 -- Table structure for common_words_type
 -- ----------------------------
 DROP TABLE IF EXISTS `common_words_type`;
@@ -72,10 +60,6 @@ CREATE TABLE `common_words_type`  (
   `creator_id` int(0) NOT NULL COMMENT '创建者id',
   PRIMARY KEY (`name`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of common_words_type
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for coustomer_info
@@ -97,10 +81,6 @@ CREATE TABLE `coustomer_info`  (
   `lasted_login_time` datetime(0) NULL DEFAULT NULL COMMENT '最后登录时间',
   PRIMARY KEY (`customer_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of coustomer_info
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for coustomer_service
@@ -128,11 +108,6 @@ CREATE TABLE `coustomer_service`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of coustomer_service
--- ----------------------------
-INSERT INTO `coustomer_service` VALUES ('15891866472', '12', 12, '12', '123@qq.com', 'abc', 'string', 12, '12', '2020-06-30 18:30:49', '2020-06-30 18:30:52', '2020-06-25 18:30:55', 12, 12, 12, '12', 12);
-
--- ----------------------------
 -- Table structure for customer_service_group
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_service_group`;
@@ -143,11 +118,6 @@ CREATE TABLE `customer_service_group`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`customer_service_group_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of customer_service_group
--- ----------------------------
-INSERT INTO `customer_service_group` VALUES ('客服组2,测试', 2, 5, '2020-04-04 16:00:00');
 
 -- ----------------------------
 -- Table structure for customer_service_id
@@ -161,10 +131,6 @@ CREATE TABLE `customer_service_id`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of customer_service_id
--- ----------------------------
-
--- ----------------------------
 -- Table structure for customer_service_role
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_service_role`;
@@ -173,10 +139,6 @@ CREATE TABLE `customer_service_role`  (
   `role_desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色描述',
   `number` int(0) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of customer_service_role
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for dialog_rule
@@ -189,28 +151,21 @@ CREATE TABLE `dialog_rule`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of dialog_rule
--- ----------------------------
-
--- ----------------------------
 -- Table structure for enterpise
 -- ----------------------------
 DROP TABLE IF EXISTS `enterpise`;
 CREATE TABLE `enterpise`  (
   `loge` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '企业logo',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `account` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账户\r\n',
+  `account` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账户\r\n',
   `industry` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '行业',
   `team_size` int(0) NULL DEFAULT NULL COMMENT '团队规模\r\n',
   `contact_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系人姓名',
   `contact_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系人电话',
   `company_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '公司地址',
-  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评论'
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评论',
+  PRIMARY KEY (`account`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of enterpise
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for log
@@ -225,10 +180,6 @@ CREATE TABLE `log`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of log
--- ----------------------------
-
--- ----------------------------
 -- Table structure for notice
 -- ----------------------------
 DROP TABLE IF EXISTS `notice`;
@@ -238,10 +189,6 @@ CREATE TABLE `notice`  (
   `creator_id` int(0) NULL DEFAULT NULL COMMENT '创建者id',
   PRIMARY KEY (`title`, `content`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of notice
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for session
@@ -264,10 +211,6 @@ CREATE TABLE `session`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of session
--- ----------------------------
-
--- ----------------------------
 -- Table structure for session_msg
 -- ----------------------------
 DROP TABLE IF EXISTS `session_msg`;
@@ -281,10 +224,6 @@ CREATE TABLE `session_msg`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of session_msg
--- ----------------------------
-
--- ----------------------------
 -- Table structure for tags
 -- ----------------------------
 DROP TABLE IF EXISTS `tags`;
@@ -295,10 +234,6 @@ CREATE TABLE `tags`  (
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型',
   PRIMARY KEY (`name`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of tags
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for visitor_info
@@ -316,10 +251,6 @@ CREATE TABLE `visitor_info`  (
   `visit_duration` datetime(0) NULL DEFAULT NULL COMMENT '访客持续时间',
   PRIMARY KEY (`customer_service_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of visitor_info
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for work_order
@@ -342,10 +273,6 @@ CREATE TABLE `work_order`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of work_order
--- ----------------------------
-
--- ----------------------------
 -- Table structure for work_order_log
 -- ----------------------------
 DROP TABLE IF EXISTS `work_order_log`;
@@ -355,10 +282,6 @@ CREATE TABLE `work_order_log`  (
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志内容',
   PRIMARY KEY (`word_order_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of work_order_log
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for work_order_reply
@@ -371,9 +294,5 @@ CREATE TABLE `work_order_reply`  (
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '回复内容',
   PRIMARY KEY (`work_order_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of work_order_reply
--- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
