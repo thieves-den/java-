@@ -7,7 +7,7 @@ public class Session {
     private int visitorIp;
     private String visitorName;
     private Timestamp createTime;
-    private Timestamp finish_time;
+    private Timestamp finishTime;
     private String channel;
     private Timestamp evaluationTime;
     private String evaluation;
