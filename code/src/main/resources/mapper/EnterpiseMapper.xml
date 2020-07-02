@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.igeekhome.ccsv2.mapper.EnterpiseMapper">
+    <update id="update" parameterType="Enterpise">
+        update enterpise
+        <trim prefix="set" suffixOverrides=",">
+            <if test="loge != null">loge = #{loge},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="industry != null">industry = #{industry},</if>
+            <if test="teamSize != null">team_size = #{teamSize},</if>
+            <if test="contactName!= null">contact_name = contactName,</if>
+            <if test="contactPhone != null">contact_phone = #{contactPhone},</if>
+            <if test="companyAddress != null">company_address = #{companyAddress},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where account = #{account}
+    </update>
+</mapper>
