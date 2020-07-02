@@ -32,7 +32,7 @@ public class CustomerServiceController {
         service.setPassword(oldPwd);
 
         HashMap<String,String> a = customerServiceBiz.findPwd(service);
-        String truePassword=a.get("password");
+        String truePassword=a.get("password");//查找正确密码
         if(!Objects.equals(truePassword, oldPwd)){
             return "密码错误";
         }else if(!Objects.equals(newPwd, twNewPwd)){
