@@ -20,26 +20,26 @@ public class CustomerServiceController {
     private ICustomerServiceBiz customerServiceBiz;
 //更改个人信息部分
     @RequestMapping(value =  {"/update"},method = RequestMethod.POST)
-    public @ResponseBody String update(CustomerService service){
-        int a = customerServiceBiz.update(service);
+    public @ResponseBody String update(CustomerService cs){
+        int a = customerServiceBiz.update(cs);
         return a+"";
     }
 //更改密码
     @RequestMapping(value =  {"/update/pwd"},method = RequestMethod.POST)
-    public @ResponseBody String updatePwd(String customerServiceId,String oldPwd, String newPwd,String twNewPwd){
-        CustomerService service = new CustomerService();
-        service.setCustomerServiceId(customerServiceId);
-        service.setPassword(oldPwd);
+    public @ResponseBody String updatePwd(int id,String oldPwd, String newPwd,String twNewPwd){
+        CustomerService cs = new CustomerService();
+        cs.setId(id);
+        cs.setPassword(oldPwd);
 
-        HashMap<String,String> a = customerServiceBiz.findPwd(service);
+        HashMap<String,String> a = customerServiceBiz.findPwd(cs);
         String truePassword=a.get("password");//查找正确密码
         if(!Objects.equals(truePassword, oldPwd)){
             return "密码错误";
         }else if(!Objects.equals(newPwd, twNewPwd)){
             return "两次输入的密码不相同";
         }else {
-            service.setPassword(newPwd);
-            int t=customerServiceBiz.updatePwd(service);
+            cs.setPassword(newPwd);
+            int t=customerServiceBiz.updatePwd(cs);
             return t + "";
         }
     }

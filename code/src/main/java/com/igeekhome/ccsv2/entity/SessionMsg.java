@@ -12,5 +12,5 @@ public class SessionMsg {
     private int msgSenderId;
     private int msgReceiverId;
     private Timestamp sendTime;
-    private String centent;
+    private String content;
 }

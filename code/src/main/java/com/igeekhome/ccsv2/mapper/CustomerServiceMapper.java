@@ -7,9 +7,17 @@ import java.util.HashMap;
 
 @Mapper
 public interface CustomerServiceMapper {
-    int update(CustomerService service);
 
-    int updatePwd(CustomerService service);
+    /**
+     * 根据id查询，返回单一查询对象
+     */
+    CustomerService queryById(int id);
 
-    HashMap<String, String> findPwd(CustomerService service);
+    int update(CustomerService cs);
+
+    int updatePwd(CustomerService cs);
+
+    HashMap<String, String> findPwd(CustomerService cs);
+
+
 }

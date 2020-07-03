@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.igeekhome.ccsv2.mapper.CustomerServiceGroupMapper">
     <insert id="save" parameterType="CustomerServiceGroup">
-        insert into customer_service_group(customer_service_group_id,name,number,create_time) values (5,#{name},#{number},#{createTime})
+        insert into customer_service_group(id,group_Name,number,create_time,update_time) values(#{id},#{name},#{number},#{createTime},#{updateTime})
     </insert>
     <select id="getOne" resultType="com.igeekhome.ccsv2.entity.CustomerServiceGroup">
-        select * from customer_service_group where customer_service_group_id = #{id}
+        select * from customer_service_group where id = #{id}
     </select>
 </mapper>

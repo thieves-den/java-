@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/ycs?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 201311tz
+    password: 123456
   jackson:
     date-format: "yyyy-MM-dd"
     time-zone: "GMT+8"
@@ -17,12 +17,12 @@ mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.igeekhome.ccsv2.entity
   configuration:
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: true #当数据库表字段命名使用小写且“_”来连接，而相应实体类使用驼峰命名法时，使用此语句即可不用配置resultMap
 
 logging:
   level:
     com:
       igeekhome:
         ccsv2:
-          mapper: debug
+          mapper: debug #查看mybatis输出的sql语句
 
