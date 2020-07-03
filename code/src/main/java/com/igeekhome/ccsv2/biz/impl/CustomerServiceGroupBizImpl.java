@@ -22,4 +22,9 @@ public class CustomerServiceGroupBizImpl implements com.igeekhome.ccsv2.biz.ICus
     public int delete(int id) {
         return serviceGroupMapper.delete(id);
     }
+
+    @Override
+    public int edit(int id, String name) {
+        return serviceGroupMapper.edit(id,name);
+    }
 }

@@ -32,5 +32,10 @@ public @ResponseBody class CustomerServiceGroupController {
     public int delete(int id){
         return customerServiceGroupBiz.delete(id);
     }
+    @RequestMapping(value = "/edit",method = RequestMethod.POST,name="id,name")
+    @ResponseBody
+    public int edit(int id,String name){
+        return customerServiceGroupBiz.edit(id,name);
+    }
 
 }

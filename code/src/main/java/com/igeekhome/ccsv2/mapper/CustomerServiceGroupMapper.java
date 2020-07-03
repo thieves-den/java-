@@ -9,4 +9,6 @@ public interface CustomerServiceGroupMapper {
 
     CustomerServiceGroup getOne(String name);
     int delete(int id);
+
+    int edit(int id, String name);
 }

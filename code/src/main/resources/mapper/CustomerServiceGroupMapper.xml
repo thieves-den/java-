@@ -12,4 +12,8 @@
     <delete id="delete" parameterType="com.igeekhome.ccsv2.entity.CustomerServiceGroup">
         delete from customer_service_group where customer_service_group_id=#{id};
     </delete>
+    <update id="edit" parameterType="com.igeekhome.ccsv2.entity.CustomerServiceGroup">
+        update customer_service_group set name=#{name} where customer_service_group_id=#{id};
+    </update>
+
 </mapper>
