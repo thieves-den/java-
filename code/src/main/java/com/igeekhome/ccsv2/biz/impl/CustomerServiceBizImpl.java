@@ -11,20 +11,26 @@ import java.util.HashMap;
 @Service
 public class CustomerServiceBizImpl implements ICustomerServiceBiz {
     @Autowired
-    private CustomerServiceMapper serviceMapper;
+    //依赖的持久化层对象
+    private CustomerServiceMapper customerServiceMapper;
 
-    //@Override
-    public int update(CustomerService service){
-        return serviceMapper.update(service);
+    @Override
+    public CustomerService queryById(int id) {
+        return customerServiceMapper.queryById(id);
     }
 
     @Override
-    public int updatePwd(CustomerService service) {
-        return serviceMapper.updatePwd(service);
+    public int update(CustomerService cs){
+        return customerServiceMapper.update(cs);
     }
 
     @Override
-    public HashMap<String, String> findPwd(CustomerService service) {
-        return serviceMapper.findPwd(service);
+    public int updatePwd(CustomerService cs) {
+        return customerServiceMapper.updatePwd(cs);
+    }
+
+    @Override
+    public HashMap<String, String> findPwd(CustomerService cs) {
+        return customerServiceMapper.findPwd(cs);
     }
 }

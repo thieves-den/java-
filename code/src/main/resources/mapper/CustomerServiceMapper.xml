@@ -1,24 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.igeekhome.ccsv2.mapper.CustomerServiceMapper">
+    <resultMap id="CustomerServiceMap" type="com.igeekhome.ccsv2.entity.CustomerService">
+        <!--主键映射-->
+        <id column="id" property="id"></id>
+        <!--普通字段映射使用result,名字一致的可以不写-->
+        <result column="phone" property="phone"></result>
+        <result column="password" property="password"></result>
+        <result column="online_state" property="onlineState"></result>
+        <result column="work_state" property="workState"></result>
+        <result column="head_img" property="headImg"></result>
+        <result column="email" property="email"></result>
+        <result column="real_name" property="realName"></result>
+        <result column="nick_name" property="nickName"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+        <result column="total_online_time" property="totalOnlineTime"></result>
+        <result column="online_time_begin" property="onlineTimeBegin"></result>
+        <result column="online_time_end" property="onlineTimeEnd"></result>
+        <result column="session_count" property="sessionCount"></result>
+        <result column="msg_count" property="msgCount"></result>
+        <result column="service_cap" property="serviceCap"></result>
+        <!--关联的实体对象查询使用association，这里映射的是CustomerServiceGroup类-->
+        <!--关联customer_service_group-->
+        <association property="group" javaType="com.igeekhome.ccsv2.entity.CustomerServiceGroup">
+            <id column="id" property="id"></id>
+            <result column="group_name" property="groupName"></result>
+            <result column="number" property="number"></result>
+            <result column="create_time" property="createTime"></result>
+            <result column="update_time" property="updateTime"></result>
+        </association>
+        <!--关联customer_service_role-->
+        <association property="role" javaType="com.igeekhome.ccsv2.entity.CustomerServiceRole">
+            <id column="id" property="id"></id>
+            <result column="role_describe" property="roleDescribe"></result>
+            <result column="name" property="name"></result>
+            <result column="number" property="number"></result>
+            <result column="create_time" property="createTime"></result>
+            <result column="update_time" property="updateTime"></result>
+            <result column="creator_id" property="creatorId"></result>
+        </association>
+    </resultMap>
+    <select id="queryById"  parameterType="int" resultMap="CustomerServiceMap"><!--通过id查找客服-->
+        select * from customer_service,customer_service_group,customer_service_role where
+        customer_service.id = #{id} and customer_service.customer_service_group_id = customer_service_group.id
+        and customer_service.role_id = customer_service_role.id
+    </select>
+
+
     <update id="update" parameterType="CustomerService">
         update coustomer_service set
             email = #{email},
             nick_name = #{nickName},
             real_name=#{realName},
             phone=#{phone}
-            where customer_service_id = #{customerServiceId}
+            where id = #{id}
     </update>
+
+
     <update id="updatePwd" parameterType="CustomerService">
-        update coustomer_service set password = #{password} where customer_service_id = #{customerServiceId}
+        update coustomer_service set password = #{password} where id = #{id}
     </update>
+
+
     <select id="findPwd" parameterType="CustomerService" resultType="hashmap">
         SELECT
 	        coustomer_service.`password`
         FROM
 	        coustomer_service
         WHERE
-	        coustomer_service.customer_service_id = #{customerServiceId}
+	        coustomer_service.id = #{id}
 
     </select>
+
+
 </mapper>

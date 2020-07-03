@@ -17,7 +17,7 @@ public @ResponseBody class CustomerServiceGroupController {
 
     @RequestMapping(value = "/save",method = {RequestMethod.POST},params = {"name"})
     public @ResponseBody String save(CustomerServiceGroup group,String name){
-        group.setName(name);
+        group.setGroupName(name);
         int a=customerServiceGroupBiz.save(group);
         return a+"";
     }
