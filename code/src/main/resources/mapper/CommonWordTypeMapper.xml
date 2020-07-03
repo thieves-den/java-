@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.igeekhome.ccsv2.mapper.CommonWordTypeMapper">
+    <insert id="save" parameterType="com.igeekhome.ccsv2.entity.CommonWordType">
+        insert into common_words_type(name,is_personal,creator_id) values(#{name},#{isPersonal},#{creatorId})
+    </insert>
+</mapper>

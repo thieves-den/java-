@@ -1,6 +1,7 @@
 package com.igeekhome.ccsv2.controller;
 
-import com.igeekhome.ccsv2.biz.INoticeBiz;
+import com.igeekhome.ccsv2.biz.ICommonWordBiz;
+import com.igeekhome.ccsv2.entity.CommonWord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,20 +9,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/notice")
+@RequestMapping("/commonWord")
 @ResponseBody
-public class NoticeController {
+public class CommonWordController {
     @Autowired
-    private INoticeBiz noticeBiz;
+    private ICommonWordBiz commonWordBiz;
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
-    public int save(String title,String content,int creatorId){
-        return noticeBiz.save(title,content,creatorId);
-    }
-    @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
-    @ResponseBody
-    public int delete(String title,String content){
-        return noticeBiz.delete(title,content);
+    public int save(CommonWord commonWord,String content,boolean isPersonal,String type,int creatorId){
+        commonWord.setContent(content);
+        commonWord.setPersonal(isPersonal);
+        commonWord.setType(type);
+        return commonWordBiz.save(commonWord);
     }
 
 }
