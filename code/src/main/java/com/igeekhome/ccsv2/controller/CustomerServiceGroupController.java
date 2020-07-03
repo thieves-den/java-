@@ -1,56 +1,36 @@
 package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.ICustomerServiceGroupBiz;
-import com.igeekhome.ccsv2.entity.CustomerService;
 import com.igeekhome.ccsv2.entity.CustomerServiceGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.security.PublicKey;
-import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/csgroup")
-public class CustomerServiceGroupController {
-
+public @ResponseBody class CustomerServiceGroupController {
     @Autowired
     private ICustomerServiceGroupBiz customerServiceGroupBiz;
-    /**
-     * 对外提供保存创建客服组的服务
-     */
-    @RequestMapping(value = {"/save"},method = RequestMethod.POST)
-    public @ResponseBody String save(CustomerServiceGroup group){
-        int a = customerServiceGroupBiz.save(group);
+
+    @RequestMapping(value = "/save",method = {RequestMethod.POST},params = {"name"})
+    public @ResponseBody String save(CustomerServiceGroup group,String name){
+        group.setName(name);
+        int a=customerServiceGroupBiz.save(group);
         return a+"";
     }
-    /**
-     * 对外提供删除客服组的服务
-     */
-    public String delete(int id){
-        return "ok";
-    }
-
-
-    /**
-     * 对外提供根据id查询客服组的服务
-     */
-    @GetMapping("/getCustomerServiceGroup/{id}")
+    @RequestMapping(value = "/getOne",method = {RequestMethod.GET},params = {"name"})
     @ResponseBody
-    public CustomerServiceGroup qieryById(@PathVariable int id){
-        CustomerServiceGroup group = customerServiceGroupBiz.getOne(id);
+    public CustomerServiceGroup getOne(String name){
+        CustomerServiceGroup group=customerServiceGroupBiz.getOne(name);
         return group;
     }
-    /**
-     * 对外提供编辑客服组的服务
-     */
-    public String edit(CustomerServiceGroup group){
-        return "OK";
+    @RequestMapping(value = "/delete",method = RequestMethod.DELETE,params = "id")
+    @ResponseBody
+    public int delete(int id){
+        return customerServiceGroupBiz.delete(id);
     }
-    /**
-     * 对外提供查询客服组的服务
-     */
-    public String adfad(List<CustomerServiceGroup> groups){
-        return "OK";
-    }
+
 }
