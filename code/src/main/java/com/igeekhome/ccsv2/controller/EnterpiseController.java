@@ -18,7 +18,7 @@ public class EnterpiseController {
     @Autowired
     private IEnterpiseBiz enterpiseBiz;
     /**
-     * 对外提供保存创建客服组的服务
+     * 对外提供保存创建企业的服务
      */
     @RequestMapping(value = {"/update"},method = RequestMethod.POST)
     public @ResponseBody
