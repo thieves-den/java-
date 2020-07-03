@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : test
-Source Server Version : 50719
+Source Server         : localhost
+Source Server Version : 50730
 Source Host           : localhost:3306
 Source Database       : ycs
 
 Target Server Type    : MYSQL
-Target Server Version : 50719
+Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-07-03 01:52:59
+Date: 2020-07-03 21:29:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for auto_reply
+-- Table structure for `auto_reply`
 -- ----------------------------
 DROP TABLE IF EXISTS `auto_reply`;
 CREATE TABLE `auto_reply` (
@@ -31,7 +31,7 @@ CREATE TABLE `auto_reply` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for blacklist
+-- Table structure for `blacklist`
 -- ----------------------------
 DROP TABLE IF EXISTS `blacklist`;
 CREATE TABLE `blacklist` (
@@ -48,15 +48,15 @@ CREATE TABLE `blacklist` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for common_words
+-- Table structure for `common_words`
 -- ----------------------------
 DROP TABLE IF EXISTS `common_words`;
 CREATE TABLE `common_words` (
   `content` varchar(255) NOT NULL COMMENT '内容',
-  `lib` varchar(255) DEFAULT NULL COMMENT '库',
-  `type` varchar(255) DEFAULT NULL COMMENT '类型',
+  `is_personal` int(1) NOT NULL COMMENT '库',
+  `type` varchar(255) NOT NULL COMMENT '类型',
   `creator_id` int(11) DEFAULT NULL COMMENT '创建者id',
-  PRIMARY KEY (`content`) USING BTREE
+  PRIMARY KEY (`content`,`is_personal`,`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -64,13 +64,14 @@ CREATE TABLE `common_words` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for common_words_type
+-- Table structure for `common_words_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `common_words_type`;
 CREATE TABLE `common_words_type` (
   `name` varchar(255) NOT NULL COMMENT '标签名',
   `creator_id` int(11) NOT NULL COMMENT '创建者id',
-  PRIMARY KEY (`name`) USING BTREE
+  `is_personal` int(1) NOT NULL,
+  PRIMARY KEY (`name`,`creator_id`,`is_personal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
@@ -78,7 +79,7 @@ CREATE TABLE `common_words_type` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for customer_info
+-- Table structure for `customer_info`
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_info`;
 CREATE TABLE `customer_info` (
@@ -103,7 +104,7 @@ CREATE TABLE `customer_info` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for customer_service
+-- Table structure for `customer_service`
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_service`;
 CREATE TABLE `customer_service` (
@@ -145,7 +146,7 @@ INSERT INTO `customer_service` VALUES ('2', null, '123', '11111111', '1', '1', n
 INSERT INTO `customer_service` VALUES ('3', null, '132434', '22222222', '1', '1', null, '125@qq.com', 'C', '3号', '2020-07-03 00:22:15', '2020-07-03 00:22:18', '00:22:30', null, null, '30', '123', '100', '3', '3');
 
 -- ----------------------------
--- Table structure for customer_service_group
+-- Table structure for `customer_service_group`
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_service_group`;
 CREATE TABLE `customer_service_group` (
@@ -167,7 +168,7 @@ INSERT INTO `customer_service_group` VALUES ('3', 'group 3', '123', null, null);
 INSERT INTO `customer_service_group` VALUES ('4', 'group 4', '123', null, null);
 
 -- ----------------------------
--- Table structure for customer_service_role
+-- Table structure for `customer_service_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_service_role`;
 CREATE TABLE `customer_service_role` (
@@ -192,7 +193,7 @@ INSERT INTO `customer_service_role` VALUES ('4', 'work order customer service', 
 INSERT INTO `customer_service_role` VALUES ('5', 'online customer service', '在线客服', '0', '2020-06-30 17:21:29', null, null);
 
 -- ----------------------------
--- Table structure for dialog_rule
+-- Table structure for `dialog_rule`
 -- ----------------------------
 DROP TABLE IF EXISTS `dialog_rule`;
 CREATE TABLE `dialog_rule` (
@@ -206,7 +207,7 @@ CREATE TABLE `dialog_rule` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for enterpise
+-- Table structure for `enterpise`
 -- ----------------------------
 DROP TABLE IF EXISTS `enterpise`;
 CREATE TABLE `enterpise` (
@@ -227,7 +228,7 @@ CREATE TABLE `enterpise` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for log
+-- Table structure for `log`
 -- ----------------------------
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
@@ -243,7 +244,7 @@ CREATE TABLE `log` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for notice
+-- Table structure for `notice`
 -- ----------------------------
 DROP TABLE IF EXISTS `notice`;
 CREATE TABLE `notice` (
@@ -258,7 +259,7 @@ CREATE TABLE `notice` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for session
+-- Table structure for `session`
 -- ----------------------------
 DROP TABLE IF EXISTS `session`;
 CREATE TABLE `session` (
@@ -282,7 +283,7 @@ CREATE TABLE `session` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for session_msg
+-- Table structure for `session_msg`
 -- ----------------------------
 DROP TABLE IF EXISTS `session_msg`;
 CREATE TABLE `session_msg` (
@@ -299,7 +300,7 @@ CREATE TABLE `session_msg` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for tags
+-- Table structure for `tags`
 -- ----------------------------
 DROP TABLE IF EXISTS `tags`;
 CREATE TABLE `tags` (
@@ -315,7 +316,7 @@ CREATE TABLE `tags` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for visitor_info
+-- Table structure for `visitor_info`
 -- ----------------------------
 DROP TABLE IF EXISTS `visitor_info`;
 CREATE TABLE `visitor_info` (
@@ -336,7 +337,7 @@ CREATE TABLE `visitor_info` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for word_order
+-- Table structure for `word_order`
 -- ----------------------------
 DROP TABLE IF EXISTS `word_order`;
 CREATE TABLE `word_order` (
@@ -360,7 +361,7 @@ CREATE TABLE `word_order` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for word_order_reply
+-- Table structure for `word_order_reply`
 -- ----------------------------
 DROP TABLE IF EXISTS `word_order_reply`;
 CREATE TABLE `word_order_reply` (
@@ -376,7 +377,7 @@ CREATE TABLE `word_order_reply` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for work_order_log
+-- Table structure for `work_order_log`
 -- ----------------------------
 DROP TABLE IF EXISTS `work_order_log`;
 CREATE TABLE `work_order_log` (
