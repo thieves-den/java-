@@ -12,4 +12,9 @@ public class NoticeBizImpl implements com.igeekhome.ccsv2.biz.INoticeBiz{
     public int save(String title, String content, int creatorId) {
         return noticeMapper.save(title,content,creatorId);
     }
+
+    @Override
+    public int delete(String title, String content) {
+        return noticeMapper.delete(title,content);
+    }
 }

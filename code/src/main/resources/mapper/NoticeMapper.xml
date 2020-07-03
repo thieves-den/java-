@@ -6,4 +6,7 @@
     <insert id="save" parameterType="com.igeekhome.ccsv2.entity.Notice">
         insert into notice(title,content,creator_id) values (#{title},#{content},#{creatorId})
     </insert>
+    <delete id="delete" parameterType="com.igeekhome.ccsv2.entity.Notice">
+        delete from notice where title=#{title} and content=#{content};
+    </delete>
 </mapper>
