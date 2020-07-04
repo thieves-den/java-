@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.igeekhome.ccsv2.mapper.BlackListMapper">
+    <insert id="create" parameterType="BlackList">
+        insert blacklist(customer_id,customer_service_id,reason) VALUES(#{customerId},#{customerServiceId},#{reason})
+    </insert>
+    <delete id="delete" parameterType="BlackList">
+        delete from blacklist where customer_id = #{customerId}
+    </delete>
+</mapper>
