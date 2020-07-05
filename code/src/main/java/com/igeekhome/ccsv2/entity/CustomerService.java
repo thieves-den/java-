@@ -8,9 +8,9 @@ public class CustomerService {
     private int id;
     private String phone;
     private String password;
-    private int onlineState;
-    private int workState;
-    private String headImg;
+    private Integer onlineState;
+    private Integer workState;
+    private Byte[] headImg;
     private String email;
     private String nickName;
     private String realName;
@@ -23,8 +23,16 @@ public class CustomerService {
     private Time totalOnlineTime;
     private Timestamp onlineTimeBegin;
     private Timestamp onlineTimeEnd;
-    private int sessionCount;
-    private int msgCount;
-    private int serviceCap;
+    private Integer sessionCount;
+    private Integer msgCount;
+    private Integer serviceCap;
+
+
+    //重写equals方法，用于判断两个CustomerService对象是否相同
+    @Override
+    public boolean equals(Object obj) {
+        CustomerService cs = (CustomerService) obj;
+        return this.phone.equals(cs.phone) && this.id == cs.id;
+    }
 
 }

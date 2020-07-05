@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class indexController {
-//处理客服端请求
+//处理客户端请求
     @RequestMapping("/")
     public @ResponseBody String index(){
         return "OK2";

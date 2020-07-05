@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.igeekhome.ccsv2.mapper.SessionMsgMapper">
+
     <insert id="create" parameterType="SessionMsg">
         insert session_msg(session_id,msg_sender_id,msg_recevice_id,send_time,content)
         values (#{sessionId},#{msgSenderId},#{msgReceiverId},#{sendTime},#{content})
     </insert>
+
     <select id="findId" resultType="java.util.HashMap" parameterType="SessionMsg">
         SELECT MAX(session_id) FROM session_msg
     </select>
+
 </mapper>

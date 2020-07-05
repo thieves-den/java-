@@ -1,37 +1,42 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50730
+Source Server         : test
+Source Server Version : 50719
 Source Host           : localhost:3306
 Source Database       : ycs
 
 Target Server Type    : MYSQL
-Target Server Version : 50730
+Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2020-07-03 21:29:17
+Date: 2020-07-05 16:58:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `auto_reply`
+-- Table structure for auto_reply
 -- ----------------------------
 DROP TABLE IF EXISTS `auto_reply`;
 CREATE TABLE `auto_reply` (
-  `terminal` char(5) DEFAULT NULL COMMENT 'web、app,mp,weibo,wap,h5',
-  `scene` varchar(255) DEFAULT NULL COMMENT 'welcome,customer_service_no_response',
-  `content` varchar(255) DEFAULT NULL COMMENT '名字',
-  `time_limit` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  `customer_service_id` int(11) NOT NULL COMMENT '自动回复创建者的客服id',
+  `terminal` char(5) DEFAULT NULL COMMENT '终端类型：web、app,mp,weibo,wap,h5',
+  `welcome` varchar(255) DEFAULT NULL COMMENT '欢迎消息',
+  `customer_service_no_response` varchar(255) DEFAULT NULL COMMENT '客服无应答消息',
+  `customer_service_time_limit` time DEFAULT NULL COMMENT '客服无响应时间限制',
+  `customer_no_response` varchar(255) DEFAULT NULL COMMENT '顾客无响应回复',
+  `customer_time_limit` time DEFAULT NULL COMMENT '顾客无响应时间限制',
+  `customer_service_end` varchar(255) DEFAULT NULL COMMENT '客服手动结束回复内容',
+  `system_end` varchar(255) DEFAULT NULL COMMENT '系统自动结束回复内容'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='自动回复';
 
 -- ----------------------------
 -- Records of auto_reply
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `blacklist`
+-- Table structure for blacklist
 -- ----------------------------
 DROP TABLE IF EXISTS `blacklist`;
 CREATE TABLE `blacklist` (
@@ -48,7 +53,7 @@ CREATE TABLE `blacklist` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `common_words`
+-- Table structure for common_words
 -- ----------------------------
 DROP TABLE IF EXISTS `common_words`;
 CREATE TABLE `common_words` (
@@ -64,7 +69,7 @@ CREATE TABLE `common_words` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `common_words_type`
+-- Table structure for common_words_type
 -- ----------------------------
 DROP TABLE IF EXISTS `common_words_type`;
 CREATE TABLE `common_words_type` (
@@ -79,7 +84,7 @@ CREATE TABLE `common_words_type` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `customer_info`
+-- Table structure for customer_info
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_info`;
 CREATE TABLE `customer_info` (
@@ -104,7 +109,7 @@ CREATE TABLE `customer_info` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `customer_service`
+-- Table structure for customer_service
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_service`;
 CREATE TABLE `customer_service` (
@@ -112,9 +117,9 @@ CREATE TABLE `customer_service` (
   `customer_service_id` int(11) DEFAULT NULL COMMENT '客户工号',
   `phone` varchar(11) NOT NULL COMMENT '手机号',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
-  `online_state` enum('1','0') DEFAULT NULL COMMENT '状态：0下线，1在线',
-  `work_state` enum('1','0') DEFAULT NULL COMMENT '工作状态：0禁用，1可用',
-  `head_img` varchar(255) DEFAULT NULL COMMENT '头像',
+  `online_state` int(11) DEFAULT NULL COMMENT '在线状态：0下线，1在线',
+  `work_state` int(11) DEFAULT NULL COMMENT '工作状态：0禁用，1可用',
+  `head_img` mediumblob COMMENT '头像',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
   `real_name` varchar(255) DEFAULT NULL COMMENT '真实姓名',
   `nick_name` varchar(255) DEFAULT NULL COMMENT '昵称',
@@ -136,39 +141,49 @@ CREATE TABLE `customer_service` (
   KEY `customer_service_ibfk_2` (`role_id`),
   CONSTRAINT `customer_service_ibfk_1` FOREIGN KEY (`customer_service_group_id`) REFERENCES `customer_service_group` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `customer_service_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `customer_service_role` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='客服信息表';
 
 -- ----------------------------
 -- Records of customer_service
 -- ----------------------------
-INSERT INTO `customer_service` VALUES ('1', null, '36435', '3333333', '1', '1', null, '126@qq.com', 'A', '1号', '2020-07-02 23:41:54', '2020-07-03 00:21:22', '23:59:59', null, null, '10', '123', '100', '1', '1');
-INSERT INTO `customer_service` VALUES ('2', null, '123', '11111111', '1', '1', null, '123@qq.com', 'B', '2号', '2020-07-03 00:21:52', '2020-07-03 00:21:55', '02:21:59', null, null, '20', '123', '100', '2', '2');
-INSERT INTO `customer_service` VALUES ('3', null, '132434', '22222222', '1', '1', null, '125@qq.com', 'C', '3号', '2020-07-03 00:22:15', '2020-07-03 00:22:18', '00:22:30', null, null, '30', '123', '100', '3', '3');
+INSERT INTO `customer_service` VALUES ('1', null, '123456', '3333333', '1', '1', null, '126@qq.com', '唐果', '水蜜桃', '2020-07-02 23:41:54', '2020-07-03 00:21:22', '23:59:59', null, null, '10', '123', '10000', '1', '1');
+INSERT INTO `customer_service` VALUES ('2', null, '12345', '111111', '0', '1', null, '124@qq.com', '林感', '小林哥', '2020-07-03 00:21:52', '2020-07-03 00:21:55', '02:21:59', null, null, '20', '123', '10000', '3', '4');
+INSERT INTO `customer_service` VALUES ('3', null, '132434', '22222222', '1', '1', null, '125@qq.com', '索瑞萨', '史蒂夫索', '2020-07-03 00:22:15', '2020-07-03 00:22:18', '00:22:30', null, null, '30', '123', '10000', '3', '3');
+INSERT INTO `customer_service` VALUES ('4', null, '999999', '123456', '1', '1', null, '324@qq.com', '副丽鱼', '鱼儿', '2020-07-05 14:14:40', '2020-07-05 14:18:47', '04:14:49', null, null, '13', '34', '1000', '4', '4');
+INSERT INTO `customer_service` VALUES ('5', null, '1314520', 'hhh', '1', '1', null, '1232@qq.com', '李一桐', '桐儿', '2020-07-05 15:23:38', '2020-07-05 14:24:20', '09:24:24', null, null, '33', '209', '10000', '2', '3');
+INSERT INTO `customer_service` VALUES ('6', null, '138238', 'wxhn', '0', '1', null, '1qwr@qq.com', '张云雷', '张师傅', '2020-07-05 14:25:31', '2020-07-05 17:25:28', '10:25:21', null, null, '43', '343', '10000', '2', '1');
+INSERT INTO `customer_service` VALUES ('7', null, '8888', '21453', '1', '1', null, '463@qq.com', '范丞丞', '小范师兄', '2020-07-05 14:28:37', '2020-07-05 16:28:42', '15:28:49', null, null, '65', '245', '10000', '3', '5');
+INSERT INTO `customer_service` VALUES ('8', null, '20201314', '54gfd', '1', '1', null, '232323@qq.com', '杨洋', '羊羊', '2020-07-05 07:30:14', '2020-07-05 14:30:10', '08:30:05', null, null, '60', '234', '10000', '4', '2');
+INSERT INTO `customer_service` VALUES ('9', null, '112233', 'niceofyou', '1', '1', null, '1818@qq.com', '柳岩', '柳姐', '2020-07-05 10:34:26', '2020-07-05 16:25:39', '12:34:51', null, null, '99', '666', '10000', '1', '3');
+INSERT INTO `customer_service` VALUES ('10', null, '1332', 'how123', '1', '1', null, '287@qq.com', '周杰伦', '杰伦哥', '2020-07-05 16:48:09', '2020-07-05 16:48:20', '06:48:24', null, null, '23', '266', '10000', '2', '1');
+INSERT INTO `customer_service` VALUES ('11', null, '234552', 'sodf2', '0', '0', null, '2321@qq.com', '黄圣依', '依姐', '2020-07-05 16:49:53', '2020-07-05 16:49:56', '08:49:37', null, null, '66', '243', '10000', '1', '2');
+INSERT INTO `customer_service` VALUES ('12', null, '18860', 'woaini', '1', '1', null, 'tiantian@qq.com', '李子柒', '子柒', '2020-07-05 16:52:36', '2020-07-05 16:52:40', '16:52:42', null, null, '88', '345', '10000', '1', '4');
 
 -- ----------------------------
--- Table structure for `customer_service_group`
+-- Table structure for customer_service_group
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_service_group`;
 CREATE TABLE `customer_service_group` (
   `id` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `group_name` varchar(50) NOT NULL COMMENT '客服组名称',
+  `group_name` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '客服组名称',
   `number` int(20) DEFAULT NULL COMMENT '客服成员数量',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `group_name` (`group_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='客服组';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COMMENT='客服组';
 
 -- ----------------------------
 -- Records of customer_service_group
 -- ----------------------------
-INSERT INTO `customer_service_group` VALUES ('1', 'group 1', '123', null, null);
-INSERT INTO `customer_service_group` VALUES ('2', 'group 2', '123', null, null);
-INSERT INTO `customer_service_group` VALUES ('3', 'group 3', '123', null, null);
-INSERT INTO `customer_service_group` VALUES ('4', 'group 4', '123', null, null);
+INSERT INTO `customer_service_group` VALUES ('1', '客服一组', '12', '2020-07-03 05:18:37', null);
+INSERT INTO `customer_service_group` VALUES ('2', '客服二组', '10', '2020-07-04 14:18:45', null);
+INSERT INTO `customer_service_group` VALUES ('3', '客服三组', '23', '2020-07-05 19:25:56', null);
+INSERT INTO `customer_service_group` VALUES ('4', '客服四组', '42', '2020-07-06 06:19:36', null);
+INSERT INTO `customer_service_group` VALUES ('5', '客服五组', '35', '2020-07-08 09:16:42', null);
 
 -- ----------------------------
--- Table structure for `customer_service_role`
+-- Table structure for customer_service_role
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_service_role`;
 CREATE TABLE `customer_service_role` (
@@ -193,7 +208,7 @@ INSERT INTO `customer_service_role` VALUES ('4', 'work order customer service', 
 INSERT INTO `customer_service_role` VALUES ('5', 'online customer service', '在线客服', '0', '2020-06-30 17:21:29', null, null);
 
 -- ----------------------------
--- Table structure for `dialog_rule`
+-- Table structure for dialog_rule
 -- ----------------------------
 DROP TABLE IF EXISTS `dialog_rule`;
 CREATE TABLE `dialog_rule` (
@@ -207,7 +222,7 @@ CREATE TABLE `dialog_rule` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `enterpise`
+-- Table structure for enterpise
 -- ----------------------------
 DROP TABLE IF EXISTS `enterpise`;
 CREATE TABLE `enterpise` (
@@ -228,7 +243,7 @@ CREATE TABLE `enterpise` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `log`
+-- Table structure for log
 -- ----------------------------
 DROP TABLE IF EXISTS `log`;
 CREATE TABLE `log` (
@@ -244,7 +259,7 @@ CREATE TABLE `log` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `notice`
+-- Table structure for notice
 -- ----------------------------
 DROP TABLE IF EXISTS `notice`;
 CREATE TABLE `notice` (
@@ -259,7 +274,7 @@ CREATE TABLE `notice` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `session`
+-- Table structure for session
 -- ----------------------------
 DROP TABLE IF EXISTS `session`;
 CREATE TABLE `session` (
@@ -283,7 +298,7 @@ CREATE TABLE `session` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `session_msg`
+-- Table structure for session_msg
 -- ----------------------------
 DROP TABLE IF EXISTS `session_msg`;
 CREATE TABLE `session_msg` (
@@ -300,7 +315,7 @@ CREATE TABLE `session_msg` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `tags`
+-- Table structure for tags
 -- ----------------------------
 DROP TABLE IF EXISTS `tags`;
 CREATE TABLE `tags` (
@@ -316,7 +331,7 @@ CREATE TABLE `tags` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `visitor_info`
+-- Table structure for visitor_info
 -- ----------------------------
 DROP TABLE IF EXISTS `visitor_info`;
 CREATE TABLE `visitor_info` (
@@ -337,7 +352,7 @@ CREATE TABLE `visitor_info` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `word_order`
+-- Table structure for word_order
 -- ----------------------------
 DROP TABLE IF EXISTS `word_order`;
 CREATE TABLE `word_order` (
@@ -361,7 +376,7 @@ CREATE TABLE `word_order` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `word_order_reply`
+-- Table structure for word_order_reply
 -- ----------------------------
 DROP TABLE IF EXISTS `word_order_reply`;
 CREATE TABLE `word_order_reply` (
@@ -377,7 +392,7 @@ CREATE TABLE `word_order_reply` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `work_order_log`
+-- Table structure for work_order_log
 -- ----------------------------
 DROP TABLE IF EXISTS `work_order_log`;
 CREATE TABLE `work_order_log` (
