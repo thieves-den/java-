@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.igeekhome.ccsv2.mapper.TagsMapper">
+    <insert id="save" parameterType="com.igeekhome.ccsv2.entity.Tags">
+        insert into tags(id,name,creator_id,num_of_use,create_time) values (#{id},#{name},#{creatorId},#{numOfUse},#{createTime})
+    </insert>
+    <delete id="delete" parameterType="com.igeekhome.ccsv2.entity.Tags">
+        delete from tags where id=#{id};
+    </delete>
+    <update id="update" parameterType="com.igeekhome.ccsv2.entity.Tags">
+        update tags set name=#{name} where id=#{id};
+    </update>
+
+</mapper>

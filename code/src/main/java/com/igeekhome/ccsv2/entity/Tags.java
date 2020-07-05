@@ -1,8 +1,18 @@
 package com.igeekhome.ccsv2.entity;
 
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
+@Data
 public class Tags {
+    private int id;
     private String name;
-    private String tagDesc;
     private int creatorId;
-    private String type;
+    private int numOfUse;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createTime;
+
+
 }
