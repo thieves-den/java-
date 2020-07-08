@@ -4,55 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.igeekhome.ccsv2.mapper.CustomerServiceMapper">
-
-    <sql id="sql1">
-        <if test="nickName != null and nickName != ''">
-            and customer_service.nick_name = #{nickName}
-        </if>
-        <if test="realName != null and realName != ''">
-            and customer_service.real_name = #{realName}
-        </if>
-        <if test="id != 0">
-            and customer_service.id = #{id}
-        </if>
-        <if test="phone != null and phone != ''">
-            and customer_service.phone = #{phone}
-        </if>
-        <if test="workState != null">
-            and customer_service.work_state = #{workState}
-        </if>
-        <if test="onlineState != null">
-            and customer_service.online_state = #{onlineState}
-        </if>
-    </sql>
-
-
-    <insert id="save" parameterType="CustomerService">
-        insert into customer_service(
-        phone
-        , password
-        <if test="id != 0">, id</if>
-        <if test="email != null and email != ''">, email</if>
-        <if test="nickName != null and nickName != ''">, nick_name</if>
-        <if test="realName != null and realName != ''">, real_name</if>
-        <if test="group != null and group.id != 0">, customer_service_group_id</if>
-        <if test="role != null and role.id != 0">, role_id</if>
-        <if test="serviceCap != null">, service_cap</if>
-        )
-        values (
-        #{phone}
-        , #{password}
-        <if test="id != 0">, #{id}</if>
-        <if test="email != null and email != ''">, #{email}</if>
-        <if test="nickName != null and nickName != ''">, #{nickName}</if>
-        <if test="realName != null and realName != ''">, #{realName}</if>
-        <if test="group != null and group.id != 0">, #{group.id}</if>
-        <if test="role != null and role.id != 0">, #{role.id}</if>
-        <if test="serviceCap != null">, #{serviceCap}</if>
-        )
-    </insert>
-
-
     <resultMap id="CustomerServiceMap" type="com.igeekhome.ccsv2.entity.CustomerService">
         <!--主键映射-->
         <id column="id" property="id"></id>
@@ -93,67 +44,23 @@
             <result column="creator_id" property="creatorId"></result>
         </association>
     </resultMap>
-    <select id="queryFuzzy" parameterType="CustomerService" resultMap="CustomerServiceMap" ><!--通过id查找客服-->
-        select * from
-        (customer_service left join customer_service_group on customer_service.customer_service_group_id = customer_service_group.id)
-        left join customer_service_role on customer_service.role_id = customer_service_role.id where 1=1
-        <choose>
-            <when test="nickName != null and nickName != ''">
-                and customer_service.nick_name = #{nickName}
-            </when>
-            <when test="realName != null and realName != ''">
-                and customer_service.real_name = #{realName}
-            </when>
-            <when test="id != 0">
-                and customer_service.id = #{id}
-            </when>
-            <when test="phone != null and phone != ''">
-                and customer_service.phone = #{phone}
-            </when>
-            <when test="email != null and email != ''">
-                and customer_service.email = #{email}
-            </when>
-            <when test="workState != null">
-                and customer_service.work_state = #{workState}
-            </when>
-            <when test="onlineState != null">
-                and customer_service.online_state = #{onlineState}
-            </when>
-            <otherwise></otherwise>
-        </choose>
+    <insert id="resign" parameterType="CustomerService">
+        insert coustomer_service(phone,password) values (#{customerServicePhone},#{password})
+    </insert>
+    <select id="queryById"  parameterType="int" resultMap="CustomerServiceMap"><!--通过id查找客服-->
+        select * from customer_service,customer_service_group,customer_service_role where
+        customer_service.id = #{id} and customer_service.customer_service_group_id = customer_service_group.id
+        and customer_service.role_id = customer_service_role.id
     </select>
 
 
-    <select id="showByGroup" parameterType="CustomerServiceGroup" resultMap="CustomerServiceMap"><!--分组展示-->
-        select * from
-        (customer_service left join customer_service_group on customer_service.customer_service_group_id = customer_service_group.id)
-        left join customer_service_role on customer_service.role_id = customer_service_role.id where 1=1
-        <choose>
-            <when test="id != 0">
-                and customer_service_group_id = #{id}
-            </when>
-            <when test="groupName != null">
-                and group_name = #{groupName}
-            </when>
-            <otherwise></otherwise>
-        </choose>
-    </select>
-
-
-    <update id="update">
-        update customer_service
-        <trim prefix="set" prefixOverrides=",">
-            <if test="newcs.email != null"> email = #{newcs.email}, </if>
-            <if test="newcs.nickName != null"> nick_name = #{newcs.nickName}, </if>
-            <if test="newcs.realName != null"> real_name = #{newcs.realName}, </if>
-            <if test="newcs.phone != null"> phone = #{newcs.phone}, </if>
-            <if test="newcs.workState != null"> work_state = #{newcs.workState}, </if>
-            <if test="newcs.onlineState != null"> online_state = #{newcs.onlineState}, </if>
-            <if test="newcs.group != null and newcs.group.id != 0"> customer_service_group_id = #{newcs.group.id}, </if>
-            <if test="newcs.role != null and newcs.role.id != 0"> role_id = #{newcs.role.id}, </if>
-            <if test="newcs.id != 0"> id = #{newcs.id} </if>
-            where id = #{oldcs.id}
-        </trim>
+    <update id="update" parameterType="CustomerService">
+        update coustomer_service set
+            email = #{email},
+            nick_name = #{nickName},
+            real_name=#{realName},
+            phone=#{phone}
+            where id = #{id}
     </update>
 
 
@@ -171,20 +78,6 @@
 	        coustomer_service.id = #{id}
 
     </select>
-
-
-    <delete id="deleteById" parameterType="int">
-        delete from customer_service where id = #{id}
-    </delete>
-
-    <!--根据id批量删除customer_service,id以List形式存储-->
-    <delete id="deleteBatch" parameterType="List">
-        delete from customer_service where id in
-        <!--针对集合类collection得到一个循环合集类似（1,2,3......）-->
-        <foreach collection="list" item="id" open="(" close=")" separator=",">
-            #{id}
-        </foreach>
-    </delete>
 
 
 </mapper>

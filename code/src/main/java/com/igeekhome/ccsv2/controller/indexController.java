@@ -1,23 +1,24 @@
 package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.entity.CustomerService;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class indexController {
-//处理客户端请求
+public class IndexController {
+    //处理客户端请求
     @RequestMapping("/")
     public @ResponseBody String index(){
-        return "OK2";
+        return "ok2";
     }
-    @RequestMapping("/abc")
+
+    @RequestMapping(value="/cs")
     public @ResponseBody CustomerService query(){
         CustomerService cs = new CustomerService();
         cs.setNickName("小张");
-        cs.setRealName("张三");
+        cs.setRealName("张张1");
         return cs;
     }
 }

@@ -7,8 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CustomerServiceGroupMapper {
     int save(CustomerServiceGroup group);
 
-    CustomerServiceGroup getOne(String name);
-    int delete(int id);
-
-    int edit(int id, String name);
+    CustomerServiceGroup getOne(int id);
 }
