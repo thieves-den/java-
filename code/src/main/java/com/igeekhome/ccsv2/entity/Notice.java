@@ -1,7 +1,11 @@
 package com.igeekhome.ccsv2.entity;
 
-import java.util.SplittableRandom;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.SplittableRandom;
+@Setter
+@Getter
 public class Notice {
     private String title;
     private String content;

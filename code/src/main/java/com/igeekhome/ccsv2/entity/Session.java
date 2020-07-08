@@ -1,7 +1,11 @@
 package com.igeekhome.ccsv2.entity;
 
-import java.sql.Timestamp;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.sql.Timestamp;
+@Setter
+@Getter
 public class Session {
     private int customerServiceId;
     private int visitorIp;
