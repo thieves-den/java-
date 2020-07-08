@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.igeekhome.ccsv2.mapper.VisitorInfoMapper">
+    <select id="select" resultType="VisitorInfo" parameterType="VisitorInfo">
+        SELECT
+        visitor_name,terminal,browser,visit_duration,ip,visit_time
+        FROM
+        coustomer_service,
+        visitor_info
+        WHERE
+        coustomer_service.customer_service_id = visitor_info.customer_service_id
+        <if test="nickName != null">
+            AND coustomer_service.nick_name = #{nickName}
+        </if>
+        <if test="browser != null">
+            AND visitor_info.browser = #{browser}
+        </if>
+        <if test="terminal != null">
+            AND visitor_info.terminal = #{terminal}
+        </if>
+        <if test="visitTime != null">
+            AND visitor_info.visit_time >= #{visitTime}
+        </if>
+        <if test="visitTime != null">
+            AND  #{visitTime} >= visitor_info.visit_time
+        </if>
+        <if test="visitorName != null">
+            AND visitor_info.visitor_name LIKE '%12%'
+        </if>
+
+
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.igeekhome.ccsv2.until;
+package com.igeekhome.ccsv2.untils;
 
 import com.igeekhome.ccsv2.constant.CommonConstant;
 import lombok.Data;
