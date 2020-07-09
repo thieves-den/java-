@@ -2,11 +2,14 @@ package com.igeekhome.ccsv2.biz.impl;
 
 import com.igeekhome.ccsv2.biz.ICustomerServiceBiz;
 import com.igeekhome.ccsv2.entity.CustomerService;
+import com.igeekhome.ccsv2.entity.CustomerServiceGroup;
 import com.igeekhome.ccsv2.mapper.CustomerServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class CustomerServiceBizImpl implements ICustomerServiceBiz {
@@ -15,13 +18,27 @@ public class CustomerServiceBizImpl implements ICustomerServiceBiz {
     private CustomerServiceMapper customerServiceMapper;
 
     @Override
-    public CustomerService queryById(int id) {
-        return customerServiceMapper.queryById(id);
+    public int register(CustomerService cs) {
+        return customerServiceMapper.save(cs);
+    }
+    @Override
+    public int addNewCustomerService(CustomerService cs) {
+        return customerServiceMapper.save(cs);
     }
 
     @Override
-    public int update(CustomerService cs){
-        return customerServiceMapper.update(cs);
+    public List<CustomerService> queryFuzzy(CustomerService cs) {
+        return customerServiceMapper.queryFuzzy(cs);
+    }
+
+    @Override
+    public List<CustomerService> showByGroup(CustomerServiceGroup group) {
+        return customerServiceMapper.showByGroup(group);
+    }
+
+    @Override
+    public int update(CustomerService oldcs, CustomerService newcs) {
+        return customerServiceMapper.update(oldcs, newcs);
     }
 
     @Override
@@ -35,9 +52,12 @@ public class CustomerServiceBizImpl implements ICustomerServiceBiz {
     }
 
     @Override
-    public int resign(CustomerService customerService) {
-        return customerServiceMapper.resign(customerService);
+    public int deleteById(int id) {
+        return customerServiceMapper.deleteById(id);
     }
 
-
+    @Override
+    public int deleteBatch(List<Integer> ids) {
+        return customerServiceMapper.deleteBatch(ids);
+    }
 }

@@ -20,6 +20,7 @@ public class VisitorInfoController {
     @GetMapping("/select")
     public @ResponseBody
     Result select(VisitorInfo visitorInfo){
+
         List<VisitorInfo> visitor = visitorInfoBiz.select(visitorInfo);
         return Result.ok(visitor);
     }

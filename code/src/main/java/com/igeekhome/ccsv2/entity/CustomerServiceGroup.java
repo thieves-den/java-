@@ -12,9 +12,7 @@ public class CustomerServiceGroup {
     private  int id;
     private String name;
     private int number;
-//    DateTimeFormat用来对入参进行解析用的
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
-
+    private Date updateTime;
     private List<CustomerService> groupCustomerService;
 }

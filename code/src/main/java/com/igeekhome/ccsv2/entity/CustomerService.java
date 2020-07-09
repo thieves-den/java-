@@ -1,45 +1,45 @@
 package com.igeekhome.ccsv2.entity;
-
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
 @Data
-@Setter
-@Getter
 public class CustomerService {
     private int id;
-    /**
-    * 客服头像
-    */
-    private String headImg;
-    private String state;
+    private String phone;
+    private String password;
+    private Integer onlineState;
+    private Integer workState;
+    private Byte[] headImg;
+    private String email;
     private String nickName;
     private String realName;
-    private String customerServiceId;
-    private String customerServicePhone;
-    private String password;
-    private String phone;
-    /**
-     * 关联的客服组
-     */
-    private CustomerServiceGroup group;
-    /**
-     * 关联的客服角色
-     */
-    private CustomerServiceRole role;
+    //关联的客服组
+    CustomerServiceGroup group;
+    //关联的客服角色
+    CustomerServiceRole role;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private Date totalOnlineTime;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private Date averageResponseTime;//平均响应时长
+    @JsonFormat(pattern = "HH:mm:ss")
+    private Date averageSessionTime;//平均会话时长
 
-    private int serviceCap;
-    private long totalOnlineTime;
-    private Date onlineTimeBegin;
-    private Date onlineTimeEnd;
-    private int sessionCount;
-    private int msgCount;
     private Date createTime;
     private Date updateTime;
-    private int onLineState;
-    private int workState;
+    private Date onlineTimeBegin;
+    private Date onlineTimeEnd;
+
+    private Integer sessionCount;//会话次数
+    private Integer msgCount;
+    private Integer serviceCap;
+
+    //重写equals方法，用于判断两个CustomerService对象是否相同
+    @Override
+    public boolean equals(Object obj) {
+        CustomerService cs = (CustomerService) obj;
+        return this.phone.equals(cs.phone) && this.id == cs.id;
+    }
 
 }
