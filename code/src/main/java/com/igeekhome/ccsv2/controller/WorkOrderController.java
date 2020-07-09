@@ -2,6 +2,7 @@ package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.IWorkOrderBiz;
 import com.igeekhome.ccsv2.entity.WorkOrder;
+import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +18,14 @@ public class WorkOrderController {
     private IWorkOrderBiz workOrderBiz;
 
     @RequestMapping(value = {"/create"},method = RequestMethod.POST)
-    public @ResponseBody String create(WorkOrder workOrder){
+    public @ResponseBody
+    Result create(WorkOrder workOrder){
         HashMap<String, Integer> tem = workOrderBiz.findId();
         int s = tem.get("MAX(work_order_id)") + 1;
         workOrder.setWorkOrderId(s);
         if(workOrder.getType() == null||workOrder.getTitle()==null||workOrder.getOrderDesc() == null)
-            return "请填写完整";
+            return Result.error("请填写完整");
         int a = workOrderBiz.create(workOrder);
-            return a + "";
+            return Result.ok(a);
     }
 }

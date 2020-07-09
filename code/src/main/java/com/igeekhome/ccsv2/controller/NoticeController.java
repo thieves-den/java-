@@ -1,6 +1,7 @@
 package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.INoticeBiz;
+import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +16,13 @@ public class NoticeController {
     private INoticeBiz noticeBiz;
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
-    public int save(String title,String content,int creatorId){
-        return noticeBiz.save(title,content,creatorId);
+    public Result save(String title,String content,int creatorId){
+        return Result.ok(noticeBiz.save(title,content,creatorId));
     }
     @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
     @ResponseBody
-    public int delete(String title,String content){
-        return noticeBiz.delete(title,content);
+    public Result delete(String title,String content){
+        return Result.ok(noticeBiz.delete(title,content));
     }
 
 }

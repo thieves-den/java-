@@ -4,6 +4,7 @@ package com.igeekhome.ccsv2.controller;
 import com.igeekhome.ccsv2.biz.IEnterpiseBiz;
 import com.igeekhome.ccsv2.entity.CustomerServiceGroup;
 import com.igeekhome.ccsv2.entity.Enterpise;
+import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,9 @@ public class EnterpiseController {
      */
     @RequestMapping(value = {"/update"},method = RequestMethod.POST)
     public @ResponseBody
-    String update(Enterpise enterpise){
+    Result update(Enterpise enterpise){
         int a = enterpiseBiz.update(enterpise);
-        return a+"";
+        return Result.ok(a);
     }
 
 }

@@ -2,6 +2,7 @@ package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.ICommonWordBiz;
 import com.igeekhome.ccsv2.entity.CommonWord;
+import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,11 @@ public class CommonWordController {
     private ICommonWordBiz commonWordBiz;
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
-    public int save(CommonWord commonWord,String content,boolean isPersonal,String type,int creatorId){
+    public Result save(CommonWord commonWord,String content,boolean isPersonal,String type,int creatorId){
         commonWord.setContent(content);
         commonWord.setPersonal(isPersonal);
         commonWord.setType(type);
-        return commonWordBiz.save(commonWord);
+        return Result.ok(commonWordBiz.save(commonWord));
     }
 
 }

@@ -2,6 +2,7 @@ package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.IBlackListBiz;
 import com.igeekhome.ccsv2.entity.BlackList;
+import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,15 +21,15 @@ public class BlackListController {
      */
     @RequestMapping(value = {"/delete"},method = RequestMethod.POST)
     public @ResponseBody
-    String delete(BlackList blackList){
+    Result delete(BlackList blackList){
         int a = blackListBiz.delete(blackList);
-        return a + "";
+        return Result.ok(a);
     }
 //将客户添加到黑名单中
     @RequestMapping(value = {"/create"},method = RequestMethod.POST)
     public @ResponseBody
-    String create(BlackList blackList){
+    Result create(BlackList blackList){
         int a = blackListBiz.create(blackList);
-        return a + "";
+        return Result.ok(a);
     }
 }

@@ -23,17 +23,17 @@ public class CustomerServiceController {
     //注册新客服
     @RequestMapping(value = {"/register"})
     @ResponseBody
-    public String register(){
+    public Result register(){
         CustomerService cs = new CustomerService();
         cs.setPhone("13572");
         cs.setPassword("qwerasdf");
         int a = customerServiceBiz.register(cs);
-        return a+"successfully";
+        return Result.ok(a);
     }
     //管理员新增客服信息
     @RequestMapping(value = {"/addNewCustomerService"})
     @ResponseBody
-    public String addNewCustomerService(){
+    public Result addNewCustomerService(){
         CustomerService cs = new CustomerService();
         CustomerServiceGroup group = new CustomerServiceGroup();
         CustomerServiceRole role = new CustomerServiceRole();
@@ -52,19 +52,19 @@ public class CustomerServiceController {
 
         cs.setServiceCap(10000);
         int a = customerServiceBiz.register(cs);
-        return a+"successfully";
+        return Result.ok(a);
     }
 
     //更新个人信息部分
     @RequestMapping(value =  {"/update"},method = RequestMethod.POST)
-    public @ResponseBody String update(CustomerService oldcs, CustomerService newcs){
+    public @ResponseBody Result update(CustomerService oldcs, CustomerService newcs){
         int a = customerServiceBiz.update(oldcs,newcs);
-        return a+"";
+        return Result.ok(a);
     }
 
     //更改密码
     @RequestMapping(value =  {"/update/pwd"},method = RequestMethod.POST)
-    public @ResponseBody String updatePwd(int id,String oldPwd, String newPwd,String twNewPwd){
+    public @ResponseBody Result updatePwd(int id,String oldPwd, String newPwd,String twNewPwd){
         CustomerService cs = new CustomerService();
         cs.setId(id);
         cs.setPassword(oldPwd);
@@ -72,13 +72,13 @@ public class CustomerServiceController {
         HashMap<String,String> a = customerServiceBiz.findPwd(cs);
         String truePassword=a.get("password");//查找正确密码
         if(!Objects.equals(truePassword, oldPwd)){
-            return "密码错误";
+            return Result.error("密码错误");
         }else if(!Objects.equals(newPwd, twNewPwd)){
-            return "两次输入的密码不相同";
+            return Result.error("两次输入的密码不相同");
         }else {
             cs.setPassword(newPwd);
             int t=customerServiceBiz.updatePwd(cs);
-            return t + "";
+            return Result.ok(t);
         }
     }
 
@@ -106,7 +106,7 @@ public class CustomerServiceController {
     //模糊搜索客服信息（客服管理界面）
     @RequestMapping(value = {"/query"})
     @ResponseBody
-    public String search(){
+    public Result search(){
         CustomerService cs = new CustomerService();
         List<CustomerService> csList = new ArrayList<CustomerService>();
         Scanner sc = new Scanner (System.in);
@@ -131,26 +131,26 @@ public class CustomerServiceController {
         cs.setEmail(input);
         csList.addAll(customerServiceBiz.queryFuzzy(cs));
 
-        return "查询共返回" + csList.size() + "个客服信息：" + csList;
+        return Result.ok(csList);
     }
 
     //根据客服id删除单个客服信息
     @RequestMapping(value = {"/delete"})
     @ResponseBody
-    public String deleteById() {
+    public Result deleteById() {
         Integer id = null;
         int a = customerServiceBiz.deleteById(id);
-        return "delete successfully";
+        return Result.ok(a);
     }
     //批量删除客服信息
     @RequestMapping(value = {"deleteBatch"})
     @ResponseBody
-    public String deleteBatch() {
+    public Result deleteBatch() {
         List<Integer> ids = new ArrayList<>();
         //ids.add(1);
         //ids.add(2);
         //ids.add(3);
         int a = customerServiceBiz.deleteBatch(ids);
-        return "deleteBatch successfully";
+        return Result.ok(a);
     }
 }

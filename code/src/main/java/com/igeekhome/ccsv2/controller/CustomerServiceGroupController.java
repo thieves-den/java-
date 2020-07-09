@@ -2,6 +2,7 @@ package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.ICustomerServiceGroupBiz;
 import com.igeekhome.ccsv2.entity.CustomerServiceGroup;
+import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,9 @@ public class CustomerServiceGroupController {
     * 对外提供创建客服组的服务
     */
     @RequestMapping(value = {"/save"},method = RequestMethod.POST)
-    public @ResponseBody String save(CustomerServiceGroup group){
+    public @ResponseBody Result save(CustomerServiceGroup group){
         int a = customerServiceGroupBiz.save(group);
-        return  a+"";
+        return Result.ok(a);
     }
 
     /**

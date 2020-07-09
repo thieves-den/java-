@@ -2,6 +2,7 @@ package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.ISessionMsgBiz;
 import com.igeekhome.ccsv2.entity.SessionMsg;
+import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ public class SessionMsgController {
     @Autowired
     private ISessionMsgBiz sessionMsgBiz;
     @RequestMapping(value = {"/create"},method = RequestMethod.POST)
-    public @ResponseBody String create(SessionMsg sessionMsg){
+    public @ResponseBody Result create(SessionMsg sessionMsg){
         HashMap<String,Integer> tem = sessionMsgBiz.findId();
         int s = tem.get("MAX(session_id)") + 1;
         sessionMsg.setSessionId(s);
@@ -28,6 +29,6 @@ public class SessionMsgController {
         Timestamp time = Timestamp.valueOf(dateFormat.format(date));
         sessionMsg.setSendTime(time);
         int a = sessionMsgBiz.create(sessionMsg);
-        return a + "";
+        return Result.ok(a);
     }
 }
