@@ -3,6 +3,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 public class CustomerService {
@@ -20,16 +21,19 @@ public class CustomerService {
     CustomerServiceGroup group;
     //关联的客服角色
     CustomerServiceRole role;
-    @JsonFormat(pattern = "HH:mm:ss")
-    private Date totalOnlineTime;
-    @JsonFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
+    private Date totalOnlineTime;//总计在线时长
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date averageResponseTime;//平均响应时长
-    @JsonFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date averageSessionTime;//平均会话时长
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date onlineTimeBegin;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date onlineTimeEnd;
 
     private Integer sessionCount;//会话次数

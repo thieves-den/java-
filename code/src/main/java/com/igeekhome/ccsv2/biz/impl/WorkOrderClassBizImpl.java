@@ -25,12 +25,6 @@ public class WorkOrderClassBizImpl implements IWorkOrderClassBiz {
         return workOrderClassMapper.queryByName(woc.getClassName());
     }
 
-
-    @Override
-    public int deleteById(int id) {
-        return workOrderClassMapper.deleteById(id);
-    }
-
     @Override
     public int deleteBatch(List<Integer> ids) {
         return workOrderClassMapper.deleteBatch(ids);

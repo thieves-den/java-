@@ -17,6 +17,7 @@ public class VisitorInfoController {
     @Autowired
     private IVisitorInfoBiz visitorInfoBiz;
 
+    //访客信息表
     @GetMapping("/select")
     public @ResponseBody
     Result select(VisitorInfo visitorInfo){

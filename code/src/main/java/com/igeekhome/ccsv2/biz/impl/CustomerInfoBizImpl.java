@@ -6,7 +6,9 @@ import com.igeekhome.ccsv2.mapper.CustomerInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 
 @Service
@@ -23,6 +25,16 @@ public class CustomerInfoBizImpl implements ICustomerInfoBiz {
     @Override
     public HashMap<String, Integer> createId() {
         return customerInfoMapper.createId();
+    }
+
+    @Override
+    public List<CustomerInfo> select(CustomerInfo customerInfo) {
+        return customerInfoMapper.select(customerInfo);
+    }
+
+    @Override
+    public List<CustomerInfo> selectByDate(Date begin, Date end) {
+        return customerInfoMapper.selectByDate(begin,end);
     }
 
     @Override

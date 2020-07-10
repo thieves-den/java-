@@ -3,7 +3,7 @@
 <mapper namespace="com.igeekhome.ccsv2.mapper.BlackListMapper">
 
     <insert id="create" parameterType="BlackList">
-        insert blacklist(customer_id,customer_service_id,reason) VALUES(#{customerId},#{customerServiceId},#{reason})
+        insert into blacklist(customer_id,customer_service_id,reason) VALUES(#{customerId},#{customerServiceId},#{reason})
     </insert>
 
     <delete id="delete" parameterType="BlackList">

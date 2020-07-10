@@ -17,6 +17,10 @@ class WorkOrderClassBizImplTest {
 
     @Test
     void createClass() {
+        WorkOrderClass woc = new WorkOrderClass();
+        woc.setClassName("咨询相关工单");
+        int a = workOrderClassBizImpl.createClass(woc);
+        assertNotEquals(0,a);
     }
 
     @Test

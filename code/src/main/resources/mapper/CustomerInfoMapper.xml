@@ -15,4 +15,36 @@
         SELECT MAX(customer_id) FROM coustomer_info
     </select>
 
+
+    <select id="select" parameterType="CustomerInfo" resultType="CustomerInfo">
+        select customer_id,nick_name,real_name,phone,email,level,channel from customer_info where 1=1
+        <choose>
+            <when test="nickName != null and nickName != ''">
+                and nick_name = #{nickName}
+            </when>
+            <when test="realName != null and realName != ''">
+                and real_name = #{realName}
+            </when>
+            <when test="phone != null and phone != ''">
+                and phone = #{phone}
+            </when>
+            <when test="email != null and email != ''">
+                and email = #{email}
+            </when>
+            <when test="level != null and level != ''">
+                and level = #{level}
+            </when>
+            <when test="channel != null and channel != ''">
+                and channel = #{channel}
+            </when>
+            <otherwise></otherwise>
+        </choose>
+    </select>
+
+
+    <select id="selectByDate" resultType="CustomerInfo">
+        select customer_id,nick_name,real_name,phone,email,level,channel from customer_info where
+            create_time between #{begin} and #{end}
+    </select>
+
 </mapper>

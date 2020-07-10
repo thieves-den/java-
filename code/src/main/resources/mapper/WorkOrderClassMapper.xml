@@ -10,4 +10,15 @@
         </choose>
     </select>
 
+    <insert id="createClass" parameterType="WorkOrderClass">
+        insert into work_order_class(class_name) value (#{className})
+    </insert>
+    
+    <delete id="deleteBatch" parameterType="List">
+        delete from work_order_class where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
 </mapper>

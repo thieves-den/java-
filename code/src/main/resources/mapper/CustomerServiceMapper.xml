@@ -26,11 +26,6 @@
         </if>
     </sql>
 
-    <sql id="connect">
-        (customer_service left join customer_service_group on customer_service.customer_service_group_id = customer_service_group.id)
-        left join customer_service_role on customer_service.role_id = customer_service_role.id
-    </sql>
-
 
     <insert id="save" parameterType="CustomerService">
         insert into customer_service(
@@ -58,7 +53,7 @@
     </insert>
 
 
-    <resultMap id="CustomerServiceMap" type="com.igeekhome.ccsv2.entity.CustomerService">
+    <resultMap id="CustomerServiceMap" type="CustomerService">
         <!--主键映射-->
         <id column="id" property="id"></id>
         <!--普通字段映射使用result,名字一致的可以不写-->
@@ -101,7 +96,7 @@
         </association>
     </resultMap>
     <select id="queryFuzzy" parameterType="CustomerService" resultMap="CustomerServiceMap" ><!--客服管理中模糊查找客服-->
-        select * from <include refid="connect"></include>
+        select * from cs_group_role <!--三表连接视图-->
         where 1=1
         <choose>
             <when test="nickName != null and nickName != ''">

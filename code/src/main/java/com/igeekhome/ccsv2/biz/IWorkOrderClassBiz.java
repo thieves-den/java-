@@ -9,6 +9,5 @@ public interface IWorkOrderClassBiz {
 
     List<WorkOrderClass> queryByName(WorkOrderClass woc);
 
-    int deleteById(int id);//删除单个
-    int deleteBatch(List<Integer> ids);//批量删除
+    int deleteBatch(List<Integer> ids);//删除
 }

@@ -16,12 +16,29 @@ public class WorkOrderClassController {
     @Autowired
     private IWorkOrderClassBiz workOrderClassBiz;
 
-    //查询工单类别
+    //查询工单类别,工单分类表
     @GetMapping(value = "/query")
     @ResponseBody
-    public Result queryByName(WorkOrderClass cs){
-        cs.setClassName("推广");
-        List<WorkOrderClass> wocList = workOrderClassBiz.queryByName(cs);
+    public Result queryByName(WorkOrderClass woc){
+        woc.setClassName("推广");
+        List<WorkOrderClass> wocList = workOrderClassBiz.queryByName(woc);
         return Result.ok(wocList);
+    }
+
+    //新建工单类别
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public Result createClass(WorkOrderClass woc){
+        woc.setClassName("咨询相关工单");
+        workOrderClassBiz.createClass(woc);
+        return Result.ok(woc);
+    }
+
+    //删除工单类别
+    @RequestMapping(value = "/delete")
+    @ResponseBody
+    public Result delete(List<Integer> ids){
+        int a = workOrderClassBiz.deleteBatch(ids);
+        return Result.ok(a);
     }
 }

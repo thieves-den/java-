@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/workorder")
@@ -27,5 +31,23 @@ public class WorkOrderController {
             return Result.error("请填写完整");
         int a = workOrderBiz.create(workOrder);
             return Result.ok(a);
+    }
+
+    @RequestMapping(value = {"/select"},method = RequestMethod.GET)
+    public @ResponseBody
+    Result select() {
+        WorkOrder workOrder = new WorkOrder();
+        List<WorkOrder> workOrders = workOrderBiz.select(workOrder);
+        return Result.ok(workOrders);
+    }
+
+    @RequestMapping(value = {"/selectByDate"},method = RequestMethod.GET)
+    public @ResponseBody
+    Result selectByDate() throws ParseException {
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        Date beginTime = dateformat.parse("2020-7-4");
+        Date endTime = dateformat.parse("2020-7-8");
+        List<WorkOrder> workOrders = workOrderBiz.selectByDate(beginTime, endTime);
+        return Result.ok(workOrders);
     }
 }

@@ -90,7 +90,7 @@ public class CustomerServiceController {
         }
     }
 
-    //首页客服监控，返回在线客服信息
+    //首页客服监控，返回在线客服监控信息（首页）
     @GetMapping("/CustomerServiceMonitor")
     @ResponseBody
     public Result CustomerServiceMonitor(CustomerService cs){
