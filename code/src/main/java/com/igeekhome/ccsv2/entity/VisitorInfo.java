@@ -24,8 +24,8 @@ public class VisitorInfo {
     private Date visitDuration;
     @JsonFormat(pattern = "yyyy:MM:dd HH:mm", timezone = "GMT+8")
     private Date visitTime;
-//    @DateTimeFormat(pattern = "yy-MM-dd HH-mm-ss")
+    @DateTimeFormat(pattern = "yy-MM-dd")
     private Date beginTime;
-//    @DateTimeFormat(pattern = "yy-MM-dd HH-mm-ss")
+    @DateTimeFormat(pattern = "yy-MM-dd")
     private Date endTime;
 }
