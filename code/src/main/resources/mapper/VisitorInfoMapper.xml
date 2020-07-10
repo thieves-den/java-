@@ -10,7 +10,7 @@
         WHERE
         customer_service.customer_service_id = visitor_info.customer_service_id
         <if test="nickName != null">
-            AND coustomer_service.nick_name = #{nickName}
+            AND customer_service.nick_name = #{nickName}
         </if>
         <if test="browser != null">
             AND visitor_info.browser = #{browser}
@@ -18,14 +18,14 @@
         <if test="terminal != null">
             AND visitor_info.terminal = #{terminal}
         </if>
-        <if test="visitTime != null">
-            AND visitor_info.visit_time >= #{visitTime}
+        <if test="beginTime != null">
+            AND visitor_info.visit_time >= #{beginTime}
         </if>
-        <if test="visitTime != null">
-            AND  #{visitTime} >= visitor_info.visit_time
+        <if test="endTime != null">
+            AND  #{endTime} >= visitor_info.visit_time
         </if>
         <if test="visitorName != null">
-            AND visitor_info.visitor_name LIKE '%12%'
+            AND visitor_info.visitor_name LIKE #{visitorName}
         </if>
 
 
