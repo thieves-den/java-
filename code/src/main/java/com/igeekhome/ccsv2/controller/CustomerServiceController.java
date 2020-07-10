@@ -30,7 +30,7 @@ public class CustomerServiceController {
     //客服登录
     @RequestMapping(value = {"/login"})
     @ResponseBody
-    public Result login(CustomerService cs){
+    public Result login(@RequestBody  CustomerService cs){
         CustomerService logincs = customerServiceBiz.login(cs);
         if(logincs!=null){
             return Result.ok(logincs);
