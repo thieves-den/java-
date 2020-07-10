@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2020-07-09 00:01:12
+Date: 2020-07-10 23:38:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `auto_reply`;
 CREATE TABLE `auto_reply` (
-  `customer_service_id` int(11) NOT NULL COMMENT '自动回复创建者的客服id',
+  `customer_service_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自动回复创建者的客服id',
   `terminal` char(5) DEFAULT NULL COMMENT '终端类型：web、app,mp,weibo,wap,h5',
   `welcome` varchar(255) DEFAULT NULL COMMENT '欢迎消息',
   `customer_service_no_response` varchar(255) DEFAULT NULL COMMENT '客服无应答消息',
@@ -28,7 +28,8 @@ CREATE TABLE `auto_reply` (
   `customer_no_response` varchar(255) DEFAULT NULL COMMENT '顾客无响应回复',
   `customer_time_limit` time DEFAULT NULL COMMENT '顾客无响应时间限制',
   `customer_service_end` varchar(255) DEFAULT NULL COMMENT '客服手动结束回复内容',
-  `system_end` varchar(255) DEFAULT NULL COMMENT '系统自动结束回复内容'
+  `system_end` varchar(255) DEFAULT NULL COMMENT '系统自动结束回复内容',
+  PRIMARY KEY (`customer_service_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='自动回复';
 
 -- ----------------------------
@@ -62,7 +63,7 @@ CREATE TABLE `common_words` (
   `type` varchar(255) NOT NULL COMMENT '类型',
   `creator_id` int(11) DEFAULT NULL COMMENT '创建者id',
   PRIMARY KEY (`content`,`is_personal`,`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='常用语';
 
 -- ----------------------------
 -- Records of common_words
@@ -77,7 +78,7 @@ CREATE TABLE `common_words_type` (
   `creator_id` int(11) NOT NULL COMMENT '创建者id',
   `is_personal` int(1) NOT NULL,
   PRIMARY KEY (`name`,`creator_id`,`is_personal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='常用语类型';
 
 -- ----------------------------
 -- Records of common_words_type
@@ -88,25 +89,31 @@ CREATE TABLE `common_words_type` (
 -- ----------------------------
 DROP TABLE IF EXISTS `customer_info`;
 CREATE TABLE `customer_info` (
-  `customer_id` int(11) NOT NULL COMMENT '客户id',
+  `customer_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '客户id',
   `customer_service_id` int(11) NOT NULL COMMENT '客服id',
   `nick_name` varchar(255) DEFAULT NULL COMMENT '昵称',
   `real_name` char(8) DEFAULT NULL COMMENT '真实姓名',
-  `phone` int(11) DEFAULT NULL COMMENT '手机号',
+  `phone` varchar(11) DEFAULT NULL COMMENT '手机号',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
   `company` varchar(255) DEFAULT NULL COMMENT '公司',
   `address` varchar(255) DEFAULT NULL COMMENT '地址',
-  `level` int(11) DEFAULT NULL COMMENT '客户等级',
+  `level` varchar(11) DEFAULT NULL COMMENT '客户等级',
   `channel` varchar(255) DEFAULT NULL COMMENT '来源',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `tags` varchar(255) DEFAULT NULL COMMENT '标签',
+  `remark` varchar(255) DEFAULT NULL COMMENT '客户备注',
+  `tags` varchar(255) DEFAULT NULL COMMENT '客户标签',
+  `create_time` datetime DEFAULT NULL COMMENT '客户创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '客户更新时间',
   `lasted_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   PRIMARY KEY (`customer_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='顾客信息';
 
 -- ----------------------------
 -- Records of customer_info
 -- ----------------------------
+INSERT INTO `customer_info` VALUES ('1', '1', '小小', '晓晓', '21323', '123@qq.com', '华泰集团', '北京市一环1号', 'vip客户', 'Mac', '第一位客户', '已上市', '2020-07-03 18:46:38', '2020-07-09 18:46:51', '2020-07-10 18:46:58');
+INSERT INTO `customer_info` VALUES ('2', '1', '大大', '达答', '12313', '145@qq.com', '鼎盛企业', null, null, null, null, null, '2020-07-06 18:47:08', '2020-07-08 18:47:22', '2020-07-09 18:47:26');
+INSERT INTO `customer_info` VALUES ('3', '2', '北京市客户', '王伟', '131332', null, null, null, null, null, null, null, '2020-07-07 18:48:51', '2020-07-08 18:49:04', '2020-07-10 18:49:08');
+INSERT INTO `customer_info` VALUES ('4', '2', '河南省客户', '李丽', '1572', null, '小夜传媒', null, null, null, null, null, '2020-07-10 18:51:06', '2020-07-10 18:51:10', '2020-07-10 18:51:18');
 
 -- ----------------------------
 -- Table structure for customer_service
@@ -151,7 +158,7 @@ CREATE TABLE `customer_service` (
 INSERT INTO `customer_service` VALUES ('1', null, '123456', '3333333', '1', '1', null, '126@qq.com', '唐果', '水蜜桃', '2020-07-02 23:41:54', '2020-07-03 00:21:22', '23:59:59', '00:00:10', '00:08:48', null, null, '10', '123', '10000', '1', '1');
 INSERT INTO `customer_service` VALUES ('2', null, '12345', '111111', '1', '0', null, '124@qq.com', '林感', '小林哥', '2020-07-03 00:21:52', '2020-07-03 00:21:55', '02:21:59', '00:00:09', '00:13:22', null, null, '20', '123', '10000', '3', '4');
 INSERT INTO `customer_service` VALUES ('3', null, '132434', '22222222', '1', '1', null, '125@qq.com', '索瑞萨', '史蒂夫索', '2020-07-03 00:22:15', '2020-07-03 00:22:18', '00:22:30', '00:00:08', '00:02:18', null, null, '30', '123', '10000', '3', '3');
-INSERT INTO `customer_service` VALUES ('4', null, '999999', '123456', '1', '1', null, '324@qq.com', '副丽鱼', '鱼儿', '2020-07-05 14:14:40', '2020-07-05 14:18:47', '04:14:49', '00:00:06', '00:18:20', null, null, '13', '34', '1000', '4', '4');
+INSERT INTO `customer_service` VALUES ('4', null, '999999', '123456', '1', '1', null, '324@qq.com', '副丽鱼', '鱼儿', '2020-07-05 14:14:40', '2020-07-05 14:18:47', '04:14:49', '00:00:06', '00:18:20', null, null, '13', '34', '10000', '4', '4');
 INSERT INTO `customer_service` VALUES ('5', null, '1314520', 'hhh', '1', '1', null, '1232@qq.com', '李一桐', '桐儿', '2020-07-05 15:23:38', '2020-07-05 14:24:20', '09:24:24', '00:00:13', '00:03:08', null, null, '33', '209', '10000', '2', '3');
 INSERT INTO `customer_service` VALUES ('6', null, '138238', 'wxhn', '0', '1', null, '1qwr@qq.com', '张云雷', '张师傅', '2020-07-05 14:25:31', '2020-07-05 17:25:28', '10:25:21', '00:00:12', '00:06:42', null, null, '43', '343', '10000', '2', '1');
 INSERT INTO `customer_service` VALUES ('7', null, '8888', '21453', '1', '1', null, '463@qq.com', '范丞丞', '小范师兄', '2020-07-05 14:28:37', '2020-07-05 16:28:42', '15:28:49', '00:00:11', '00:11:56', null, null, '65', '245', '10000', '3', '5');
@@ -160,8 +167,9 @@ INSERT INTO `customer_service` VALUES ('9', null, '112233', 'niceofyou', '1', '1
 INSERT INTO `customer_service` VALUES ('10', null, '1332', 'how123', '1', '1', null, '287@qq.com', '周杰伦', '杰伦哥', '2020-07-05 16:48:09', '2020-07-05 16:48:20', '06:48:24', '00:00:20', '00:23:09', null, null, '23', '266', '10000', '2', '1');
 INSERT INTO `customer_service` VALUES ('11', null, '234552', 'sodf2', '0', '0', null, '2321@qq.com', '黄圣依', '依姐', '2020-07-05 16:49:53', '2020-07-05 16:49:56', '08:49:37', '00:00:16', '00:05:46', null, null, '66', '243', '10000', '1', '2');
 INSERT INTO `customer_service` VALUES ('12', null, '18860', 'woaini', '1', '1', null, 'tiantian@qq.com', '李子柒', '子柒', '2020-07-05 16:52:36', '2020-07-05 16:52:40', '16:52:42', '00:00:13', '00:02:59', null, null, '88', '345', '10000', '1', '4');
-INSERT INTO `customer_service` VALUES ('15', null, '13388', '123456', null, null, null, '168@qq.com', '尼格买提', '小尼哥', null, null, null, '00:00:05', '00:06:50', null, null, null, null, '10000', '4', '1');
-INSERT INTO `customer_service` VALUES ('20', null, '13572', 'qwerasdf', null, null, null, null, null, null, null, null, null, '00:00:09', '00:15:48', null, null, null, null, null, null, null);
+INSERT INTO `customer_service` VALUES ('13', null, '13388', '123456', '1', '1', null, '168@qq.com', '尼格买提', '小尼哥', '2020-07-08 21:20:30', '2020-07-09 21:20:39', '15:22:35', '00:00:05', '00:06:50', null, null, '34', '324', '10000', '4', '1');
+INSERT INTO `customer_service` VALUES ('14', null, '13572', 'qwerasdf', '0', '1', null, 'rti2@qq.com', '林心如', '小林姐', '2020-07-03 21:20:45', '2020-07-06 21:20:52', '14:27:47', '00:00:09', '00:15:48', null, null, '99', '666', '10000', '3', '5');
+INSERT INTO `customer_service` VALUES ('15', null, '12223', 'qweasd', '0', '1', null, '13243@qq.com', '杨国福', '国服', '2020-07-09 21:23:09', '2020-07-10 21:23:14', '06:23:17', '00:00:19', '00:22:28', null, null, '23', '233', '10000', '1', '2');
 
 -- ----------------------------
 -- Table structure for customer_service_group
@@ -348,37 +356,48 @@ CREATE TABLE `visitor_info` (
   `screen_size` varchar(255) DEFAULT NULL COMMENT '屏幕大小',
   `device` varchar(255) DEFAULT NULL COMMENT '访问设备',
   `state` int(11) DEFAULT NULL COMMENT '在线状态',
-  `visit_duration` datetime DEFAULT NULL COMMENT '访客持续时间',
+  `visit_duration` time DEFAULT NULL COMMENT '访客持续时间',
+  `begin_time` datetime DEFAULT NULL COMMENT '访问开始时间',
+  `end_time` datetime DEFAULT NULL COMMENT '访问结束时间',
+  `visit_time` datetime DEFAULT NULL,
   PRIMARY KEY (`customer_service_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of visitor_info
 -- ----------------------------
+INSERT INTO `visitor_info` VALUES ('1', '水蜜桃', '小香香', '198.40.202', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', null, null, null);
 
 -- ----------------------------
 -- Table structure for work_order
 -- ----------------------------
 DROP TABLE IF EXISTS `work_order`;
 CREATE TABLE `work_order` (
-  `work_order_id` int(11) NOT NULL COMMENT '工单id',
+  `work_order_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '工单id',
   `type` varchar(255) DEFAULT NULL COMMENT '类型',
   `title` varchar(255) DEFAULT NULL COMMENT '标题',
   `order_desc` varchar(255) DEFAULT NULL COMMENT '描述',
   `attachments` varchar(255) DEFAULT NULL COMMENT '附件',
   `cclist` varchar(255) DEFAULT NULL COMMENT '抄送人',
-  `priority` int(11) DEFAULT NULL COMMENT '优先级',
-  `state` int(11) DEFAULT NULL COMMENT '状态',
-  `customer_service_group_id` int(11) DEFAULT NULL COMMENT '客服组id',
-  `customer_service_id` int(11) DEFAULT NULL COMMENT '客服id',
-  `customer_id` int(11) DEFAULT NULL COMMENT '客户id',
+  `priority` varchar(11) DEFAULT NULL COMMENT '优先级',
+  `state` varchar(11) DEFAULT NULL COMMENT '工单状态',
+  `customer_service_id` int(11) DEFAULT NULL COMMENT '受理客服id',
+  `customer_id` int(11) DEFAULT NULL COMMENT '所属客户id',
   `channel` varchar(255) DEFAULT NULL COMMENT '即时聊天、手工录入、客户管理',
+  `create_time` datetime DEFAULT NULL COMMENT '工单创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '工单更新时间',
   PRIMARY KEY (`work_order_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of work_order
 -- ----------------------------
+INSERT INTO `work_order` VALUES ('1', '分类一', '客户报价', '客户报价相关问题回复', null, '七尾', '高', '未分配', '1', '2', '手动录入', '2020-07-02 20:52:04', '2020-07-03 20:52:08');
+INSERT INTO `work_order` VALUES ('2', '分类二', '商业合作', '合作相关事宜回复', null, '七尾', '低', '待处理', '2', '1', '即时聊天', '2020-07-04 20:52:31', '2020-07-05 20:52:36');
+INSERT INTO `work_order` VALUES ('3', '分类一', '客户报价', '客户报价相关问题回复', null, '李想', '中', '处理中', '3', '3', '客户管理', '2020-07-06 20:53:43', '2020-07-09 20:53:52');
+INSERT INTO `work_order` VALUES ('4', '分类三', '优化建议', '客户关于产品优化的建议', null, '王志', '紧急', '已解决', '2', '2', '手动录入', '2020-07-05 20:55:55', '2020-07-08 20:55:48');
+INSERT INTO `work_order` VALUES ('5', '分类三', '改善建议', '客户关于改善优化的建议', null, '李想', '中', '已关闭', '1', '1', '客户管理', '2020-07-07 20:56:09', '2020-07-10 20:56:01');
+INSERT INTO `work_order` VALUES ('6', '分类一', '客户咨询', '客户关于产品问题咨询', null, '王志', '高', '处理中', '6', '3', '即时聊天', '2020-07-08 21:14:44', '2020-07-09 21:14:48');
 
 -- ----------------------------
 -- Table structure for work_order_class
@@ -386,7 +405,7 @@ CREATE TABLE `work_order` (
 DROP TABLE IF EXISTS `work_order_class`;
 CREATE TABLE `work_order_class` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '工单类别id',
-  `class_name` varchar(255) DEFAULT NULL COMMENT '工单类别名称',
+  `class_name` varchar(255) NOT NULL COMMENT '工单类别名称',
   `number` int(11) DEFAULT NULL COMMENT '该类别工单数量',
   `create_time` datetime DEFAULT NULL COMMENT '类别创建时间',
   PRIMARY KEY (`id`)
@@ -429,3 +448,15 @@ CREATE TABLE `work_order_reply` (
 -- ----------------------------
 -- Records of work_order_reply
 -- ----------------------------
+
+-- ----------------------------
+-- View structure for cs_group_role
+-- ----------------------------
+DROP VIEW IF EXISTS `cs_group_role`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cs_group_role` AS select `customer_service`.`id` AS `customer_service_id`,`customer_service_group`.`id` AS `group_id`,`customer_service_group`.`group_name` AS `group_name`,`customer_service_role`.`id` AS `role_id`,`customer_service_role`.`name` AS `name` from ((`customer_service` join `customer_service_group` on((`customer_service`.`customer_service_group_id` = `customer_service_group`.`id`))) join `customer_service_role` on((`customer_service`.`role_id` = `customer_service_role`.`id`))) ;
+
+-- ----------------------------
+-- View structure for c_cs_wo_group
+-- ----------------------------
+DROP VIEW IF EXISTS `c_cs_wo_group`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `c_cs_wo_group` AS select `work_order`.`work_order_id` AS `work_order_id`,`work_order`.`title` AS `title`,`work_order`.`state` AS `state`,`work_order`.`priority` AS `priority`,`work_order`.`type` AS `type`,`work_order`.`channel` AS `channel`,`work_order`.`create_time` AS `create_time`,`work_order`.`update_time` AS `update_time`,`customer_service`.`id` AS `customer_service_id`,`customer_service`.`real_name` AS `customer_service_name`,`customer_service_group`.`id` AS `group_id`,`customer_service_group`.`group_name` AS `group_name`,`customer_info`.`customer_id` AS `customer_id`,`customer_info`.`real_name` AS `customer_real_name` from (((`work_order` join `customer_service` on((`work_order`.`customer_service_id` = `customer_service`.`id`))) join `customer_service_group` on((`customer_service`.`customer_service_group_id` = `customer_service_group`.`id`))) join `customer_info` on((`customer_info`.`customer_id` = `work_order`.`customer_id`))) ;
