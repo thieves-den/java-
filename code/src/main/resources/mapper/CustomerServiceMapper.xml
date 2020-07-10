@@ -177,6 +177,9 @@
 	        coustomer_service.id = #{id}
 
     </select>
+    <select id="getOne" resultType="com.igeekhome.ccsv2.entity.CustomerService">
+        select id,head_img,nick_name,customer_service_id,phone from customer_service where phone=#{phone} and password = #{password}
+    </select>
 
 
     <delete id="deleteById" parameterType="int">

@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class CustomerService {
     private int id;
+    private int customerServiceId;
     private String phone;
     private String password;
     private Integer onlineState;

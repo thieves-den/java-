@@ -60,4 +60,9 @@ public class CustomerServiceBizImpl implements ICustomerServiceBiz {
     public int deleteBatch(List<Integer> ids) {
         return customerServiceMapper.deleteBatch(ids);
     }
+
+    @Override
+    public CustomerService login(CustomerService cs) {
+        return customerServiceMapper.getOne(cs);
+    }
 }

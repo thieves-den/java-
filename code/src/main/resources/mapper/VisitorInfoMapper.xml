@@ -5,10 +5,10 @@
         SELECT
         visitor_name,terminal,browser,visit_duration,ip,visit_time
         FROM
-        coustomer_service,
+        customer_service,
         visitor_info
         WHERE
-        coustomer_service.customer_service_id = visitor_info.customer_service_id
+        customer_service.customer_service_id = visitor_info.customer_service_id
         <if test="nickName != null">
             AND coustomer_service.nick_name = #{nickName}
         </if>

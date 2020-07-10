@@ -23,34 +23,42 @@ public class CustomerServiceController {
     //注册新客服
     @RequestMapping(value = {"/register"})
     @ResponseBody
-    public Result register(){
-        CustomerService cs = new CustomerService();
-        cs.setPhone("13572");
-        cs.setPassword("qwerasdf");
+    public Result register(CustomerService cs){
         int a = customerServiceBiz.register(cs);
         return Result.ok(a);
+    }
+    //客服登录
+    @RequestMapping(value = {"/login"})
+    @ResponseBody
+    public Result login(CustomerService cs){
+        CustomerService logincs = customerServiceBiz.login(cs);
+        if(logincs!=null){
+            return Result.ok(logincs);
+        }else{
+            return Result.error("用户名或账号错误");
+        }
     }
     //管理员新增客服信息
     @RequestMapping(value = {"/addNewCustomerService"})
     @ResponseBody
-    public Result addNewCustomerService(){
+    public Result addNewCustomerService(String email,String nickName,String realName,int id,String phone,String password,int serviceCap){
         CustomerService cs = new CustomerService();
         CustomerServiceGroup group = new CustomerServiceGroup();
         CustomerServiceRole role = new CustomerServiceRole();
-        cs.setEmail("168@qq.com");
-        cs.setNickName("小尼哥");
-        cs.setRealName("尼格买提");
-        cs.setId(15);
-        cs.setPhone("13388");
-        cs.setPassword("123456");//设置初始密码
+        cs.setEmail(email);
+        cs.setNickName(nickName);
+        cs.setRealName(realName);
+        cs.setId(id);
+        cs.setPhone(phone);
+        cs.setPassword(password);//设置初始密码
 
-        role.setId(1);
+        role.setId(id);
         cs.setRole(role);
 
-        group.setId(4);
+        group.setId(id);
         cs.setGroup(group);
 
-        cs.setServiceCap(10000);
+        cs.setServiceCap(serviceCap);
         int a = customerServiceBiz.register(cs);
         return Result.ok(a);
     }
@@ -85,9 +93,7 @@ public class CustomerServiceController {
     //首页客服监控，返回在线客服信息
     @GetMapping("/CustomerServiceMonitor")
     @ResponseBody
-    public Result CustomerServiceMonitor(){
-        CustomerService cs = new CustomerService();
-        cs.setOnlineState(1);
+    public Result CustomerServiceMonitor(CustomerService cs){
         List<CustomerService> csList = customerServiceBiz.queryFuzzy(cs);
         return Result.ok(csList);
     }
@@ -95,10 +101,7 @@ public class CustomerServiceController {
     //分组查询客服信息
     @GetMapping("/showByGroup")
     @ResponseBody
-    public Result showByGroup(){
-        CustomerServiceGroup group = new CustomerServiceGroup();
-        group.setId(1);
-        group.setName("客服二组");
+    public Result showByGroup(CustomerServiceGroup group){
         List<CustomerService> csList = customerServiceBiz.showByGroup(group);
         return Result.ok(csList);
     }
@@ -106,8 +109,7 @@ public class CustomerServiceController {
     //模糊搜索客服信息（客服管理界面）
     @RequestMapping(value = {"/query"})
     @ResponseBody
-    public Result search(){
-        CustomerService cs = new CustomerService();
+    public Result search(CustomerService cs){
         List<CustomerService> csList = new ArrayList<CustomerService>();
         Scanner sc = new Scanner (System.in);
         String input = sc.next();
@@ -137,20 +139,17 @@ public class CustomerServiceController {
     //根据客服id删除单个客服信息
     @RequestMapping(value = {"/delete"})
     @ResponseBody
-    public Result deleteById() {
-        Integer id = null;
+    public Result deleteById(Integer id) {
         int a = customerServiceBiz.deleteById(id);
         return Result.ok(a);
     }
-    //批量删除客服信息
+    //批量删除客服信息(存疑)
     @RequestMapping(value = {"deleteBatch"})
     @ResponseBody
     public Result deleteBatch() {
         List<Integer> ids = new ArrayList<>();
-        //ids.add(1);
-        //ids.add(2);
-        //ids.add(3);
         int a = customerServiceBiz.deleteBatch(ids);
         return Result.ok(a);
     }
+
 }

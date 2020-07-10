@@ -39,4 +39,5 @@ public interface CustomerServiceMapper {
     int deleteById(int id);//删除单个
     int deleteBatch(List<Integer> ids);//批量删除
 
+    CustomerService getOne(CustomerService cs);
 }
