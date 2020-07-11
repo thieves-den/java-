@@ -2,6 +2,7 @@ package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.ICustomerInfoBiz;
 import com.igeekhome.ccsv2.entity.CustomerInfo;
+import com.igeekhome.ccsv2.entity.VisitorInfo;
 import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,23 +34,43 @@ public class CusomerInfoController {
         return Result.ok(a);
     }
 
-    @RequestMapping(value = {"/delete"},method = RequestMethod.POST)//删除客户
-    public @ResponseBody Result delete(CustomerInfo customerInfo){
-        int a = customerInfoBiz.delete(customerInfo);
+    //根据customerId定位编辑修改客户信息
+    @RequestMapping(value = {"/update"},method = RequestMethod.POST)
+    @ResponseBody
+    public Result update(CustomerInfo customerInfo){
+        int a = customerInfoBiz.update(customerInfo);
         return Result.ok(a);
     }
 
-    @RequestMapping(value = {"/select"},method = RequestMethod.GET)//模糊搜索客户信息表
+    //模糊搜索客户信息表
+    @RequestMapping(value = {"/select"},method = RequestMethod.GET)
     @ResponseBody
     public Result select(CustomerInfo customerInfo) {
         List<CustomerInfo> customerInfos = customerInfoBiz.select(customerInfo);
         return Result.ok(customerInfos);
     }
 
-    @RequestMapping(value = {"/selectByDate"},method = RequestMethod.GET)//根据日期时间段搜索客户信息表
+    //根据日期时间段搜索客户信息表
+    @RequestMapping(value = {"/selectByDate"},method = RequestMethod.GET)
     @ResponseBody
-    public Result selectByDate(CustomerInfo customerInfo) throws ParseException {
-        List<CustomerInfo> customerInfos = customerInfoBiz.selectByDate(customerInfo);
+    public Result selectByDate(Date begin, Date end) throws ParseException {
+        List<CustomerInfo> customerInfos = customerInfoBiz.selectByDate(begin, end);
         return Result.ok(customerInfos);
+    }
+
+
+    //客户详情中历史会话表（客户的访问信息），根据customerId
+    @RequestMapping(value = "/historyCustomerSession",method = RequestMethod.GET)
+    @ResponseBody
+    public Result historyCustomerSession(CustomerInfo customerInfo){
+        List<VisitorInfo> visitorInfos = customerInfoBiz.selectCustomerSession(customerInfo);
+        return Result.ok(visitorInfos);
+    }
+
+
+    @RequestMapping(value = {"/delete"},method = RequestMethod.POST)//删除客户
+    public @ResponseBody Result delete(CustomerInfo customerInfo){
+        int a = customerInfoBiz.delete(customerInfo);
+        return Result.ok(a);
     }
 }

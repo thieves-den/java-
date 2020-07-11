@@ -81,15 +81,16 @@
             <result column="role_name" property="name"></result>
         </association>
     </resultMap>
+
     <select id="queryFuzzy" parameterType="CustomerService" resultMap="CustomerServiceMap" ><!--客服管理中模糊查找客服-->
         select * from cs_group_role <!--三表连接视图-->
         where 1=1
         <choose>
             <when test="nickName != null and nickName != ''">
-                and nick_name = #{nickName}
+                and nick_name LIKE CONCAT('%', '${nickName}', '%')
             </when>
             <when test="realName != null and realName != ''">
-                and real_name = #{realName}
+                and real_name LIKE CONCAT('%', '${realName}', '%')
             </when>
             <when test="id != 0">
                 and customer_service_id = #{id}
@@ -128,16 +129,16 @@
 
     <update id="update">
         update customer_service
-        <trim prefix="set" prefixOverrides=",">
-            <if test="newcs.email != null"> email = #{newcs.email}, </if>
-            <if test="newcs.nickName != null"> nick_name = #{newcs.nickName}, </if>
-            <if test="newcs.realName != null"> real_name = #{newcs.realName}, </if>
-            <if test="newcs.phone != null"> phone = #{newcs.phone}, </if>
-            <if test="newcs.workState != null"> work_state = #{newcs.workState}, </if>
-            <if test="newcs.onlineState != null"> online_state = #{newcs.onlineState}, </if>
-            <if test="newcs.group != null and newcs.group.id != 0"> customer_service_group_id = #{newcs.group.id}, </if>
-            <if test="newcs.role != null and newcs.role.id != 0"> role_id = #{newcs.role.id}, </if>
-            <if test="newcs.id != 0"> id = #{newcs.id} </if>
+        <trim prefix="set" suffixOverrides=",">
+            <if test="newcs.email != null"> email = #{newcs.email},</if>
+            <if test="newcs.nickName != null"> nick_name = #{newcs.nickName},</if>
+            <if test="newcs.realName != null"> real_name = #{newcs.realName},</if>
+            <if test="newcs.phone != null"> phone = #{newcs.phone},</if>
+            <if test="newcs.workState != null"> work_state = #{newcs.workState},</if>
+            <if test="newcs.onlineState != null"> online_state = #{newcs.onlineState},</if>
+            <if test="newcs.group != null and newcs.group.id != 0"> customer_service_group_id = #{newcs.group.id},</if>
+            <if test="newcs.role != null and newcs.role.id != 0"> role_id = #{newcs.role.id},</if>
+            <if test="newcs.id != 0"> id = #{newcs.id}</if>
             where id = #{oldcs.id}
         </trim>
     </update>

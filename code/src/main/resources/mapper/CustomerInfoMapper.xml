@@ -7,6 +7,23 @@
         values (#{nickName},#{realName},#{phone},#{email},#{company},#{address},#{level},#{channel},#{tags},#{remark},#{customerId},#{customerServiceId})
     </insert>
 
+    <update id="update" parameterType="CustomerInfo">
+        update customer_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="realName != null">real_name = #{realName},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="company != null">company = #{company},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="channel != null">channel = #{channel},</if>
+            <if test="tags != null">ags = #{tags},</if>t
+            <if test="remark != null">remark = #{remark}</if>
+        where customer_id = #{customerId}
+        </trim>
+    </update>
+
     <delete id="delete" parameterType="CustomerInfo">
         DELETE FROM coustomer_info WHERE coustomer_info.customer_id = #{customerId}
     </delete>
@@ -16,14 +33,17 @@
     </select>
 
 
-    <select id="select" parameterType="CustomerInfo" resultType="com.igeekhome.ccsv2.entity.CustomerInfo">
+    <select id="select" parameterType="CustomerInfo" resultType="CustomerInfo">
         select customer_id,nick_name,real_name,phone,email,level,channel from customer_info where 1=1
         <choose>
+            <when test="customerId != 0">
+                and customer_id = #{customerId}
+            </when>
             <when test="nickName != null and nickName != ''">
-                and nick_name = #{nickName}
+                and nick_name LIKE CONCAT('%', '${nickName}', '%')
             </when>
             <when test="realName != null and realName != ''">
-                and real_name = #{realName}
+                and real_name LIKE CONCAT('%', '${realName}', '%')
             </when>
             <when test="phone != null and phone != ''">
                 and phone = #{phone}
@@ -41,10 +61,25 @@
         </choose>
     </select>
 
+    <select id="selectByDate" resultType="CustomerInfo">
+        select customer_id,nick_name,real_name,phone,email,level,channel from customer_info where 1=1
+        <if test="beginTime != null"> and create_time >= #{beginTime} </if>
+        <if test="endTime != null"> and #{endTime} >= create_time </if>
+    </select>
 
-    <select id="selectByDate" resultType="com.igeekhome.ccsv2.entity.CustomerInfo">
-        select customer_id,nick_name,real_name,phone,email,level,channel from customer_info where
-            create_time between #{beginTime} and #{endTime}
+
+
+    <resultMap id="VisitorInfoMap" type="VisitorInfo">
+        <result column="visit_time" property="visitTime"></result>
+        <result column="terminal" property="terminal"></result>
+        <result column="customer_service_name" property="customerServiceName"></result>
+        <result column="group_name" property="groupName"></result>
+        <result column="visit_duration" property="visitDuration"></result>
+        <result column="satisfaction" property="satisfaction"></result>
+    </resultMap>
+    <select id="selectCustomerSession" parameterType="CustomerInfo" resultMap="VisitorInfoMap">
+        select visit_time, terminal, customer_service_name, group_name, visit_duration, satisfaction
+        from c_v_cs_group where customer_id = #{customerId}
     </select>
 
 </mapper>

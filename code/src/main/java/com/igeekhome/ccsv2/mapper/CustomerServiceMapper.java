@@ -28,7 +28,7 @@ public interface CustomerServiceMapper {
     List<CustomerService> showByGroup(CustomerServiceGroup group);
 
     /**
-     * 根据某一客服原信息 oldcs，替换为该客服新的信息 newcs
+     * 根据某一客服原信息 oldcs，替换为该客服新的信息 newcs，也可修改主键客服id
      */
     int update(@Param("oldcs") CustomerService oldcs, @Param("newcs") CustomerService newcs);
 

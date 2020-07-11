@@ -2,6 +2,7 @@ package com.igeekhome.ccsv2.biz.impl;
 
 import com.igeekhome.ccsv2.biz.ICustomerInfoBiz;
 import com.igeekhome.ccsv2.entity.CustomerInfo;
+import com.igeekhome.ccsv2.entity.VisitorInfo;
 import com.igeekhome.ccsv2.mapper.CustomerInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,9 +28,21 @@ public class CustomerInfoBizImpl implements ICustomerInfoBiz {
         return customerInfoMapper.createId();
     }
 
+
     @Override
     public List<CustomerInfo> select(CustomerInfo customerInfo) {
         return customerInfoMapper.select(customerInfo);
+    }
+
+
+    @Override
+    public List<VisitorInfo> selectCustomerSession(CustomerInfo customerInfo) {
+        return customerInfoMapper.selectCustomerSession(customerInfo);
+    }
+
+    @Override
+    public int update(CustomerInfo customerInfo) {
+        return customerInfoMapper.update(customerInfo);
     }
 
     @Override
@@ -37,8 +50,9 @@ public class CustomerInfoBizImpl implements ICustomerInfoBiz {
         return customerInfoMapper.delete(customerInfo);
     }
 
+
     @Override
-    public List<CustomerInfo> selectByDate(CustomerInfo customerInfo) {
-        return customerInfoMapper.selectByDate(customerInfo);
+    public List<CustomerInfo> selectByDate(Date begin, Date end) {
+        return customerInfoMapper.selectByDate(begin, end);
     }
 }
