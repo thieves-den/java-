@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-07-11 17:23:30
+Date: 2020-07-11 22:20:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -363,7 +363,7 @@ INSERT INTO `notice` VALUES ('产品上新通知', '9号产品将于9号上线',
 DROP TABLE IF EXISTS `session`;
 CREATE TABLE `session` (
   `customer_service_id` int(11) NOT NULL COMMENT '客服工号',
-  `visitor_ip` int(11) NOT NULL COMMENT '访客编号',
+  `visitor_ip` varchar(255) NOT NULL COMMENT '访客编号',
   `visitor_name` varchar(255) DEFAULT NULL COMMENT '访客名称\r\n',
   `creat_time` datetime DEFAULT NULL COMMENT '创建时间',
   `finish_time` datetime DEFAULT NULL COMMENT '完成时间',
@@ -375,12 +375,32 @@ CREATE TABLE `session` (
   `customer_msg_num` int(11) DEFAULT NULL,
   `customer_service_msg_mum` int(11) DEFAULT NULL,
   PRIMARY KEY (`customer_service_id`,`visitor_ip`) USING BTREE,
-  CONSTRAINT `会话-客服id` FOREIGN KEY (`customer_service_id`) REFERENCES `customer_service` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
+  KEY `会话-访客ip` (`visitor_ip`),
+  CONSTRAINT `会话-客服id` FOREIGN KEY (`customer_service_id`) REFERENCES `customer_service` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `会话-访客ip` FOREIGN KEY (`visitor_ip`) REFERENCES `visitor_info` (`ip`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of session
 -- ----------------------------
+INSERT INTO `session` VALUES ('1', '198.40.1', null, '2020-07-11 21:33:28', '2020-07-11 21:45:28', null, null, null, null, null, '1', null);
+INSERT INTO `session` VALUES ('1', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:09:58', null, null, null, null, null, '53', null);
+INSERT INTO `session` VALUES ('1', '198.40.3', null, '2020-07-11 22:13:57', '2020-07-11 22:26:57', null, null, null, null, null, null, null);
+INSERT INTO `session` VALUES ('2', '198.40.1', null, '2020-07-11 21:33:28', '2020-07-11 21:34:28', null, null, null, null, null, '16', null);
+INSERT INTO `session` VALUES ('2', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:10:42', null, null, null, null, null, '53', null);
+INSERT INTO `session` VALUES ('3', '198.40.1', null, '2020-07-11 21:33:28', '2020-07-11 21:47:28', null, null, null, null, null, '14', null);
+INSERT INTO `session` VALUES ('3', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:09:49', null, null, null, null, null, '4', null);
+INSERT INTO `session` VALUES ('4', '198.40.1', null, '2020-07-11 21:33:28', '2020-07-11 21:44:28', null, null, null, null, null, '24', null);
+INSERT INTO `session` VALUES ('4', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:49:42', null, null, null, null, null, '1', null);
+INSERT INTO `session` VALUES ('5', '198.40.1', null, '2020-07-11 21:33:28', '2020-07-11 21:24:28', null, null, null, null, null, '26', null);
+INSERT INTO `session` VALUES ('5', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:39:42', null, null, null, null, null, '2', null);
+INSERT INTO `session` VALUES ('6', '198.40.1', null, '2020-07-11 21:33:28', '2020-07-11 21:53:28', null, null, null, null, null, '26', null);
+INSERT INTO `session` VALUES ('6', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:29:42', null, null, null, null, null, '4', null);
+INSERT INTO `session` VALUES ('7', '198.40.1', null, '2020-07-11 21:33:28', '2020-07-11 21:33:48', null, null, null, null, null, '47', null);
+INSERT INTO `session` VALUES ('7', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:09:51', null, null, null, null, null, '53', null);
+INSERT INTO `session` VALUES ('8', '198.40.1', null, '2020-07-11 21:33:28', '2020-07-11 21:36:28', null, null, null, null, null, '58', null);
+INSERT INTO `session` VALUES ('8', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:10:42', null, null, null, null, null, '53', null);
+INSERT INTO `session` VALUES ('9', '198.40.2', null, '2020-07-11 22:09:42', '2020-07-11 22:19:42', null, null, null, null, null, '23', null);
 
 -- ----------------------------
 -- Table structure for `session_msg`
@@ -420,10 +440,10 @@ CREATE TABLE `tags` (
 -- ----------------------------
 DROP TABLE IF EXISTS `visitor_info`;
 CREATE TABLE `visitor_info` (
+  `ip` varchar(255) NOT NULL COMMENT 'ip地址',
   `customer_service_id` int(11) NOT NULL COMMENT '客服id',
   `nick_name` varchar(255) DEFAULT NULL COMMENT '访客昵称',
   `visitor_name` varchar(255) DEFAULT NULL COMMENT '访问者名称',
-  `ip` varchar(255) NOT NULL COMMENT 'ip地址',
   `terminal` varchar(255) DEFAULT NULL COMMENT '访客终端',
   `browser` varchar(255) DEFAULT NULL COMMENT '访客浏览器',
   `screen_size` varchar(255) DEFAULT NULL COMMENT '屏幕大小',
@@ -433,14 +453,25 @@ CREATE TABLE `visitor_info` (
   `begin_time` datetime DEFAULT NULL COMMENT '访问开始时间',
   `end_time` datetime DEFAULT NULL COMMENT '访问结束时间',
   `visit_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`customer_service_id`) USING BTREE,
+  PRIMARY KEY (`ip`),
+  KEY `访客-客服id` (`customer_service_id`),
   CONSTRAINT `访客-客服id` FOREIGN KEY (`customer_service_id`) REFERENCES `customer_service` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of visitor_info
 -- ----------------------------
-INSERT INTO `visitor_info` VALUES ('1', '水蜜桃', '小香香', '198.40.202', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.1', '2', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.10', '3', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.2', '3', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.202', '1', '水蜜桃', '小香香', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.3', '4', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.4', '5', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.5', '6', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.6', '2', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.7', '8', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.8', '4', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.9', '1', null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `word_order`
