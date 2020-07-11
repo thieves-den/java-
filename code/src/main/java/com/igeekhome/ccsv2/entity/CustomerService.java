@@ -11,7 +11,7 @@ public class CustomerService {
     private int customerServiceId;
     private String phone;
     private String password;
-    private Integer onlineState;
+    private String onlineState;//在线或离线
     private Integer workState;
     private Byte[] headImg;
     private String email;

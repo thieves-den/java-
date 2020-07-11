@@ -106,8 +106,8 @@ public class CustomerServiceController {
         return Result.ok(csList);
     }
 
-    //模糊搜索客服信息（客服管理界面）
-    @RequestMapping(value = {"/query"})
+    //模糊搜索客服信息（客服管理界面）,若无条件则全部展示
+    @RequestMapping(value = {"/queryFuzzy"})
     @ResponseBody
     public Result search(CustomerService cs){
         List<CustomerService> csList = new ArrayList<CustomerService>();

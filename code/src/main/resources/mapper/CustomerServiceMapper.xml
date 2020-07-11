@@ -50,49 +50,36 @@
         <if test="role != null and role.id != 0">, #{role.id}</if>
         <if test="serviceCap != null">, #{serviceCap}</if>
         )
+        insert into auto_reply(customer_service_id) value(#{id})
     </insert>
 
 
     <resultMap id="CustomerServiceMap" type="CustomerService">
         <!--主键映射-->
-        <id column="id" property="id"></id>
+        <id column="customer_service_id" property="id"></id>
         <!--普通字段映射使用result,名字一致的可以不写-->
         <result column="phone" property="phone"></result>
-        <result column="password" property="password"></result>
         <result column="online_state" property="onlineState"></result>
         <result column="work_state" property="workState"></result>
-        <result column="head_img" property="headImg"></result>
         <result column="email" property="email"></result>
         <result column="real_name" property="realName"></result>
         <result column="nick_name" property="nickName"></result>
-        <result column="create_time" property="createTime"></result>
-        <result column="update_time" property="updateTime"></result>
         <result column="total_online_time" property="totalOnlineTime"></result>
         <result column="average_response_time" property="averageResponseTime"></result>
         <result column="average_session_time" property="averageSessionTime"></result>
-        <result column="online_time_begin" property="onlineTimeBegin"></result>
-        <result column="online_time_end" property="onlineTimeEnd"></result>
         <result column="session_count" property="sessionCount"></result>
         <result column="msg_count" property="msgCount"></result>
         <result column="service_cap" property="serviceCap"></result>
         <!--关联的实体对象查询使用association，这里映射的是CustomerServiceGroup类-->
         <!--关联customer_service_group-->
         <association property="group" javaType="com.igeekhome.ccsv2.entity.CustomerServiceGroup">
-            <id column="id" property="id"></id>
+            <id column="group_id" property="id"></id>
             <result column="group_name" property="name"></result>
-            <result column="number" property="number"></result>
-            <result column="create_time" property="createTime"></result>
-            <result column="update_time" property="updateTime"></result>
         </association>
         <!--关联customer_service_role-->
         <association property="role" javaType="com.igeekhome.ccsv2.entity.CustomerServiceRole">
-            <id column="id" property="id"></id>
-            <result column="role_describe" property="roleDescribe"></result>
-            <result column="name" property="name"></result>
-            <result column="number" property="number"></result>
-            <result column="create_time" property="createTime"></result>
-            <result column="update_time" property="updateTime"></result>
-            <result column="creator_id" property="creatorId"></result>
+            <id column="role_id" property="id"></id>
+            <result column="role_name" property="name"></result>
         </association>
     </resultMap>
     <select id="queryFuzzy" parameterType="CustomerService" resultMap="CustomerServiceMap" ><!--客服管理中模糊查找客服-->
@@ -100,25 +87,25 @@
         where 1=1
         <choose>
             <when test="nickName != null and nickName != ''">
-                and customer_service.nick_name = #{nickName}
+                and nick_name = #{nickName}
             </when>
             <when test="realName != null and realName != ''">
-                and customer_service.real_name = #{realName}
+                and real_name = #{realName}
             </when>
             <when test="id != 0">
-                and customer_service.id = #{id}
+                and customer_service_id = #{id}
             </when>
             <when test="phone != null and phone != ''">
-                and customer_service.phone = #{phone}
+                and phone = #{phone}
             </when>
             <when test="email != null and email != ''">
-                and customer_service.email = #{email}
+                and email = #{email}
             </when>
             <when test="workState != null">
-                and customer_service.work_state = #{workState}
+                and work_state = #{workState}
             </when>
             <when test="onlineState != null">
-                and customer_service.online_state = #{onlineState}
+                and online_state = #{onlineState}
             </when>
             <otherwise></otherwise>
         </choose>
@@ -126,9 +113,8 @@
 
 
     <select id="showByGroup" parameterType="CustomerServiceGroup" resultMap="CustomerServiceMap"><!--分组展示-->
-        select * from
-        (customer_service left join customer_service_group on customer_service.customer_service_group_id = customer_service_group.id)
-        left join customer_service_role on customer_service.role_id = customer_service_role.id where 1=1
+        select * from cs_group_role <!--三表连接视图-->
+        where 1=1
         <choose>
             <when test="id != 0">
                 and customer_service_group_id = #{id}

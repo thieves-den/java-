@@ -20,8 +20,8 @@ class CustomerServiceBizImplTest {
     @Test
     void register(){
         CustomerService cs = new CustomerService();
-        cs.setPhone("13572");
-        cs.setPassword("qwerasdf");
+        cs.setPhone("135722");
+        cs.setPassword("qwdf");
         int a = customerServiceBizImpl.register(cs);
         assertNotEquals(0,a);
     }
@@ -81,8 +81,8 @@ class CustomerServiceBizImplTest {
         newcs.setNickName("小林哥");
         newcs.setRealName("林感");
         newcs.setPhone("12345");
-        newcs.setOnlineState(1);
-        newcs.setWorkState(0);
+        newcs.setOnlineState("在线");
+        newcs.setWorkState(1);
         newcs.setId(999);//主码改变为999
 
         role.setId(4);
