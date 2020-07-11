@@ -16,7 +16,8 @@ public interface CustomerInfoMapper {
     //客户信息表搜索
     List<CustomerInfo> select(CustomerInfo customerInfo);
     //根据创建日期搜索客户信息
-    List<CustomerInfo> selectByDate(@Param("begin") Date begin, @Param("end") Date end);
 
     int delete(CustomerInfo customerInfo);
+
+    List<CustomerInfo> selectByDate(CustomerInfo customerInfo);
 }

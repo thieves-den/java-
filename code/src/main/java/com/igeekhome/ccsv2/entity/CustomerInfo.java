@@ -1,5 +1,6 @@
 package com.igeekhome.ccsv2.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,10 @@ public class CustomerInfo {
     private Date updateTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastedLoginTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date beginTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endTime;
 
     public void setcustomerId(int v) {
         this.customerId = v;

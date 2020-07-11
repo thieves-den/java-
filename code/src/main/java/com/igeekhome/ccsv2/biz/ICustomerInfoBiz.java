@@ -12,7 +12,8 @@ public interface ICustomerInfoBiz {
 
     //客户信息表搜索
     List<CustomerInfo> select(CustomerInfo customerInfo);
-    List<CustomerInfo> selectByDate(Date begin, Date end);
 
     int delete(CustomerInfo customerInfo);
+
+    List<CustomerInfo> selectByDate(CustomerInfo customerInfo);
 }

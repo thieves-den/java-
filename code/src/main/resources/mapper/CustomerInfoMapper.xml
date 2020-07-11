@@ -16,7 +16,7 @@
     </select>
 
 
-    <select id="select" parameterType="CustomerInfo" resultType="CustomerInfo">
+    <select id="select" parameterType="CustomerInfo" resultType="com.igeekhome.ccsv2.entity.CustomerInfo">
         select customer_id,nick_name,real_name,phone,email,level,channel from customer_info where 1=1
         <choose>
             <when test="nickName != null and nickName != ''">
@@ -42,9 +42,9 @@
     </select>
 
 
-    <select id="selectByDate" resultType="CustomerInfo">
+    <select id="selectByDate" resultType="com.igeekhome.ccsv2.entity.CustomerInfo">
         select customer_id,nick_name,real_name,phone,email,level,channel from customer_info where
-            create_time between #{begin} and #{end}
+            create_time between #{beginTime} and #{endTime}
     </select>
 
 </mapper>

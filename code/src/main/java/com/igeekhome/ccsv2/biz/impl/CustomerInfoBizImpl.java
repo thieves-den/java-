@@ -33,12 +33,12 @@ public class CustomerInfoBizImpl implements ICustomerInfoBiz {
     }
 
     @Override
-    public List<CustomerInfo> selectByDate(Date begin, Date end) {
-        return customerInfoMapper.selectByDate(begin,end);
+    public int delete(CustomerInfo customerInfo) {
+        return customerInfoMapper.delete(customerInfo);
     }
 
     @Override
-    public int delete(CustomerInfo customerInfo) {
-        return customerInfoMapper.delete(customerInfo);
+    public List<CustomerInfo> selectByDate(CustomerInfo customerInfo) {
+        return customerInfoMapper.selectByDate(customerInfo);
     }
 }
