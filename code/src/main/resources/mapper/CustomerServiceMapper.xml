@@ -50,7 +50,6 @@
         <if test="role != null and role.id != 0">, #{role.id}</if>
         <if test="serviceCap != null">, #{serviceCap}</if>
         )
-        insert into auto_reply(customer_service_id) value(#{id})
     </insert>
 
 
