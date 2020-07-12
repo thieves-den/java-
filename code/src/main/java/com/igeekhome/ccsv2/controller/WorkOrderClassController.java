@@ -6,6 +6,9 @@ import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -29,9 +32,13 @@ public class WorkOrderClassController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public Result createClass(WorkOrderClass woc){
-        woc.setClassName("咨询相关工单");
-        workOrderClassBiz.createClass(woc);
-        return Result.ok(woc);
+        Date date = new Date();
+        //date = dateformat.parse("2020-7-6 12:09:36"); ——>Date赋值语句
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Timestamp time = Timestamp.valueOf(dateFormat.format(date));//获取当前时间
+        woc.setCreateTime(time);
+        int a = workOrderClassBiz.createClass(woc);
+        return Result.ok(a);
     }
 
     //删除工单类别

@@ -11,7 +11,7 @@
     </select>
 
     <insert id="createClass" parameterType="WorkOrderClass">
-        insert into work_order_class(class_name) value (#{className})
+        insert into work_order_class(class_name,create_time) value (#{className},#{createTime})
     </insert>
     
     <delete id="deleteBatch" parameterType="List">

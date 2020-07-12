@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 @CrossOrigin
 @RestController
@@ -24,6 +26,10 @@ public class CustomerServiceController {
     @RequestMapping(value = {"/register"})
     @ResponseBody
     public Result register(CustomerService cs){
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Timestamp time = Timestamp.valueOf(dateFormat.format(date));//获取当前时间
+        cs.setCreateTime(time);
         int a = customerServiceBiz.register(cs);
         return Result.ok(a);
     }
@@ -41,31 +47,38 @@ public class CustomerServiceController {
     //管理员新增客服信息
     @RequestMapping(value = {"/addNewCustomerService"})
     @ResponseBody
-    public Result addNewCustomerService(String email,String nickName,String realName,int id,String phone,String password,int serviceCap){
+    public Result addNewCustomerService(String email,String nickName,String realName,int id,String phone,String password,int serviceCap,int groupId,int roleId){
         CustomerService cs = new CustomerService();
         CustomerServiceGroup group = new CustomerServiceGroup();
+        group.setId(groupId);
+        cs.setGroup(group);
+
         CustomerServiceRole role = new CustomerServiceRole();
+        role.setId(roleId);
+        cs.setRole(role);
+
         cs.setEmail(email);
         cs.setNickName(nickName);
         cs.setRealName(realName);
         cs.setId(id);
         cs.setPhone(phone);
         cs.setPassword(password);//设置初始密码
-
-        role.setId(id);
-        cs.setRole(role);
-
-        group.setId(id);
-        cs.setGroup(group);
-
         cs.setServiceCap(serviceCap);
-        int a = customerServiceBiz.register(cs);
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Timestamp time = Timestamp.valueOf(dateFormat.format(date));//获取当前时间
+        cs.setCreateTime(time);
+        int a = customerServiceBiz.addNewCustomerService(cs);
         return Result.ok(a);
     }
 
     //更新个人信息部分
     @RequestMapping(value =  {"/update"},method = RequestMethod.POST)
     public @ResponseBody Result update(CustomerService oldcs, CustomerService newcs){
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Timestamp time = Timestamp.valueOf(dateFormat.format(date));//获取当前时间
+        newcs.setUpdateTime(time);
         int a = customerServiceBiz.update(oldcs,newcs);
         return Result.ok(a);
     }

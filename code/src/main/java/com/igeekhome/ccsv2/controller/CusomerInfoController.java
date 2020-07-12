@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +31,11 @@ public class CusomerInfoController {
         HashMap<String, Integer> t = customerInfoBiz.createId();
         int v = t.get("MAX(customer_id)") + 1;
         customerInfo.setcustomerId(v);
+
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Timestamp time = Timestamp.valueOf(dateFormat.format(date));//获取当前时间
+        customerInfo.setCreateTime(time);
         int a = customerInfoBiz.create(customerInfo);
         return Result.ok(a);
     }
@@ -38,6 +44,10 @@ public class CusomerInfoController {
     @RequestMapping(value = {"/update"},method = RequestMethod.POST)
     @ResponseBody
     public Result update(CustomerInfo customerInfo){
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Timestamp time = Timestamp.valueOf(dateFormat.format(date));//获取当前时间
+        customerInfo.setUpdateTime(time);
         int a = customerInfoBiz.update(customerInfo);
         return Result.ok(a);
     }
