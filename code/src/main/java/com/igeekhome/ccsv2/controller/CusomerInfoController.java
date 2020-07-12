@@ -6,10 +6,7 @@ import com.igeekhome.ccsv2.entity.VisitorInfo;
 import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -27,7 +24,7 @@ public class CusomerInfoController {
     private ICustomerInfoBiz customerInfoBiz;
 
     @RequestMapping(value = {"/create"},method = RequestMethod.POST)//创建客户
-    public @ResponseBody Result creat(CustomerInfo customerInfo){
+    public @ResponseBody Result creat(@RequestBody CustomerInfo customerInfo){
         HashMap<String, Integer> t = customerInfoBiz.createId();
         int v = t.get("MAX(customer_id)") + 1;
         customerInfo.setcustomerId(v);

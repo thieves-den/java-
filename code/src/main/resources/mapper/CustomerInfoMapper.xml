@@ -3,7 +3,7 @@
 <mapper namespace="com.igeekhome.ccsv2.mapper.CustomerInfoMapper">
 
     <insert id="create" parameterType="CustomerInfo">
-        insert into coustomer_info(nick_name,real_name,phone,email,company,address,level,channel,tags,remark,customer_id,customer_service_id,create_time)
+        insert into customer_info(nick_name,real_name,phone,email,company,address,level,channel,tags,remark,customer_id,customer_service_id,create_time)
         values (#{nickName},#{realName},#{phone},#{email},#{company},#{address},#{level},#{channel},#{tags},#{remark},#{customerId},#{customerServiceId},#{createTime})
     </insert>
 
@@ -26,11 +26,11 @@
     </update>
 
     <delete id="delete" parameterType="CustomerInfo">
-        DELETE FROM coustomer_info WHERE coustomer_info.customer_id = #{customerId}
+        DELETE FROM customer_info WHERE customer_info.customer_id = #{customerId}
     </delete>
 
     <select id="createId" resultType="java.util.HashMap">
-        SELECT MAX(customer_id) FROM coustomer_info
+        SELECT MAX(customer_id) FROM customer_info
     </select>
 
 
