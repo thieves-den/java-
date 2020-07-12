@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-07-12 10:40:42
+Date: 2020-07-12 17:24:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,7 +56,7 @@ CREATE TABLE `blacklist` (
   `customer_service_id` int(11) NOT NULL COMMENT '创建客服id',
   `reason` varchar(255) DEFAULT NULL COMMENT '原因',
   `create_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`customer_id`) USING BTREE,
+  PRIMARY KEY (`customer_id`,`customer_service_id`),
   KEY `blacklist_ibfk_1` (`customer_service_id`),
   CONSTRAINT `blacklist_ibfk_1` FOREIGN KEY (`customer_service_id`) REFERENCES `customer_service` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
@@ -64,6 +64,7 @@ CREATE TABLE `blacklist` (
 -- ----------------------------
 -- Records of blacklist
 -- ----------------------------
+INSERT INTO `blacklist` VALUES ('1', '1', 'Dadadad', null);
 INSERT INTO `blacklist` VALUES ('1', '11', '骂人', '2020-07-11 11:01:58');
 INSERT INTO `blacklist` VALUES ('2', '2', '骂人', '2020-07-23 11:03:45');
 INSERT INTO `blacklist` VALUES ('3', '4', '骂人', '2020-07-23 11:03:45');
@@ -74,6 +75,7 @@ INSERT INTO `blacklist` VALUES ('8', '6', '骂人', '2020-07-23 11:03:45');
 INSERT INTO `blacklist` VALUES ('9', '4', '骂人', '2020-07-23 11:03:45');
 INSERT INTO `blacklist` VALUES ('10', '3', '骂人', '2020-07-23 11:03:45');
 INSERT INTO `blacklist` VALUES ('11', '4', '骂人', '2020-07-23 11:03:45');
+INSERT INTO `blacklist` VALUES ('12', '12', '法沙发沙发', null);
 
 -- ----------------------------
 -- Table structure for `common_words`
@@ -508,7 +510,7 @@ CREATE TABLE `work_order` (
   `create_time` datetime DEFAULT NULL COMMENT '工单创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '工单更新时间',
   PRIMARY KEY (`work_order_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of work_order
@@ -519,6 +521,8 @@ INSERT INTO `work_order` VALUES ('3', '分类一', '客户报价', '客户报价
 INSERT INTO `work_order` VALUES ('4', '分类三', '优化建议', '客户关于产品优化的建议', null, '王志', '紧急', '已解决', '2', '2', '手动录入', '2020-07-05 20:55:55', '2020-07-08 20:55:48');
 INSERT INTO `work_order` VALUES ('5', '分类三', '改善建议', '客户关于改善优化的建议', null, '李想', '中', '已关闭', '1', '1', '客户管理', '2020-07-07 20:56:09', '2020-07-10 20:56:01');
 INSERT INTO `work_order` VALUES ('6', '分类一', '客户咨询', '客户关于产品问题咨询', null, '王志', '高', '处理中', '6', '3', '即时聊天', '2020-07-08 21:14:44', '2020-07-09 21:14:48');
+INSERT INTO `work_order` VALUES ('7', '2131231', '212', '1', null, '2020-4-1', '21', 'da', '1', '1', null, null, null);
+INSERT INTO `work_order` VALUES ('8', '1', '123', '123', null, '1', '1', '1', '1', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `work_order_class`
