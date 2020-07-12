@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ISessionBiz {
     List<Session> select(Session session);
+
+    List<Session> getSessionList(Integer customerServiceId, Integer type, Integer pageNum);
 }

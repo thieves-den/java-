@@ -13,8 +13,14 @@ public class SessionBizImpl implements ISessionBiz {
 
     @Autowired
     private SessionMapper sessionMapper;
+
     @Override
     public List<Session> select(Session session) {
         return sessionMapper.select(session);
+    }
+
+    @Override
+    public List<Session> getSessionList(Integer customerServiceId, Integer type, Integer pageNum) {
+        return sessionMapper.getSessionList(customerServiceId,type,pageNum);
     }
 }

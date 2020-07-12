@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface SessionMapper {
     List<Session> select(Session session);
+
+    List<Session> getSessionList(Integer customerServiceId, Integer type, Integer pageNum);
 }
