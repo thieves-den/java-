@@ -1,16 +1,22 @@
 package com.igeekhome.ccsv2.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Date;
+
 @Setter
 @Getter
+@Data
 public class Session {
     private int customerServiceId;
-    private int visitorIp;
+    private String visitorIp;
     private String visitorName;
-    private Timestamp createTime;
+    @JsonFormat(pattern = "HH:mm")
+    private Date creatTime;
     private Timestamp finishTime;
     private String channel;
     private Timestamp evaluationTime;
