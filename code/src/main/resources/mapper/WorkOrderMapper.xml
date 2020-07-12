@@ -3,8 +3,8 @@
 <mapper namespace="com.igeekhome.ccsv2.mapper.WorkOrderMapper">
 
     <insert id="create" parameterType="WorkOrder">
-        insert work_order(work_order_id,type,title,order_desc,attachments,cclist,priority,state,customer_service_id,customer_id)
-        values (#{workOrderId},#{type},#{title},#{orderDesc},#{attachments},#{cclist},#{priority},#{state},#{customerServiceId},#{customerId})
+        insert work_order(work_order_id,type,title,order_desc,cclist,priority,state,customer_service_id,customer_id)
+        values (#{workOrderId},#{type},#{title},#{orderDesc},#{cclist},#{priority},#{state},#{customerServiceId},#{customerId})
     </insert>
 
     <select id="findId" resultType="java.util.HashMap">

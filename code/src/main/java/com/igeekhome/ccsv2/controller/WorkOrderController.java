@@ -5,9 +5,7 @@ import com.igeekhome.ccsv2.entity.WorkOrder;
 import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,13 +15,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/workorder")
+@CrossOrigin
 public class WorkOrderController {
     @Autowired
     private IWorkOrderBiz workOrderBiz;
 
     @RequestMapping(value = {"/create"},method = RequestMethod.POST)
     public @ResponseBody
-    Result create(WorkOrder workOrder){
+    Result create(@RequestBody  WorkOrder workOrder){
         HashMap<String, Integer> tem = workOrderBiz.findId();
         int s = tem.get("MAX(work_order_id)") + 1;
         workOrder.setWorkOrderId(s);

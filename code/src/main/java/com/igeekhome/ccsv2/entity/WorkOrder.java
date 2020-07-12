@@ -19,6 +19,7 @@ public class WorkOrder {
     private String state;
     private String groupName;//客服组名
     private String customerServiceName;//客服真实姓名
+    private int customerServiceId;
     private int customerId;
     private String customerRealName;//顾客真实姓名
     private String channel;
