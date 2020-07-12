@@ -40,4 +40,6 @@ public interface CustomerServiceMapper {
     int deleteBatch(List<Integer> ids);//批量删除
 
     CustomerService getOne(CustomerService cs);
+
+    List<CustomerService> queryWorkload(CustomerService cs);
 }

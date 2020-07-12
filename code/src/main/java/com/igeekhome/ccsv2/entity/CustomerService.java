@@ -17,6 +17,8 @@ public class CustomerService {
     private String email;
     private String nickName;
     private String realName;
+    private int finishedSession;
+    private double totalTime;
     //关联的客服组
     CustomerServiceGroup group;
     //关联的客服角色

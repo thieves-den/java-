@@ -31,4 +31,6 @@ public interface ICustomerServiceBiz {
     int deleteBatch(List<Integer> ids);//批量删除
 
     CustomerService login(CustomerService cs);
+
+    List<CustomerService> queryWorkload(CustomerService cs);
 }

@@ -65,4 +65,9 @@ public class CustomerServiceBizImpl implements ICustomerServiceBiz {
     public CustomerService login(CustomerService cs) {
         return customerServiceMapper.getOne(cs);
     }
+
+    @Override
+    public List<CustomerService> queryWorkload(CustomerService cs) {
+        return customerServiceMapper.queryWorkload(cs);
+    }
 }
