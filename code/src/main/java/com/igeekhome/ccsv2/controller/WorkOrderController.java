@@ -35,18 +35,14 @@ public class WorkOrderController {
 
     @RequestMapping(value = {"/select"},method = RequestMethod.GET)
     public @ResponseBody
-    Result select() {
-        WorkOrder workOrder = new WorkOrder();
+    Result select(WorkOrder workOrder) {
         List<WorkOrder> workOrders = workOrderBiz.select(workOrder);
         return Result.ok(workOrders);
     }
 
     @RequestMapping(value = {"/selectByDate"},method = RequestMethod.GET)
     public @ResponseBody
-    Result selectByDate() throws ParseException {
-        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-        Date beginTime = dateformat.parse("2020-7-4");
-        Date endTime = dateformat.parse("2020-7-8");
+    Result selectByDate(Date beginTime,Date endTime) {
         List<WorkOrder> workOrders = workOrderBiz.selectByDate(beginTime, endTime);
         return Result.ok(workOrders);
     }

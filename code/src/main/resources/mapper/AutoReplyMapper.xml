@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.igeekhome.ccsv2.mapper.AutoReplyMapper">
+
+    <select id="showSetting" parameterType="int" resultType="AutoReply">
+        select * from auto_reply where customer_service_id = #{customerServiceId}
+    </select>
+
+
+
+    <update id="saveWelcome" parameterType="AutoReply">
+        update auto_reply set
+        welcome = #{welcome}, w_state = #{wState}
+        where customer_service_id = #{customerServiceId}
+    </update>
+
+    <update id="saveCSNResponse" parameterType="AutoReply">
+        update auto_reply set
+        customer_service_no_response = #{customerServiceNoResponse},
+        customer_service_time_limit = #{customerServiceTimeLimit},
+        c_s_n_state = #{cSNState}
+        where customer_service_id = #{customerServiceId}
+    </update>
+
+    <update id="saveCNResponse" parameterType="AutoReply">
+        update auto_reply set
+        customer_no_response = #{customerNoResponse},
+        customer_time_limit = #{customerTimeLimit},
+        c_n_state = #{cSNState}
+        where customer_service_id = #{customerServiceId}
+    </update>
+
+    <update id="saveEnd" parameterType="AutoReply">
+        update auto_reply set
+        customer_service_end = #{customerServiceEnd},
+        system_end = #{systemEnd},
+        e_state = #{eState}
+        where customer_service_id = #{customerServiceId}
+    </update>
+
+</mapper>

@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 public class CustomerInfo {
     private int customerId;
-    private int customerServiceId;
+    private int customerServiceId; //该客户的创建客服id（唯一）
     private String nickName;
     private String realName;
     private String phone;

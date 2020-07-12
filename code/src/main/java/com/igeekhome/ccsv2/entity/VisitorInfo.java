@@ -9,18 +9,20 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
-public class VisitorInfo { //包含客户与普通访客的来访信息
-    private int customerServiceId;  //服务客服的id
-    private String nickName;
-    private String realName; //客户拥有
+//包含客户与普通访客的来访信息
+public class VisitorInfo {
+    private int customerServiceId;  //受理客服的id
+    private String customerId; //客户才拥有
+    private String groupName;  //受理客服组
+    private String customerServiceName; //受理客服昵称
     private String visitorName;
     private String ip;
-    private String terminal;
+    private String terminal;//终端
     private String browser;
     private String screenSize;
     private String device;
     private int state;
-    private int Satisfaction; //满意度打分
+    private int satisfaction; //满意度打分
 
     @JsonFormat(pattern = "HH:mm:ss")
     private Date visitDuration;

@@ -25,7 +25,7 @@
             AND  #{endTime} >= visitor_info.visit_time
         </if>
         <if test="visitorName != null">
-            AND visitor_info.visitor_name LIKE #{visitorName}
+            AND visitor_info.visitor_name LIKE CONCAT('%', '${visitorName}', '%')
         </if>
 
 
