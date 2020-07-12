@@ -3,14 +3,19 @@ package com.igeekhome.ccsv2.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
+@Getter
+@Setter
 @Data
 //包含客户与普通访客的来访信息
 public class VisitorInfo {
+    private String nickName;
     private int customerServiceId;  //受理客服的id
     private String customerId; //客户才拥有
     private String groupName;  //受理客服组
