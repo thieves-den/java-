@@ -1,6 +1,8 @@
 package com.igeekhome.ccsv2.controller;
 
+import com.igeekhome.ccsv2.biz.IBlackListBiz;
 import com.igeekhome.ccsv2.biz.ICustomerInfoBiz;
+import com.igeekhome.ccsv2.entity.BlackList;
 import com.igeekhome.ccsv2.entity.CustomerInfo;
 import com.igeekhome.ccsv2.entity.VisitorInfo;
 import com.igeekhome.ccsv2.untils.Result;
@@ -22,6 +24,8 @@ public class CusomerInfoController {
 
     @Autowired
     private ICustomerInfoBiz customerInfoBiz;
+
+
 
     @RequestMapping(value = {"/create"},method = RequestMethod.POST)//创建客户
     public @ResponseBody Result creat(@RequestBody CustomerInfo customerInfo){
@@ -74,8 +78,11 @@ public class CusomerInfoController {
         return Result.ok(visitorInfos);
     }
 
+    //客户详情页面拉黑记录表在BlackListController
 
-    @RequestMapping(value = {"/delete"},method = RequestMethod.POST)//删除客户
+
+    //删除客户
+    @RequestMapping(value = {"/delete"},method = RequestMethod.POST)
     public @ResponseBody Result delete(CustomerInfo customerInfo){
         int a = customerInfoBiz.delete(customerInfo);
         return Result.ok(a);

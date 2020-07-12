@@ -110,7 +110,8 @@ public class CustomerServiceController {
         List<CustomerService> csList = customerServiceBiz.queryFuzzy(cs);
         return Result.ok(csList);
     }
-    //首页客服监控，返回在线客服监控信息（首页）
+
+    //数据报表工作量统计
     @GetMapping("/CustomerServiceWorkload")
     @ResponseBody
     public Result CustomerServiceWorkload(CustomerService cs){

@@ -6,6 +6,10 @@
         insert into blacklist(customer_id,customer_service_id,reason) VALUES(#{customerId},#{customerServiceId},#{reason})
     </insert>
 
+    <select id="showBlackRecord" parameterType="CustomerInfo" resultType="BlackList">
+        select * from blacklist where customer_id = #{customerId}
+    </select>
+
     <delete id="delete" parameterType="BlackList">
         delete from blacklist where customer_id = #{customerId}
     </delete>

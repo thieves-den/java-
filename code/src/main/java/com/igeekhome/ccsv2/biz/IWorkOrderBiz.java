@@ -1,5 +1,6 @@
 package com.igeekhome.ccsv2.biz;
 
+import com.igeekhome.ccsv2.entity.CustomerInfo;
 import com.igeekhome.ccsv2.entity.WorkOrder;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,4 +15,6 @@ public interface IWorkOrderBiz {
     //工单列表
     List<WorkOrder> select(WorkOrder workOrder);//模糊查找
     List<WorkOrder> selectByDate(Date begin, Date end);//根据日期时间段查找
+
+    List<WorkOrder> historyWorkOrder(CustomerInfo customerInfo);
 }

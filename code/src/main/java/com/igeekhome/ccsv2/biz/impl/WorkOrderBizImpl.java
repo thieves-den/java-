@@ -1,6 +1,7 @@
 package com.igeekhome.ccsv2.biz.impl;
 
 import com.igeekhome.ccsv2.biz.IWorkOrderBiz;
+import com.igeekhome.ccsv2.entity.CustomerInfo;
 import com.igeekhome.ccsv2.entity.WorkOrder;
 import com.igeekhome.ccsv2.mapper.WorkOrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class WorkOrderBizImpl implements IWorkOrderBiz {
     @Override
     public List<WorkOrder> selectByDate(Date begin, Date end) {
         return workOrderMapper.selectByDate(begin, end);
+    }
+
+    @Override
+    public List<WorkOrder> historyWorkOrder(CustomerInfo customerInfo) {
+        return workOrderMapper.historyWorkOrder(customerInfo);
     }
 }
