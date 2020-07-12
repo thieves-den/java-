@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-07-12 17:24:43
+Date: 2020-07-12 17:30:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -463,17 +463,17 @@ CREATE TABLE `visitor_info` (
 -- ----------------------------
 -- Records of visitor_info
 -- ----------------------------
-INSERT INTO `visitor_info` VALUES ('198.40.1', '2', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.10', '3', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.2', '3', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.202', '1', '水蜜桃', '小香香', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.3', '4', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.4', '5', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.5', '6', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.6', '2', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.7', '8', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.8', '4', null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `visitor_info` VALUES ('198.40.9', '1', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `visitor_info` VALUES ('198.40.1', '2', '君雄', '林君雄', '浏览器', 'Firefox', '18寸', '笔记本', '0', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.10', '3', '平山', '谭平山', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.2', '3', '希亮', '朱希亮', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.202', '1', '水蜜桃', '小香香', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.3', '4', '四光', '李四光', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.4', '5', '铁生', '甘铁生', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.5', '6', '绍祖', '张伍绍祖', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.6', '2', '继祖', '马继祖', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.7', '8', '孝先', '程孝先', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.8', '4', '敬先', '宗敬先', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.9', '1', '广嗣', '年广嗣', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:50', '2020-07-12 17:29:50');
 
 -- ----------------------------
 -- Table structure for `word_order_reply`
