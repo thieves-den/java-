@@ -31,6 +31,7 @@
         insert into customer_service(
         phone
         , password
+        , createTime
         <if test="id != 0">, id</if>
         <if test="email != null and email != ''">, email</if>
         <if test="nickName != null and nickName != ''">, nick_name</if>
@@ -42,6 +43,7 @@
         values (
         #{phone}
         , #{password}
+        , #{createTime}
         <if test="id != 0">, #{id}</if>
         <if test="email != null and email != ''">, #{email}</if>
         <if test="nickName != null and nickName != ''">, #{nickName}</if>
@@ -130,6 +132,7 @@
     <update id="update">
         update customer_service
         <trim prefix="set" suffixOverrides=",">
+            <if test="newcs.updateTime != null">update_time = #{newcs.updateTime},</if>
             <if test="newcs.email != null"> email = #{newcs.email},</if>
             <if test="newcs.nickName != null"> nick_name = #{newcs.nickName},</if>
             <if test="newcs.realName != null"> real_name = #{newcs.realName},</if>
@@ -138,7 +141,7 @@
             <if test="newcs.onlineState != null"> online_state = #{newcs.onlineState},</if>
             <if test="newcs.group != null and newcs.group.id != 0"> customer_service_group_id = #{newcs.group.id},</if>
             <if test="newcs.role != null and newcs.role.id != 0"> role_id = #{newcs.role.id},</if>
-            <if test="newcs.id != 0"> id = #{newcs.id}</if>
+            <if test="newcs.id != 0"> id = #{newcs.id},</if>
             where id = #{oldcs.id}
         </trim>
     </update>

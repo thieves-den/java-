@@ -3,8 +3,8 @@
 <mapper namespace="com.igeekhome.ccsv2.mapper.CustomerInfoMapper">
 
     <insert id="create" parameterType="CustomerInfo">
-        insert into coustomer_info(nick_name,real_name,phone,email,company,address,level,channel,tags,remark,customer_id,customer_service_id)
-        values (#{nickName},#{realName},#{phone},#{email},#{company},#{address},#{level},#{channel},#{tags},#{remark},#{customerId},#{customerServiceId})
+        insert into coustomer_info(nick_name,real_name,phone,email,company,address,level,channel,tags,remark,customer_id,customer_service_id,create_time)
+        values (#{nickName},#{realName},#{phone},#{email},#{company},#{address},#{level},#{channel},#{tags},#{remark},#{customerId},#{customerServiceId},#{createTime})
     </insert>
 
     <update id="update" parameterType="CustomerInfo">
@@ -19,7 +19,8 @@
             <if test="level != null">level = #{level},</if>
             <if test="channel != null">channel = #{channel},</if>
             <if test="tags != null">ags = #{tags},</if>t
-            <if test="remark != null">remark = #{remark}</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
         where customer_id = #{customerId}
         </trim>
     </update>

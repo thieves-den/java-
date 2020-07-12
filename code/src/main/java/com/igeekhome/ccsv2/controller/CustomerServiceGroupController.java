@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -20,6 +23,11 @@ public class CustomerServiceGroupController {
     */
     @RequestMapping(value = {"/save"},method = RequestMethod.POST)
     public @ResponseBody Result save(CustomerServiceGroup group){
+        Date date = new Date();
+        //date = dateformat.parse("2020-7-6 12:09:36"); ——>Date赋值语句
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Timestamp time = Timestamp.valueOf(dateFormat.format(date));//获取当前时间
+        group.setCreateTime(time);
         int a = customerServiceGroupBiz.save(group);
         return Result.ok(a);
     }
