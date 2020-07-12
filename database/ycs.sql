@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-07-11 22:20:53
+Date: 2020-07-12 08:34:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -474,30 +474,6 @@ INSERT INTO `visitor_info` VALUES ('198.40.8', '4', null, null, null, null, null
 INSERT INTO `visitor_info` VALUES ('198.40.9', '1', null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
--- Table structure for `word_order`
--- ----------------------------
-DROP TABLE IF EXISTS `word_order`;
-CREATE TABLE `word_order` (
-  `work_order_id` int(11) NOT NULL COMMENT '工单id',
-  `type` varchar(255) DEFAULT NULL COMMENT '类型',
-  `title` varchar(255) DEFAULT NULL COMMENT '标题',
-  `order_desc` varchar(255) DEFAULT NULL COMMENT '描述',
-  `attachments` varchar(255) DEFAULT NULL COMMENT '附件',
-  `cclist` varchar(255) DEFAULT NULL COMMENT '抄送人',
-  `priority` int(11) DEFAULT NULL COMMENT '优先级',
-  `state` int(11) DEFAULT NULL COMMENT '状态',
-  `customer_service_group_id` int(11) DEFAULT NULL COMMENT '客服组id',
-  `customer_service_id` int(11) DEFAULT NULL COMMENT '客服id',
-  `customer_id` int(11) DEFAULT NULL COMMENT '客户id',
-  `channel` varchar(255) DEFAULT NULL COMMENT '即时聊天、手工录入、客户管理',
-  PRIMARY KEY (`work_order_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of word_order
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `word_order_reply`
 -- ----------------------------
 DROP TABLE IF EXISTS `word_order_reply`;
@@ -576,22 +552,6 @@ CREATE TABLE `work_order_log` (
 
 -- ----------------------------
 -- Records of work_order_log
--- ----------------------------
-
--- ----------------------------
--- Table structure for `work_order_reply`
--- ----------------------------
-DROP TABLE IF EXISTS `work_order_reply`;
-CREATE TABLE `work_order_reply` (
-  `work_order_id` int(11) NOT NULL COMMENT '回复编号',
-  `customer_service_id` int(11) DEFAULT NULL COMMENT '客服id',
-  `reply_time` datetime DEFAULT NULL COMMENT '回复时间',
-  `content` varchar(255) DEFAULT NULL COMMENT '回复内容',
-  PRIMARY KEY (`work_order_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
--- ----------------------------
--- Records of work_order_reply
 -- ----------------------------
 
 -- ----------------------------
