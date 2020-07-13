@@ -28,6 +28,9 @@ public class VisitorInfo {
     private String device;
     private int state;
     private int satisfaction; //满意度打分
+    private int visitNum;
+    private int visitorNum;
+    private double averageDuration;
 
     @JsonFormat(pattern = "HH:mm:ss")
     private Date visitDuration;

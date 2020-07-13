@@ -30,4 +30,7 @@
 
 
     </select>
+    <select id="queryVisit" parameterType="VisitorInfo" resultType="VisitorInfo" ><!--访问统计-->
+        select * from visit
+    </select>
 </mapper>

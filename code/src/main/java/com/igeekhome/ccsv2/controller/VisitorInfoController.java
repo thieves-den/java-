@@ -1,6 +1,7 @@
 package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.IVisitorInfoBiz;
+import com.igeekhome.ccsv2.entity.CustomerService;
 import com.igeekhome.ccsv2.entity.VisitorInfo;
 import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,13 @@ public class VisitorInfoController {
             visitorInfo.setVisitorName(tem);
         }
         List<VisitorInfo> visitor = visitorInfoBiz.select(visitorInfo);
+        return Result.ok(visitor);
+    }
+    //访问统计表
+    @GetMapping("/visit")
+    @ResponseBody
+    public Result CustomerServiceWorkload(VisitorInfo visitorInfo){
+        List<VisitorInfo> visitor = visitorInfoBiz.queryVisit(visitorInfo);
         return Result.ok(visitor);
     }
 }

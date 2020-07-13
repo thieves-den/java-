@@ -17,4 +17,9 @@ public class VisitorInfoImpl implements IVisitorInfoBiz {
     public List<VisitorInfo> select(VisitorInfo visitorInfo) {
         return visitorInfoMapper.select(visitorInfo);
     }
+
+    @Override
+    public List<VisitorInfo> queryVisit(VisitorInfo visitorInfo) {
+        return visitorInfoMapper.queryVisit(visitorInfo);
+    }
 }

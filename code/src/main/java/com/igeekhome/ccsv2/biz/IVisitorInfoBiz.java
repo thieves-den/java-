@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IVisitorInfoBiz {
     List<VisitorInfo> select(VisitorInfo visitorInfo);
+
+    List<VisitorInfo> queryVisit(VisitorInfo visitorInfo);
 }

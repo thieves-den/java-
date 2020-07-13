@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface VisitorInfoMapper {
     List<VisitorInfo> select(VisitorInfo visitorInfo);
+
+    List<VisitorInfo> queryVisit(VisitorInfo visitorInfo);
 }
