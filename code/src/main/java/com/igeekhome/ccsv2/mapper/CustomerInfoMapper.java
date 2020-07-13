@@ -29,4 +29,5 @@ public interface CustomerInfoMapper {
     int delete(CustomerInfo customerInfo);
 
 
+    int getIdByNickName(CustomerInfo nickName);
 }

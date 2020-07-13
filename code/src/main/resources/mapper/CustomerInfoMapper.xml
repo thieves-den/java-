@@ -82,5 +82,9 @@
         select visit_time, terminal, customer_service_name, group_name, visit_duration, satisfaction
         from c_v_cs_group where customer_id = #{customerId}
     </select>
+    <select id="getIdByNickName" resultType="java.lang.Integer" parameterType="CustomerInfo">
+        select customer_id from customer_info where nick_name = #{nickName}
+    </select>
+
 
 </mapper>

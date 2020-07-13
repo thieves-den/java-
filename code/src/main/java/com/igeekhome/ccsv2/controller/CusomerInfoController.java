@@ -83,8 +83,13 @@ public class CusomerInfoController {
 
     //删除客户
     @RequestMapping(value = {"/delete"},method = RequestMethod.POST)
-    public @ResponseBody Result delete(CustomerInfo customerInfo){
+    public @ResponseBody Result delete(String nickName){
+        CustomerInfo customerInfo = new CustomerInfo();
+        customerInfo.setNickName(nickName);
+        customerInfo.setcustomerId(customerInfoBiz.getIdByNickName(customerInfo));
         int a = customerInfoBiz.delete(customerInfo);
         return Result.ok(a);
     }
+
+
 }

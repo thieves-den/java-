@@ -21,6 +21,7 @@ public class WorkOrderController {
     @Autowired
     private IWorkOrderBiz workOrderBiz;
 
+    //创建工单
     @RequestMapping(value = {"/create"},method = RequestMethod.POST)
     public @ResponseBody
     Result create(@RequestBody  WorkOrder workOrder){

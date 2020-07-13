@@ -50,6 +50,11 @@ public class CustomerInfoBizImpl implements ICustomerInfoBiz {
         return customerInfoMapper.delete(customerInfo);
     }
 
+    @Override
+    public int getIdByNickName(CustomerInfo nickName) {
+        return customerInfoMapper.getIdByNickName(nickName);
+    }
+
 
     @Override
     public List<CustomerInfo> selectByDate(Date begin, Date end) {

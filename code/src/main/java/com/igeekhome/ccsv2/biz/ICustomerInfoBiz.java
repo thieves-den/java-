@@ -25,4 +25,5 @@ public interface ICustomerInfoBiz {
     int delete(CustomerInfo customerInfo);
 
 
+    int getIdByNickName(CustomerInfo nickName);
 }
