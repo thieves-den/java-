@@ -44,4 +44,6 @@ public interface CustomerServiceMapper {
     List<CustomerService> queryWorkload(CustomerService cs);
 
     List<CustomerService> queryCheckingIn(CustomerService cs);
+
+    List<CustomerService> queryWorkQuality(CustomerService cs);
 }

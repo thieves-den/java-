@@ -20,6 +20,8 @@ public class CustomerService {
     private int finishedSession;
     private double totalTime;
     private  int busyTime;
+    private int roleId;
+    private int customerServiceGroupId;
     //关联的客服组
     CustomerServiceGroup group;
     //关联的客服角色

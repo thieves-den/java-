@@ -126,6 +126,13 @@ public class CustomerServiceController {
         return Result.ok(csList);
     }
 
+    @GetMapping("/workQuality")
+    @ResponseBody
+    public Result CustomerServiceWorkQuality(CustomerService cs){
+        List<CustomerService> csList = customerServiceBiz.queryWorkQuality(cs);
+        return Result.ok(csList);
+    }
+
     //分组查询客服信息
     @GetMapping("/showByGroup")
     @ResponseBody
