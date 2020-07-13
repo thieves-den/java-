@@ -118,6 +118,10 @@ public class CustomerServiceController {
         return Result.ok(csList);
     }
 
+<<<<<<< HEAD
+=======
+    //数据报表工作量统计
+>>>>>>> bbe7261a8fd50fb260af940468d3b0349637d0a5
     @GetMapping("/CustomerServiceWorkload")
     @ResponseBody
     public Result CustomerServiceWorkload(CustomerService cs){

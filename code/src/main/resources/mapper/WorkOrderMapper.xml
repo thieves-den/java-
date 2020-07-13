@@ -59,4 +59,11 @@
         select work_order_id,title,channel,state,customer_real_name,update_time from c_cs_wo_group
         where create_time between #{begin} and #{end}
     </select>
+
+
+    <select id="historyWorkOrder" parameterType="CustomerInfo" resultType="WorkOrder">
+        select work_order_id,title,channel,state,customer_real_name,update_time
+        from c_cs_wo_group where customer_id = #{customerId}
+    </select>
+
 </mapper>

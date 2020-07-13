@@ -1,6 +1,7 @@
 package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.IWorkOrderBiz;
+import com.igeekhome.ccsv2.entity.CustomerInfo;
 import com.igeekhome.ccsv2.entity.WorkOrder;
 import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +46,14 @@ public class WorkOrderController {
         List<WorkOrder> workOrders = workOrderBiz.selectByDate(beginTime, endTime);
         return Result.ok(workOrders);
     }
+
+
+    //客户详情中历史工单表
+    @RequestMapping(value = {"/customerWorkOrder"},method = RequestMethod.GET)
+    @ResponseBody
+    public Result historyWorkOrder(CustomerInfo customerInfo){
+        List<WorkOrder> historyWorkOrders = workOrderBiz.historyWorkOrder(customerInfo);
+        return Result.ok(historyWorkOrders);
+    }
+
 }
