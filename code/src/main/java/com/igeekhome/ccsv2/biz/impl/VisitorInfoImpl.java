@@ -22,4 +22,9 @@ public class VisitorInfoImpl implements IVisitorInfoBiz {
     public List<VisitorInfo> queryVisit(VisitorInfo visitorInfo) {
         return visitorInfoMapper.queryVisit(visitorInfo);
     }
+
+    @Override
+    public void save(VisitorInfo visitor) {
+        visitorInfoMapper.insert(visitor);
+    }
 }

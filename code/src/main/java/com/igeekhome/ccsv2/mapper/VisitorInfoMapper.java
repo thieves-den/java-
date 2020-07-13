@@ -10,4 +10,6 @@ public interface VisitorInfoMapper {
     List<VisitorInfo> select(VisitorInfo visitorInfo);
 
     List<VisitorInfo> queryVisit(VisitorInfo visitorInfo);
+
+    void insert(VisitorInfo visitor);
 }

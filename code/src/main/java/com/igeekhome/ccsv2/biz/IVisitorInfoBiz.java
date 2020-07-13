@@ -8,4 +8,6 @@ public interface IVisitorInfoBiz {
     List<VisitorInfo> select(VisitorInfo visitorInfo);
 
     List<VisitorInfo> queryVisit(VisitorInfo visitorInfo);
+
+    void save(VisitorInfo visitor);
 }
