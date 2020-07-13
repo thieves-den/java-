@@ -27,32 +27,7 @@
     </resultMap>
 
     <select id="select" parameterType="WorkOrder" resultType="WorkOrder">
-        select work_order_id,title,channel,state,customer_real_name,update_time
-        from c_cs_wo_group where 1=1
-        <choose>
-            <when test="state != null and state != ''">
-                and state = #{state}
-            </when>
-            <when test="priority != null and priority != ''">
-                and priority = #{priority}
-            </when>
-            <when test="type != null and type != ''">
-                and type = #{type}
-            </when>
-            <when test="channel != null and channel != ''">
-                and channel = #{channel}
-            </when>
-            <when test="groupName != null and groupName != ''">
-                and group_name = #{groupName}
-            </when>
-            <when test="customerServiceName != null and customerServiceName != ''">
-                and customer_service_name = #{customerServiceName}
-            </when>
-            <when test="customerRealName != null and customerRealName != ''">
-                and customer_real_name = #{customerRealName}
-            </when>
-            <otherwise></otherwise>
-        </choose>
+        select work_order_id,title,channel,state,customer_id,update_time from work_order
     </select>
 
     <select id="selectByDate" resultType="WorkOrder">
