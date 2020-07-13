@@ -70,29 +70,5 @@ class CustomerServiceBizImplTest {
         assertNotNull(csList);
     }
 
-    @Test
-    void update(){
-        CustomerService oldcs = new CustomerService();
-        CustomerService newcs = new CustomerService();
-        CustomerServiceGroup group = new CustomerServiceGroup();
-        CustomerServiceRole role = new CustomerServiceRole();
-        oldcs.setId(2);//设定需修改信息的客服id
-        newcs.setEmail("124@qq.com");
-        newcs.setNickName("小林哥");
-        newcs.setRealName("林感");
-        newcs.setPhone("12345");
-        newcs.setOnlineState("在线");
-        newcs.setWorkState(1);
-        newcs.setId(999);//主码改变为999
-
-        role.setId(4);
-        newcs.setRole(role);
-
-        group.setId(3);
-        newcs.setGroup(group);
-
-        int a = customerServiceBizImpl.update(oldcs,newcs);
-        assertNotEquals(0,a);
-    }
 
 }

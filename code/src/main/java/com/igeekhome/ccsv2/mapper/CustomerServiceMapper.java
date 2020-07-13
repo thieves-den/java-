@@ -30,8 +30,8 @@ public interface CustomerServiceMapper {
     /**
      * 根据某一客服原信息 oldcs，替换为该客服新的信息 newcs，也可修改主键客服id
      */
-    int update(@Param("oldcs") CustomerService oldcs, @Param("newcs") CustomerService newcs);
-
+    //int update(@Param("oldcs") CustomerService oldcs, @Param("newcs") CustomerService newcs);
+    int update(CustomerService cs);
     int updatePwd(CustomerService cs);
 
     HashMap<String, String> findPwd(CustomerService cs);

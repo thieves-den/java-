@@ -74,12 +74,14 @@ public class CustomerServiceController {
 
     //更新个人信息部分
     @RequestMapping(value =  {"/update"},method = RequestMethod.POST)
-    public @ResponseBody Result update(CustomerService oldcs, CustomerService newcs){
+    public @ResponseBody Result update(@RequestBody CustomerService cs){
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Timestamp time = Timestamp.valueOf(dateFormat.format(date));//获取当前时间
-        newcs.setUpdateTime(time);
-        int a = customerServiceBiz.update(oldcs,newcs);
+        //oldcs.setId(1);
+        cs.setId(1);
+        cs.setUpdateTime(time);
+        int a = customerServiceBiz.update(cs);
         return Result.ok(a);
     }
 

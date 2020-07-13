@@ -141,48 +141,52 @@
     </select>
 
 
-    <update id="update">
-        update customer_service
-        <trim prefix="set" suffixOverrides=",">
-            <if test="newcs.updateTime != null">update_time = #{newcs.updateTime},</if>
-            <if test="newcs.email != null"> email = #{newcs.email},</if>
-            <if test="newcs.nickName != null"> nick_name = #{newcs.nickName},</if>
-            <if test="newcs.realName != null"> real_name = #{newcs.realName},</if>
-            <if test="newcs.phone != null"> phone = #{newcs.phone},</if>
-            <if test="newcs.workState != null"> work_state = #{newcs.workState},</if>
-            <if test="newcs.onlineState != null"> online_state = #{newcs.onlineState},</if>
-            <if test="newcs.group != null and newcs.group.id != 0"> customer_service_group_id = #{newcs.group.id},</if>
-            <if test="newcs.role != null and newcs.role.id != 0"> role_id = #{newcs.role.id},</if>
-            <if test="newcs.id != 0"> id = #{newcs.id},</if>
-            where id = #{oldcs.id}
-        </trim>
+    <!-- <update id="update">
+
+          update customer_service
+           <trim prefix="set" suffixOverrides=",">
+        <if test="newcs.updateTime != null">update_time = #{newcs.updateTime},</if>
+        <if test="newcs.email != null"> email = #{newcs.email},</if>
+        <if test="newcs.nickName != null"> nick_name = #{newcs.nickName},</if>
+        <if test="newcs.realName != null"> real_name = #{newcs.realName},</if>
+        <if test="newcs.phone != null"> phone = #{newcs.phone},</if>
+        <if test="newcs.workState != null"> work_state = #{newcs.workState},</if>
+        <if test="newcs.onlineState != null"> online_state = #{newcs.onlineState},</if>
+        <if test="newcs.group != null and newcs.group.id != 0"> customer_service_group_id = #{newcs.group.id},</if>
+        <if test="newcs.role != null and newcs.role.id != 0"> role_id = #{newcs.role.id},</if>
+   <if test="newcs.id != 0"> id = #{newcs.id},</if>
+      where id = #{oldcs.id}
+  </trim>
+ </update>-->
+    <update id="update" parameterType="CustomerService">
+        update customer_service set password = #{password},email=#{email},nick_name=#{nickName},real_name=#{realName},customer_service_id=#{customerServiceId},
+         phone=#{phone},password=#{password} where id = #{id}
     </update>
 
-
-    <update id="updatePwd" parameterType="CustomerService">
-        update coustomer_service set password = #{password} where id = #{id}
-    </update>
-
-
-    <select id="findPwd" parameterType="CustomerService" resultType="hashmap">
-        SELECT
-	        coustomer_service.`password`
-        FROM
-	        coustomer_service
-        WHERE
-	        coustomer_service.id = #{id}
-
-    </select>
-    <select id="getOne" resultType="com.igeekhome.ccsv2.entity.CustomerService">
-        select id,head_img,nick_name,customer_service_id,phone from customer_service where phone=#{phone} and password = #{password}
-    </select>
+<update id="updatePwd" parameterType="CustomerService">
+ update customer_service set password = #{password} where id = #{id}
+</update>
 
 
-    <delete id="deleteById" parameterType="int">
-        delete from customer_service where id = #{id}
-    </delete>
+<select id="findPwd" parameterType="CustomerService" resultType="hashmap">
+ SELECT
+     coustomer_service.`password`
+ FROM
+     coustomer_service
+ WHERE
+     coustomer_service.id = #{id}
 
-    <!--根据id批量删除customer_service,id以List形式存储-->
+</select>
+<select id="getOne" resultType="com.igeekhome.ccsv2.entity.CustomerService">
+ select id,head_img,nick_name,customer_service_id,phone from customer_service where phone=#{phone} and password = #{password}
+</select>
+
+
+<delete id="deleteById" parameterType="int">
+ delete from customer_service where id = #{id}
+</delete>
+
+<!--根据id批量删除customer_service,id以List形式存储-->
     <delete id="deleteBatch" parameterType="List">
         delete from customer_service where id in
         <!--针对集合类collection得到一个循环合集类似（1,2,3......）-->

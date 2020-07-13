@@ -37,8 +37,8 @@ public class CustomerServiceBizImpl implements ICustomerServiceBiz {
     }
 
     @Override
-    public int update(CustomerService oldcs, CustomerService newcs) {
-        return customerServiceMapper.update(oldcs, newcs);
+    public int update(CustomerService cs) {
+        return customerServiceMapper.update(cs);
     }
 
     @Override

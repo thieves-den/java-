@@ -21,7 +21,7 @@ public interface ICustomerServiceBiz {
     List<CustomerService> queryFuzzy(CustomerService cs);
     List<CustomerService> showByGroup(CustomerServiceGroup group);
 
-    int update(CustomerService oldcs, CustomerService newcs);
+    int update(CustomerService cs);
 
     int updatePwd(CustomerService cs);
 
