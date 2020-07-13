@@ -26,4 +26,6 @@ public interface ICustomerInfoBiz {
 
 
     int getIdByNickName(CustomerInfo nickName);
+
+    CustomerInfo selectByNickName(CustomerInfo customerInfo);
 }

@@ -30,4 +30,6 @@ public interface CustomerInfoMapper {
 
 
     int getIdByNickName(CustomerInfo nickName);
+
+    CustomerInfo selectByNickName(CustomerInfo customerInfo);
 }

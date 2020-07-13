@@ -85,6 +85,9 @@
     <select id="getIdByNickName" resultType="java.lang.Integer" parameterType="CustomerInfo">
         select customer_id from customer_info where nick_name = #{nickName}
     </select>
+    <select id="selectByNickName" resultType="com.igeekhome.ccsv2.entity.CustomerInfo" parameterType="CustomerInfo">
+        select * from customer_info where nick_name = #{nickName}
+    </select>
 
 
 </mapper>

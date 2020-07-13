@@ -90,6 +90,11 @@ public class CusomerInfoController {
         int a = customerInfoBiz.delete(customerInfo);
         return Result.ok(a);
     }
-
+    @GetMapping("/selectBynickName")
+    public @ResponseBody Result selectBynickName(String nickName){
+        CustomerInfo customerInfo = new CustomerInfo();
+        customerInfo.setNickName(nickName);
+        return Result.ok(customerInfoBiz.selectByNickName(customerInfo));
+    }
 
 }
