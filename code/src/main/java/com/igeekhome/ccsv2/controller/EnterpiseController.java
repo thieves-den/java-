@@ -7,13 +7,12 @@ import com.igeekhome.ccsv2.entity.Enterpise;
 import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 @RequestMapping("/enterpise")
+@CrossOrigin
 public class EnterpiseController {
 
     @Autowired
@@ -23,7 +22,7 @@ public class EnterpiseController {
      */
     @RequestMapping(value = {"/update"},method = RequestMethod.POST)
     public @ResponseBody
-    Result update(Enterpise enterpise){
+    Result update(@RequestBody Enterpise enterpise){
         int a = enterpiseBiz.update(enterpise);
         return Result.ok(a);
     }

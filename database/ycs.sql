@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-07-13 11:49:54
+Date: 2020-07-13 22:45:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -203,7 +203,7 @@ CREATE TABLE `customer_service` (
 -- ----------------------------
 -- Records of customer_service
 -- ----------------------------
-INSERT INTO `customer_service` VALUES ('1', '1', '123456', '3333333', '在线', '1', null, '126@qq.com', '唐果', '水蜜桃', '2020-07-02 23:41:54', '2020-07-03 00:21:22', '23:59:59', '00:00:10', '00:08:48', '15:03:29', '16:03:29', '10', '123', '10000', '1', '1');
+INSERT INTO `customer_service` VALUES ('1', '123333', '3333333', '123', '在线', '1', null, '33333333', '321', '312', '2020-07-02 23:41:54', '2020-07-03 00:21:22', '23:59:59', '00:00:10', '00:08:48', '15:03:29', '16:03:29', '10', '123', '10000', '1', '1');
 INSERT INTO `customer_service` VALUES ('2', '2', '12345', '111111', '离线', '0', null, '124@qq.com', '林感', '小林哥', '2020-07-03 00:21:52', '2020-07-03 00:21:55', '02:21:59', '00:00:09', '00:13:22', '15:03:29', '16:03:29', '20', '123', '10000', '3', '4');
 INSERT INTO `customer_service` VALUES ('3', '3', '132434', '22222222', '在线', '1', null, '125@qq.com', '索瑞萨', '史蒂夫索', '2020-07-03 00:22:15', '2020-07-03 00:22:18', '00:22:30', '00:00:08', '00:02:18', '15:03:29', '16:03:29', '30', '123', '10000', '3', '3');
 INSERT INTO `customer_service` VALUES ('4', '4', '999999', '123456', '在线', '1', null, '324@qq.com', '副丽鱼', '鱼儿', '2020-07-05 14:14:40', '2020-07-05 14:18:47', '04:14:49', '00:00:06', '00:18:20', '15:03:29', '16:03:29', '13', '34', '10000', '4', '4');
@@ -300,7 +300,7 @@ CREATE TABLE `enterpise` (
   `name` varchar(255) DEFAULT NULL,
   `account` varchar(255) NOT NULL COMMENT '账户\r\n',
   `industry` varchar(255) DEFAULT NULL COMMENT '行业',
-  `team_size` int(11) DEFAULT NULL COMMENT '团队规模\r\n',
+  `team_size` varchar(255) DEFAULT NULL COMMENT '团队规模\r\n',
   `contact_name` varchar(255) DEFAULT NULL COMMENT '联系人姓名',
   `contact_phone` varchar(255) DEFAULT NULL COMMENT '联系人电话',
   `company_address` varchar(255) DEFAULT NULL COMMENT '公司地址',
@@ -311,7 +311,7 @@ CREATE TABLE `enterpise` (
 -- ----------------------------
 -- Records of enterpise
 -- ----------------------------
-INSERT INTO `enterpise` VALUES ('', '七尾云科技有限公司', '1339000@163.com', '教育', '98', '杜宇', '17789067899', '北京市', '备注信息');
+INSERT INTO `enterpise` VALUES ('', '七尾云科技有限公司', '1339000@163.com', '教育', '12', '21313313', '2133213', '123', '123');
 
 -- ----------------------------
 -- Table structure for `log`
@@ -588,3 +588,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `workload`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `workload` AS select `customer_service`.`nick_name` AS `nick_name`,`customer_service`.`msg_count` AS `msg_count`,`customer_service`.`session_count` AS `session_count`,count((`session`.`finish_time` is not null)) AS `finished_session`,((`customer_service`.`average_session_time` * count(0)) / 60) AS `total_time`,`customer_service`.`average_session_time` AS `average_session_time` from (`customer_service` join `session`) where (`customer_service`.`id` = `session`.`customer_service_id`) group by `customer_service`.`nick_name`,`customer_service`.`msg_count`,`customer_service`.`session_count`,`customer_service`.`average_session_time` ;
+
+-- ----------------------------
+-- View structure for `work_quality`
+-- ----------------------------
+DROP VIEW IF EXISTS `work_quality`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `work_quality` AS select `customer_service`.`nick_name` AS `nick_name`,`customer_service`.`session_count` AS `session_count`,`customer_service`.`average_response_time` AS `average_response_time`,`customer_service`.`phone` AS `phone`,`customer_service`.`work_state` AS `work_state`,`customer_service`.`customer_service_id` AS `customer_service_id`,`customer_service`.`role_id` AS `role_id`,`customer_service`.`customer_service_group_id` AS `customer_service_group_id` from `customer_service` ;

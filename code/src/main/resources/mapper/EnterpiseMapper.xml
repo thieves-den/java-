@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.igeekhome.ccsv2.mapper.EnterpiseMapper">
 
-    <update id="update" parameterType="Enterpise">
+    <!--<update id="update" parameterType="Enterpise">
         update enterpise
         <trim prefix="set" suffixOverrides=",">
             <if test="loge != null">loge = #{loge},</if>
@@ -15,6 +15,8 @@
             <if test="remark != null">remark = #{remark},</if>
         </trim>
         where account = #{account}
+    </update>-->
+    <update id="update" parameterType="Enterpise">
+        update enterpise set enterpise.name=#{name},industry=#{industry},team_size=#{teamSize},contact_name=#{contactName},contact_phone=#{contactPhone},company_address=#{companyAddress},enterpise.remark=#{remark} where enterpise.account = #{account}
     </update>
-
 </mapper>
