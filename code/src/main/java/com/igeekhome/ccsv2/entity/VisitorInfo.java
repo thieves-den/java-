@@ -13,9 +13,9 @@ import java.util.Date;
 @Getter
 @Setter
 @Data
-//包含客户与普通访客的来访信息
+//包含客户与普通访客的来访信息,可以是一个用户多次访问
 public class VisitorInfo {
-    private String id; //访客主键
+    private String id; //访客UUID
     private String nickName;
     private int customerServiceId;  //受理客服的id
     private String customerId; //客户才拥有
