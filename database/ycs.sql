@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-07-12 18:37:09
+Date: 2020-07-13 11:49:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,7 +72,9 @@ INSERT INTO `blacklist` VALUES ('6', '6', '骂人', '2020-07-23 11:03:45');
 INSERT INTO `blacklist` VALUES ('7', '5', '骂人', '2020-07-23 11:03:45');
 INSERT INTO `blacklist` VALUES ('8', '6', '骂人', '2020-07-23 11:03:45');
 INSERT INTO `blacklist` VALUES ('9', '4', '骂人', '2020-07-23 11:03:45');
+INSERT INTO `blacklist` VALUES ('10', '2', '大大', null);
 INSERT INTO `blacklist` VALUES ('10', '3', '骂人', '2020-07-23 11:03:45');
+INSERT INTO `blacklist` VALUES ('11', '2', '撒旦飞洒是', null);
 INSERT INTO `blacklist` VALUES ('11', '4', '骂人', '2020-07-23 11:03:45');
 INSERT INTO `blacklist` VALUES ('12', '2', '辱骂客服', null);
 INSERT INTO `blacklist` VALUES ('12', '12', '法沙发沙发', null);
@@ -137,7 +139,7 @@ CREATE TABLE `customer_info` (
   PRIMARY KEY (`customer_id`) USING BTREE,
   KEY `客服id` (`customer_service_id`),
   CONSTRAINT `客服id` FOREIGN KEY (`customer_service_id`) REFERENCES `customer_service` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='顾客信息';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='顾客信息';
 
 -- ----------------------------
 -- Records of customer_info
@@ -160,6 +162,7 @@ INSERT INTO `customer_info` VALUES ('15', '12', '莽', '林莽', '1000015', '15@
 INSERT INTO `customer_info` VALUES ('16', '4', '强辉', '黄强辉', '1000016', '16@qq.com', '强辉企业', '北京市一环16号', 'vip客户', 'Mac', '第16位客户', '已上市', '2020-07-07 18:48:51', '2020-07-07 18:48:51', '2020-07-07 18:48:51');
 INSERT INTO `customer_info` VALUES ('17', '6', '汉夫', '章汉夫', '1000017', '17@qq.com', '汉夫企业', '北京市一环17号', 'vip客户', 'Mac', '第17位客户', '已上市', '2020-07-07 18:48:51', '2020-07-07 18:48:51', '2020-07-07 18:48:51');
 INSERT INTO `customer_info` VALUES ('18', '9', '长江', '范长江', '1000018', '18@qq.com', '长江企业', '北京市一环18号', 'vip客户', 'Mac', '第18位客户', '已上市', '2020-07-07 18:48:51', '2020-07-07 18:48:51', '2020-07-07 18:48:51');
+INSERT INTO `customer_info` VALUES ('19', '2', '321', '3213', '3123', '3213', '3213', '3123', '1', '2', '3123', '1', '2020-07-11 23:19:07', null, null);
 
 -- ----------------------------
 -- Table structure for `customer_service`
@@ -181,8 +184,8 @@ CREATE TABLE `customer_service` (
   `total_online_time` time DEFAULT NULL COMMENT '总计在线时长',
   `average_response_time` time DEFAULT NULL COMMENT '平均响应时长',
   `average_session_time` time DEFAULT NULL COMMENT '平均会话时长',
-  `online_time_begin` datetime DEFAULT NULL COMMENT '上线时间',
-  `online_time_end` datetime DEFAULT NULL COMMENT '下线时间',
+  `online_time_begin` time DEFAULT NULL COMMENT '上线时间',
+  `online_time_end` time DEFAULT NULL COMMENT '下线时间',
   `session_count` int(11) DEFAULT NULL COMMENT '会话次数',
   `msg_count` int(11) DEFAULT NULL COMMENT '消息数',
   `service_cap` int(255) DEFAULT NULL COMMENT '服务上限',
@@ -200,21 +203,21 @@ CREATE TABLE `customer_service` (
 -- ----------------------------
 -- Records of customer_service
 -- ----------------------------
-INSERT INTO `customer_service` VALUES ('1', '1', '123456', '3333333', '在线', '1', null, '126@qq.com', '唐果', '水蜜桃', '2020-07-02 23:41:54', '2020-07-03 00:21:22', '23:59:59', '00:00:10', '00:08:48', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '10', '123', '10000', '1', '1');
-INSERT INTO `customer_service` VALUES ('2', '2', '12345', '111111', '离线', '0', null, '124@qq.com', '林感', '小林哥', '2020-07-03 00:21:52', '2020-07-03 00:21:55', '02:21:59', '00:00:09', '00:13:22', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '20', '123', '10000', '3', '4');
-INSERT INTO `customer_service` VALUES ('3', '3', '132434', '22222222', '在线', '1', null, '125@qq.com', '索瑞萨', '史蒂夫索', '2020-07-03 00:22:15', '2020-07-03 00:22:18', '00:22:30', '00:00:08', '00:02:18', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '30', '123', '10000', '3', '3');
-INSERT INTO `customer_service` VALUES ('4', '4', '999999', '123456', '在线', '1', null, '324@qq.com', '副丽鱼', '鱼儿', '2020-07-05 14:14:40', '2020-07-05 14:18:47', '04:14:49', '00:00:06', '00:18:20', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '13', '34', '10000', '4', '4');
-INSERT INTO `customer_service` VALUES ('5', '5', '1314520', 'hhh', '在线', '1', null, '1232@qq.com', '李一桐', '桐儿', '2020-07-05 15:23:38', '2020-07-05 14:24:20', '09:24:24', '00:00:13', '00:03:08', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '33', '209', '10000', '2', '3');
-INSERT INTO `customer_service` VALUES ('6', '6', '138238', 'wxhn', '离线', '1', null, '1qwr@qq.com', '张云雷', '张师傅', '2020-07-05 14:25:31', '2020-07-05 17:25:28', '10:25:21', '00:00:12', '00:06:42', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '43', '343', '10000', '2', '1');
-INSERT INTO `customer_service` VALUES ('7', '7', '8888', '21453', '在线', '1', null, '463@qq.com', '范丞丞', '小范师兄', '2020-07-05 14:28:37', '2020-07-05 16:28:42', '15:28:49', '00:00:11', '00:11:56', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '65', '245', '10000', '3', '5');
-INSERT INTO `customer_service` VALUES ('8', '8', '20201314', '54gfd', '在线', '1', null, '232323@qq.com', '杨洋', '羊羊', '2020-07-05 07:30:14', '2020-07-05 14:30:10', '08:30:05', '00:00:04', '00:09:38', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '60', '234', '10000', '4', '2');
-INSERT INTO `customer_service` VALUES ('9', '9', '112233', 'niceofyou', '在线', '1', null, '1818@qq.com', '柳岩', '柳姐', '2020-07-05 10:34:26', '2020-07-05 16:25:39', '12:34:51', '00:00:17', '00:18:43', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '99', '666', '10000', '1', '3');
-INSERT INTO `customer_service` VALUES ('10', '10', '1332', 'how123', '在线', '1', null, '287@qq.com', '周杰伦', '杰伦哥', '2020-07-05 16:48:09', '2020-07-05 16:48:20', '06:48:24', '00:00:20', '00:23:09', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '23', '266', '10000', '2', '1');
-INSERT INTO `customer_service` VALUES ('11', '11', '234552', 'sodf2', '离线', '0', null, '2321@qq.com', '黄圣依', '依姐', '2020-07-05 16:49:53', '2020-07-05 16:49:56', '08:49:37', '00:00:16', '00:05:46', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '66', '243', '10000', '1', '2');
-INSERT INTO `customer_service` VALUES ('12', '12', '18860', 'woaini', '在线', '1', null, 'tiantian@qq.com', '李子柒', '子柒', '2020-07-05 16:52:36', '2020-07-05 16:52:40', '16:52:42', '00:00:13', '00:02:59', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '88', '345', '10000', '1', '4');
-INSERT INTO `customer_service` VALUES ('13', '13', '13388', '123456', '在线', '1', null, '168@qq.com', '尼格买提', '小尼哥', '2020-07-08 21:20:30', '2020-07-09 21:20:39', '15:22:35', '00:00:05', '00:06:50', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '34', '324', '10000', '4', '1');
-INSERT INTO `customer_service` VALUES ('14', '14', '13572', 'qwerasdf', '在线', '1', null, 'rti2@qq.com', '林心如', '小林姐', '2020-07-03 21:20:45', '2020-07-06 21:20:52', '14:27:47', '00:00:09', '00:15:48', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '99', '666', '10000', '3', '5');
-INSERT INTO `customer_service` VALUES ('15', '15', '12223', 'qweasd', '在线', '1', null, '13243@qq.com', '杨国福', '国服', '2020-07-09 21:23:09', '2020-07-10 21:23:14', '06:23:17', '00:00:19', '00:22:28', '2020-07-10 15:03:29', '2020-07-11 16:03:29', '23', '233', '10000', '1', '2');
+INSERT INTO `customer_service` VALUES ('1', '1', '123456', '3333333', '在线', '1', null, '126@qq.com', '唐果', '水蜜桃', '2020-07-02 23:41:54', '2020-07-03 00:21:22', '23:59:59', '00:00:10', '00:08:48', '15:03:29', '16:03:29', '10', '123', '10000', '1', '1');
+INSERT INTO `customer_service` VALUES ('2', '2', '12345', '111111', '离线', '0', null, '124@qq.com', '林感', '小林哥', '2020-07-03 00:21:52', '2020-07-03 00:21:55', '02:21:59', '00:00:09', '00:13:22', '15:03:29', '16:03:29', '20', '123', '10000', '3', '4');
+INSERT INTO `customer_service` VALUES ('3', '3', '132434', '22222222', '在线', '1', null, '125@qq.com', '索瑞萨', '史蒂夫索', '2020-07-03 00:22:15', '2020-07-03 00:22:18', '00:22:30', '00:00:08', '00:02:18', '15:03:29', '16:03:29', '30', '123', '10000', '3', '3');
+INSERT INTO `customer_service` VALUES ('4', '4', '999999', '123456', '在线', '1', null, '324@qq.com', '副丽鱼', '鱼儿', '2020-07-05 14:14:40', '2020-07-05 14:18:47', '04:14:49', '00:00:06', '00:18:20', '15:03:29', '16:03:29', '13', '34', '10000', '4', '4');
+INSERT INTO `customer_service` VALUES ('5', '5', '1314520', 'hhh', '在线', '1', null, '1232@qq.com', '李一桐', '桐儿', '2020-07-05 15:23:38', '2020-07-05 14:24:20', '09:24:24', '00:00:13', '00:03:08', '15:03:29', '16:03:29', '33', '209', '10000', '2', '3');
+INSERT INTO `customer_service` VALUES ('6', '6', '138238', 'wxhn', '离线', '1', null, '1qwr@qq.com', '张云雷', '张师傅', '2020-07-05 14:25:31', '2020-07-05 17:25:28', '10:25:21', '00:00:12', '00:06:42', '15:03:29', '16:03:29', '43', '343', '10000', '2', '1');
+INSERT INTO `customer_service` VALUES ('7', '7', '8888', '21453', '在线', '1', null, '463@qq.com', '范丞丞', '小范师兄', '2020-07-05 14:28:37', '2020-07-05 16:28:42', '15:28:49', '00:00:11', '00:11:56', '15:03:29', '16:03:29', '65', '245', '10000', '3', '5');
+INSERT INTO `customer_service` VALUES ('8', '8', '20201314', '54gfd', '在线', '1', null, '232323@qq.com', '杨洋', '羊羊', '2020-07-05 07:30:14', '2020-07-05 14:30:10', '08:30:05', '00:00:04', '00:09:38', '15:03:29', '16:03:29', '60', '234', '10000', '4', '2');
+INSERT INTO `customer_service` VALUES ('9', '9', '112233', 'niceofyou', '在线', '1', null, '1818@qq.com', '柳岩', '柳姐', '2020-07-05 10:34:26', '2020-07-05 16:25:39', '12:34:51', '00:00:17', '00:18:43', '15:03:29', '16:03:29', '99', '666', '10000', '1', '3');
+INSERT INTO `customer_service` VALUES ('10', '10', '1332', 'how123', '在线', '1', null, '287@qq.com', '周杰伦', '杰伦哥', '2020-07-05 16:48:09', '2020-07-05 16:48:20', '06:48:24', '00:00:20', '00:23:09', '15:03:29', '16:03:29', '23', '266', '10000', '2', '1');
+INSERT INTO `customer_service` VALUES ('11', '11', '234552', 'sodf2', '离线', '0', null, '2321@qq.com', '黄圣依', '依姐', '2020-07-05 16:49:53', '2020-07-05 16:49:56', '08:49:37', '00:00:16', '00:05:46', '15:03:29', '16:03:29', '66', '243', '10000', '1', '2');
+INSERT INTO `customer_service` VALUES ('12', '12', '18860', 'woaini', '在线', '1', null, 'tiantian@qq.com', '李子柒', '子柒', '2020-07-05 16:52:36', '2020-07-05 16:52:40', '16:52:42', '00:00:13', '00:02:59', '15:03:29', '16:03:29', '88', '345', '10000', '1', '4');
+INSERT INTO `customer_service` VALUES ('13', '13', '13388', '123456', '在线', '1', null, '168@qq.com', '尼格买提', '小尼哥', '2020-07-08 21:20:30', '2020-07-09 21:20:39', '15:22:35', '00:00:05', '00:06:50', '15:03:29', '16:03:29', '34', '324', '10000', '4', '1');
+INSERT INTO `customer_service` VALUES ('14', '14', '13572', 'qwerasdf', '在线', '1', null, 'rti2@qq.com', '林心如', '小林姐', '2020-07-03 21:20:45', '2020-07-06 21:20:52', '14:27:47', '00:00:09', '00:15:48', '15:03:29', '16:03:29', '99', '666', '10000', '3', '5');
+INSERT INTO `customer_service` VALUES ('15', '15', '12223', 'qweasd', '在线', '1', null, '13243@qq.com', '杨国福', '国服', '2020-07-09 21:23:09', '2020-07-10 21:23:14', '06:23:17', '00:00:19', '00:22:28', '15:03:29', '16:03:29', '23', '233', '10000', '1', '2');
 
 -- ----------------------------
 -- Table structure for `customer_service_group`
@@ -463,17 +466,17 @@ CREATE TABLE `visitor_info` (
 -- ----------------------------
 -- Records of visitor_info
 -- ----------------------------
-INSERT INTO `visitor_info` VALUES ('198.40.1', '2', '君雄', '林君雄', '浏览器', 'Firefox', '15.6寸', '笔记本', '0', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.10', '3', '平山', '谭平山', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.2', '3', '希亮', '朱希亮', '浏览器', 'Firefox', '14寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.202', '1', '水蜜桃', '小香香', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.3', '4', '四光', '李四光', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.4', '5', '铁生', '甘铁生', '浏览器', 'Firefox', '15.6寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.5', '6', '绍祖', '张伍绍祖', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.6', '2', '继祖', '马继祖', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.7', '8', '孝先', '程孝先', '浏览器', 'Firefox', '14寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.8', '4', '敬先', '宗敬先', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
-INSERT INTO `visitor_info` VALUES ('198.40.9', '1', '广嗣', '年广嗣', '浏览器', 'Firefox', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:50', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.1', '2', '君雄', '林君雄', '浏览器', '网页', '15.6寸', '笔记本', '0', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.10', '3', '平山', '谭平山', '浏览器', '手机app', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.2', '3', '希亮', '朱希亮', '浏览器', '微信公众号', '14寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.202', '1', '水蜜桃', '小香香', '浏览器', '微信小程序', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.3', '4', '四光', '李四光', '浏览器', '微博', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.4', '5', '铁生', '甘铁生', '浏览器', '头条号', '15.6寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.5', '6', '绍祖', '张伍绍祖', '浏览器', '手机app', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.6', '2', '继祖', '马继祖', '浏览器', '手机app', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.7', '8', '孝先', '程孝先', '浏览器', '头条号', '14寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.8', '4', '敬先', '宗敬先', '浏览器', '微信小程序', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:32', '2020-07-12 17:29:50');
+INSERT INTO `visitor_info` VALUES ('198.40.9', '1', '广嗣', '年广嗣', '浏览器', '头条号', '18寸', '笔记本', '1', '00:21:36', '2020-07-12 17:29:12', '2020-07-12 17:29:50', '2020-07-12 17:29:50');
 
 -- ----------------------------
 -- Table structure for `word_order_reply`
@@ -557,6 +560,12 @@ CREATE TABLE `work_order_log` (
 -- ----------------------------
 
 -- ----------------------------
+-- View structure for `checking_in`
+-- ----------------------------
+DROP VIEW IF EXISTS `checking_in`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `checking_in` AS select `customer_service`.`nick_name` AS `nick_name`,`customer_service`.`online_time_begin` AS `online_time_begin`,timestampdiff(HOUR,`customer_service`.`online_time_begin`,`customer_service`.`online_time_end`) AS `busy_time`,`customer_service`.`average_response_time` AS `average_response_time`,`customer_service`.`total_online_time` AS `total_online_time`,`customer_service`.`average_session_time` AS `average_session_time` from `customer_service` ;
+
+-- ----------------------------
 -- View structure for `cs_group_role`
 -- ----------------------------
 DROP VIEW IF EXISTS `cs_group_role`;
@@ -567,3 +576,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `c_cs_wo_group`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `c_cs_wo_group` AS select `customer_service`.`id` AS `customer_service_id`,`customer_service_group`.`id` AS `group_id`,`customer_service_group`.`group_name` AS `group_name`,`customer_service_role`.`id` AS `role_id`,`customer_service_role`.`name` AS `role_name`,`customer_service`.`nick_name` AS `nick_name`,`customer_service`.`real_name` AS `real_name`,`customer_service`.`phone` AS `phone`,`customer_service`.`email` AS `email`,`customer_service`.`work_state` AS `work_state`,`customer_service`.`online_state` AS `online_state`,`customer_service`.`average_session_time` AS `average_session_time`,`customer_service`.`average_response_time` AS `average_response_time`,`customer_service`.`session_count` AS `session_count`,`customer_service`.`msg_count` AS `msg_count`,`customer_service`.`total_online_time` AS `total_online_time` from ((`customer_service` join `customer_service_group` on((`customer_service`.`customer_service_group_id` = `customer_service_group`.`id`))) join `customer_service_role` on((`customer_service`.`role_id` = `customer_service_role`.`id`))) ;
+
+-- ----------------------------
+-- View structure for `visit`
+-- ----------------------------
+DROP VIEW IF EXISTS `visit`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `visit` AS select `visitor_info`.`browser` AS `browser`,count(0) AS `visit_num`,count(0) AS `visitor_num`,((sum(`visitor_info`.`visit_duration`) / 60) / count(0)) AS `average_duration` from `visitor_info` group by `visitor_info`.`browser` ;
+
+-- ----------------------------
+-- View structure for `workload`
+-- ----------------------------
+DROP VIEW IF EXISTS `workload`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `workload` AS select `customer_service`.`nick_name` AS `nick_name`,`customer_service`.`msg_count` AS `msg_count`,`customer_service`.`session_count` AS `session_count`,count((`session`.`finish_time` is not null)) AS `finished_session`,((`customer_service`.`average_session_time` * count(0)) / 60) AS `total_time`,`customer_service`.`average_session_time` AS `average_session_time` from (`customer_service` join `session`) where (`customer_service`.`id` = `session`.`customer_service_id`) group by `customer_service`.`nick_name`,`customer_service`.`msg_count`,`customer_service`.`session_count`,`customer_service`.`average_session_time` ;
