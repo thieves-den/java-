@@ -15,6 +15,7 @@ import java.util.Date;
 @Data
 //包含客户与普通访客的来访信息
 public class VisitorInfo {
+    private String id; //访客主键
     private String nickName;
     private int customerServiceId;  //受理客服的id
     private String customerId; //客户才拥有

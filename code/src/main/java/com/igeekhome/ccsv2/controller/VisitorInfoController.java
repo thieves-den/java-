@@ -1,13 +1,12 @@
 package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.IVisitorInfoBiz;
-import com.igeekhome.ccsv2.entity.CustomerService;
 import com.igeekhome.ccsv2.entity.VisitorInfo;
 import com.igeekhome.ccsv2.untils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
 import java.util.List;
 
 @CrossOrigin
@@ -37,5 +36,15 @@ public class VisitorInfoController {
     public Result CustomerServiceWorkload(VisitorInfo visitorInfo){
         List<VisitorInfo> visitor = visitorInfoBiz.queryVisit(visitorInfo);
         return Result.ok(visitor);
+    }
+
+    @PostMapping("/save")
+    public Result<Object> save(@RequestBody VisitorInfo visitor){
+        String id = UUID.randomUUID().toString();
+
+        visitor.setId(id);
+        visitorInfoBiz.save(visitor);
+
+        return Result.ok(id);
     }
 }
