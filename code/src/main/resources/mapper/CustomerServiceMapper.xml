@@ -88,6 +88,10 @@
         select * from workload
     </select>
 
+    <select id="queryCheckingIn" parameterType="CustomerService" resultType="CustomerService" ><!--考勤统计-->
+        select * from checking_in
+    </select>
+
     <select id="queryFuzzy" parameterType="CustomerService" resultMap="CustomerServiceMap" ><!--客服管理中模糊查找客服-->
         select * from cs_group_role <!--三表连接视图-->
         where 1=1

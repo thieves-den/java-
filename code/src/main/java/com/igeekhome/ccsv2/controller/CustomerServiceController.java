@@ -103,6 +103,13 @@ public class CustomerServiceController {
         }
     }
 
+    @GetMapping("/CustomerServiceCheckingIn")
+    @ResponseBody
+    public Result CustomerServiceCheckingIn(CustomerService cs){
+        List<CustomerService> csList = customerServiceBiz.queryCheckingIn(cs);
+        return Result.ok(csList);
+    }
+
     //首页客服监控，返回在线客服监控信息（首页）
     @GetMapping("/CustomerServiceMonitor")
     @ResponseBody
@@ -110,7 +117,7 @@ public class CustomerServiceController {
         List<CustomerService> csList = customerServiceBiz.queryFuzzy(cs);
         return Result.ok(csList);
     }
-    //首页客服监控，返回在线客服监控信息（首页）
+
     @GetMapping("/CustomerServiceWorkload")
     @ResponseBody
     public Result CustomerServiceWorkload(CustomerService cs){

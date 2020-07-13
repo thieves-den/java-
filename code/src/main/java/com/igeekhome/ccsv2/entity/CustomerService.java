@@ -19,6 +19,7 @@ public class CustomerService {
     private String realName;
     private int finishedSession;
     private double totalTime;
+    private  int busyTime;
     //关联的客服组
     CustomerServiceGroup group;
     //关联的客服角色
@@ -33,7 +34,7 @@ public class CustomerService {
     private Date createTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm:ss")
     private Date onlineTimeBegin;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date onlineTimeEnd;

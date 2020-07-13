@@ -33,4 +33,6 @@ public interface ICustomerServiceBiz {
     CustomerService login(CustomerService cs);
 
     List<CustomerService> queryWorkload(CustomerService cs);
+
+    List<CustomerService> queryCheckingIn(CustomerService cs);
 }

@@ -70,4 +70,9 @@ public class CustomerServiceBizImpl implements ICustomerServiceBiz {
     public List<CustomerService> queryWorkload(CustomerService cs) {
         return customerServiceMapper.queryWorkload(cs);
     }
+
+    @Override
+    public List<CustomerService> queryCheckingIn(CustomerService cs) {
+        return customerServiceMapper.queryCheckingIn(cs);
+    }
 }

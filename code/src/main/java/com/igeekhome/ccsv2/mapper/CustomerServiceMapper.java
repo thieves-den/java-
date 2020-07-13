@@ -42,4 +42,6 @@ public interface CustomerServiceMapper {
     CustomerService getOne(CustomerService cs);
 
     List<CustomerService> queryWorkload(CustomerService cs);
+
+    List<CustomerService> queryCheckingIn(CustomerService cs);
 }
