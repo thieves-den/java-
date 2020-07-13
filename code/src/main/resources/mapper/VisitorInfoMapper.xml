@@ -3,7 +3,7 @@
 <mapper namespace="com.igeekhome.ccsv2.mapper.VisitorInfoMapper">
     <insert id="insert" parameterType="VisitorInfo">
         insert into visitor_info(id,ip,visitor_name,terminal,browser,screen_size,device)
-        values(#{id},#{ip},#{name},#{terminal},#{browser},#{screenSize},#{device})
+        values(#{id},#{ip},#{visitorName},#{terminal},#{browser},#{screenSize},#{device})
     </insert>
 
     <select id="select" resultType="VisitorInfo" parameterType="VisitorInfo">
