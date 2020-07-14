@@ -2,7 +2,6 @@ package com.igeekhome.ccsv2.biz.impl;
 
 import com.igeekhome.ccsv2.entity.CustomerInfo;
 import com.igeekhome.ccsv2.entity.VisitorInfo;
-import com.igeekhome.ccsv2.untils.Result;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class CustomerInfoBizImplTest {
     @Autowired

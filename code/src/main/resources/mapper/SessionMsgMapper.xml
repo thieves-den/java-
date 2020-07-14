@@ -3,7 +3,7 @@
 <mapper namespace="com.igeekhome.ccsv2.mapper.SessionMsgMapper">
 
     <insert id="create" parameterType="SessionMsg">
-        insert session_msg(session_id,msg_sender_id,msg_recevice_id,send_time,content)
+        insert session_msg(session_id,msg_sender_id,msg_receiver_id,send_time,content)
         values (#{sessionId},#{msgSenderId},#{msgReceiverId},#{sendTime},#{content})
     </insert>
 

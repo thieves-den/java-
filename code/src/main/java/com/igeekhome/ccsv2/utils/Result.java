@@ -1,4 +1,4 @@
-package com.igeekhome.ccsv2.untils;
+package com.igeekhome.ccsv2.utils;
 
 import com.igeekhome.ccsv2.constant.CommonConstant;
 import lombok.Data;

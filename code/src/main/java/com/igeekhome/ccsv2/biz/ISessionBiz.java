@@ -8,4 +8,10 @@ public interface ISessionBiz {
     List<Session> select(Session session);
 
     List<Session> getSessionList(Integer customerServiceId, Integer type, Integer pageNum);
+
+    int save(Session cs_session);
+
+    void updateMsgCount(String sessionId, String type);
+
+    void closeSessionBy(String userName,String type);
 }

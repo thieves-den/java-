@@ -2,7 +2,7 @@ package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.IVisitorInfoBiz;
 import com.igeekhome.ccsv2.entity.VisitorInfo;
-import com.igeekhome.ccsv2.untils.Result;
+import com.igeekhome.ccsv2.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +38,7 @@ public class VisitorInfoController {
         return Result.ok(visitor);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/saveall")
     public Result<Object> save(@RequestBody VisitorInfo visitor){
         String id = UUID.randomUUID().toString();
 

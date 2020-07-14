@@ -27,4 +27,9 @@ public class VisitorInfoImpl implements IVisitorInfoBiz {
     public void save(VisitorInfo visitor) {
         visitorInfoMapper.insert(visitor);
     }
+
+    @Override
+    public VisitorInfo getOneById(String id) {
+        return visitorInfoMapper.getOneById(id);
+    }
 }

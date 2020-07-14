@@ -21,4 +21,10 @@ public class SessionMsgBizImpl implements ISessionMsgBiz {
     public int create(SessionMsg sessionMsg) {
         return sessionMsgMapper.create(sessionMsg);
     }
+
+    @Override
+    public void save(SessionMsg sessionMsg) {
+        sessionMsgMapper.insert(sessionMsg);
+    }
+
 }

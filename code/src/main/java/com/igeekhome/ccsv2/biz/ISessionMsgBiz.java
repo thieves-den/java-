@@ -8,4 +8,6 @@ public interface ISessionMsgBiz {
     HashMap<String, Integer> findId();
 
     int create(SessionMsg sessionMsg);
+
+    void save(SessionMsg sessionMsg);
 }

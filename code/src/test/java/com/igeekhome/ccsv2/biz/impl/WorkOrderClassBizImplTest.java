@@ -1,7 +1,6 @@
 package com.igeekhome.ccsv2.biz.impl;
 
 import com.igeekhome.ccsv2.entity.WorkOrderClass;
-import com.igeekhome.ccsv2.untils.Result;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

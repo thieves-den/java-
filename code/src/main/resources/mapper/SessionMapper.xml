@@ -2,16 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.igeekhome.ccsv2.mapper.SessionMapper">
 
+    <insert id="save" parameterType="Session" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into session(customer_service_id,visitor_ip,visitor_name,visitor_id) values (#{customerServiceId},#{visitorIp},#{visitorName},#{visitorId})
+    </insert>
+
     <select id="select" resultType="com.igeekhome.ccsv2.entity.Session" parameterType="com.igeekhome.ccsv2.entity.Session">
         select * from session where customer_service_id = #{customerServiceId}
     </select>
 
+    <update id="updateMsgCount">
+        update session
+        <if test="type=='cs'">
+            set customer_service_msg_num = customer_service_msg_num+1
+        </if>
+        <if test="type=='visitor'">
+            set customer_msg_num = customer_msg_num + 1
+        </if>
+        where id = #{sessionId}
+    </update>
+
+    <update id="closeSessionBy">
+        update session set finish_time = now()
+        where
+        <if test="type=='visitor'">
+            visitor_id = #{userName}
+        </if>
+        <if test="type=='cs'">
+            customer_service_id = #{userName}
+        </if>
+        and finish_time is null
+    </update>
+
     <select id="getSessionList" resultType="com.igeekhome.ccsv2.entity.Session">
-        select session.session_id,visitor_name,session.create_time,content
-        from session left join session_msg sm on sm.session_id = session.session_id
-        where customer_service_id = #{customerServiceId}
-        <if test="type == 1">and finish_time is not null</if>
-        <if test="type == 0">and finish_time is null</if>
+        select s.id,visitor_name,s.create_time,s.visitor_id,content
+        from session s
+        left join session_msg sm
+        on sm.session_id = s.id
+        where
+        customer_service_id=#{customerServiceId}
+        <if test="type == 1">
+            and finish_time is not null
+        </if>
+        <if test="type == 0">
+            and finish_time is null
+        </if>
     </select>
 
 </mapper>

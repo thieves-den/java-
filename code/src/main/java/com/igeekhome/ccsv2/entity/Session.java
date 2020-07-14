@@ -14,8 +14,11 @@ import java.util.Date;
 @Data
 public class Session {
     private  int sessionId;
+    private  int id;
 
     private int customerServiceId;
+    private CustomerService cs;
+    private String visitorId;
     private String visitorIp;
     private String visitorName;
     private String channel;

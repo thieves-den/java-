@@ -10,4 +10,6 @@ public interface IVisitorInfoBiz {
     List<VisitorInfo> queryVisit(VisitorInfo visitorInfo);
 
     void save(VisitorInfo visitor);
+
+    VisitorInfo getOneById(String id);
 }

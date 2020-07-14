@@ -1,9 +1,7 @@
 package com.igeekhome.ccsv2.controller;
 
-import com.igeekhome.ccsv2.biz.ICommonWordBiz;
 import com.igeekhome.ccsv2.biz.ICommonWordTypeBiz;
-import com.igeekhome.ccsv2.entity.CommonWord;
-import com.igeekhome.ccsv2.untils.Result;
+import com.igeekhome.ccsv2.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

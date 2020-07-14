@@ -2,7 +2,7 @@ package com.igeekhome.ccsv2.controller;
 
 import com.igeekhome.ccsv2.biz.IWorkOrderClassBiz;
 import com.igeekhome.ccsv2.entity.WorkOrderClass;
-import com.igeekhome.ccsv2.untils.Result;
+import com.igeekhome.ccsv2.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
